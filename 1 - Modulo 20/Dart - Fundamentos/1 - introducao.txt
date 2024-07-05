@@ -1,0 +1,6 @@
+Como o Dart sabe por onde começar a execução do código?
+  Resposta: A porta de entrada de um programa Dart é a função "main".
+  Ou seja: O Dart irá procurar a função "main" e executá-la.
+
+O que acontece se eu colocar algo fora da função "main"?
+  Resposta: O código não será executado, gerando um erro de compilação.
