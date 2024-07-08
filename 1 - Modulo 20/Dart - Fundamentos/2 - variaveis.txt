@@ -1,15 +1,25 @@
 Introdução as variáveis:
-  Conceito: Variáveis são espaços de memória que reservamos para armazenar valores.
-  Tipagem: Dart é uma linguagem fortemente tipada.
+  Conceito: Variáveis são espaços de memória que reservamos para armazenar valores que podem serem alteradas durante a execução do programa.
+  Tipagem: O Dart é uma linguagem de programação fortemente tipada.
     Ou seja: É sempre necessário declarar o tipo de uma variável.
   Exemplos:
-    1 - Variáveis do tipo inteiro:
+    1 - Variável do tipo inteiro:
       int idade = 24;
-    2 - Variáveis do tipo double:
+    2 - Variável do tipo double:
       double altura = 1.80;
-    3 - Variáveis do tipo String:
+    3 - Variável do tipo String:
       String nome = "Gabriel";
-    4 - Variáveis do tipo boolean:
+    4 - Variável do tipo boolean:
       bool maiorDeIdade = true;
-    5 - Variáveis do tipo dynamic (pode mudar o tipo da variável a qualquer momento):
+    5 - Variável do tipo dynamic (pode mudar o tipo da variável a qualquer momento):
       dynamic variavel = 1;
+    6 - Inferir de forma automática o tipo de uma variável:
+      var nome = "Gabriel";
+    7 - Checar o tipo de uma variável:
+      print(nome.runtimeType);
+    8 - Checar se uma variável é do tipo String:
+      print(nome is String);
+    9 - Verificar se a variável é vazia:
+      print(nome.isEmpty);
+    10 - Converter a variável 'idade' para o tipo String:
+      print(idade.toString().runtimeType);
