@@ -23,3 +23,11 @@ Introdução as variáveis:
       print(nome.isEmpty);
     10 - Converter a variável 'idade' para o tipo String:
       print(idade.toString().runtimeType);
+    11 - Pegando o valor absoluto de um número:
+      const int n1 = -10;
+      print(n1.abs());
+    12 - Arredondando um número para cima:
+      final double n5 = 10.5;
+      print(n5.ceil());
+    13 - Arredondando um número para baixo:
+      print(n5.floor());
