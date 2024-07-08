@@ -1,0 +1,14 @@
+Introdução as constantes:
+  Conceito: Podemos declarar constantes utilizando as palavras-chave final e const.
+  Diferença: A diferença entre elas é que 'final' é uma constante que só pode ser atribuída uma vez e 'const' é uma constante que é atribuída em tempo de compilação.
+    Observação: As constantes devem ser inicializadas com um valor, pois, não é possível atribuir um valor posteriormente.
+  Exemplos:
+    1 - Constante com a palavra-chave 'const':
+      const idade = 24;
+    2 - Constante com a palavra-chave 'final':
+      final double altura = 1.80;
+    3 - Atribuição de valor em tempo de compilação (const):
+      const double PI = 3.14159265359;
+    4 - Atribuição de valor posteriormente (final):
+      final double altura;
+      altura = 1.80;
