@@ -12,3 +12,5 @@ Introdução as constantes:
     4 - Atribuição de valor posteriormente (final):
       final double altura;
       altura = 1.80;
+    5 - Definição de uma lista constante:
+      final List<String> frutas = const ['banana', 'maçã', 'uva'];
