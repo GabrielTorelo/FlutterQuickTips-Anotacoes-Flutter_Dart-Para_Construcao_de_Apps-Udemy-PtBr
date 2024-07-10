@@ -20,3 +20,20 @@ Introdução aos condicionais:
   Exemplo:
     1 - Verificando se um número é neutro:
       else print("O número $numero é neutro");
+
+* Trocar (Switch):
+  Conceito: Uma estrutura de controle que permite a execução de diferentes blocos de código com base no valor de uma expressão.
+  Uso: Utilizado quando se deseja comparar a mesma variável com diferentes valores.
+  Exemplos:
+    1 - Verificando e imprimindo o dia da semana:
+      String dia = "segunda";
+      switch (dia) {
+        case "segunda":
+          print("Hoje é segunda-feira");
+          break;
+        case "terça":
+          print("Hoje é terça-feira");
+          break;
+        default:
+          print("Hoje não é segunda-feira e nem terça-feira");
+      }
