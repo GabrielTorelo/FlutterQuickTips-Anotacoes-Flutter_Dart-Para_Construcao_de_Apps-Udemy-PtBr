@@ -1,0 +1,64 @@
+Laços de repetição:
+  Conceito: Laço de repetição é uma estrutura usada para repetir trechos de códigos enquanto uma condição for verdadeira.
+  ATENÇÃO: Cuidado para não gerar Loops Infinitos (quando um trecho de código não tem fim)!
+
+* Para (for):
+  Conceito: Um laço que itera um bloco de código um número específico de vezes.
+  Uso: Utilizado quando se sabe o número exato de iterações que o laço deve executar.
+  Exemplos:
+    1 - Imprimindo números de 1 a 5:
+      for (int i = 1; i <= 5; i++) {
+        print(i);
+      }
+
+* Para Dentro (for in):
+  Conceito: Um laço que itera sobre uma coleção de elementos.
+  Uso: Utilizado para percorrer listas, mapas ou qualquer coleção que implemente a interface "Iterable".
+  Exemplos:
+    1 - Iterando sobre uma lista de nomes:
+      const List<String> nomes = const ['Daniel', 'Mari', 'João', 'Pedro', 'Maria'];
+      for (String nome in nomes) {
+        print(nome);
+      }
+
+* Enquanto (while):
+  Conceito: Um laço que repete um bloco de código enquanto uma condição for verdadeira.
+  Uso: Utilizado quando o número de iterações não é conhecido e depende de uma condição.
+  Exemplos:
+    1 - Imprimindo números de 1 a 5:
+      int i = 1;
+      while (i <= 5) {
+        print(i);
+        i++;
+      }
+
+* Fazer Enquanto (do while):
+  Conceito: Um laço que executa um bloco de código pelo menos uma vez e então repete enquanto uma condição for verdadeira.
+  Uso: Utilizado quando se deseja garantir que o bloco de código seja executado pelo menos uma vez.
+  Exemplos:
+    1 - Imprimindo números de 1 a 5:
+      int i = 1;
+      do {
+        print(i);
+        i++;
+      } while (i <= 5);
+
+* Quebrar (break):
+  Conceito: Quebra a execução de um laço de repetição ou de um switch.
+  Uso: Utilizado para sair de um laço antes que a condição termine ou para sair de um case no switch.
+  Exemplo:
+    1 - Saindo de um laço for quando um número específico é encontrado:
+      for (int i = 1; i <= 10; i++) {
+        if (i == 5) break;
+        print('O valor de i é $i');
+      }
+
+* Continuar (continue):
+  Conceito: Usado para pular a execução do loop atual e continuar com a próxima iteração.
+  Uso: Ignora o trecho de código abaixo dele e inicia um novo loop enquanto a condição do loop for verdadeira.
+  Exemplo:
+    1 - Pulando a impressão de um número específico:
+      for (int i = 1; i <= 10; i++) {
+        if (i == 5) continue;
+        print('O valor de i é $i');
+      }
