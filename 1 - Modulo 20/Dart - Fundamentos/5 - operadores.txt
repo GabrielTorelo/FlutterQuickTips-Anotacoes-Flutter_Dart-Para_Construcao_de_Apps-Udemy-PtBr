@@ -1,0 +1,80 @@
+Introdução aos operadores:
+  Conceito: Operadores são símbolos que realizam operações em variáveis ou valores.
+  Uso: Usado frequentemente em manipulações de dados e tomada de decisões.
+  Analogia: Podemos fazer uma analogia a uma caixa de ferramentas, na qual cada ferramenta possui uma função específica (somar, subtrair, comparar ou atribuir valores).
+
+Operadores aritméticos:
+  Conceito: Operadores que realizam operações matemáticas básicas.
+  ATENÇÃO: Uma divisão pode resultar em números decimais, logo, necessita de uma tipagem como "double".
+  Uso: Utilizados para somar, subtrair, multiplicar, dividir e obter o resto de uma divisão.
+  Exemplo: 
+    1 - Somando 2 números inteiros:
+      print('O resultado da soma é: ${7 + 3}');
+    2 - Subtraindo 2 números inteiros:
+      print('O resultado da subtração é: ${7 - 3}');
+    3 - Multiplicando 2 números inteiros:
+      print('O resultado da multiplicação é: ${7 * 3}');
+    4 - Dividindo 2 números inteiros:
+      print('O resultado da divisão é: ${7 / 3}');
+    5 - Obtendo o resto da divisão de 2 números inteiros:
+      print('O resto da divisão é: ${7 % 2}');
+
+Operadores lógicos:
+  Conceito: Operadores que realizam operações lógicas, avaliando expressões como verdadeiras ou falsas.
+  ATENÇÃO: É preciso entender a precedência dos operadores lógicos para evitar resultados inesperados.
+  Uso: Utilizados para combinar múltiplas condições.
+  Exemplo: 
+    1 - Verificando se um produto é frágio e caro:
+      ehFragio && ehCaro ? print("O produto é Frágio e Caro") : print("O produto é Resistente e Barato");
+    2 - Verificando se um produto é frágio ou caro:
+      ehFragio || ehCaro ? print("O produto é Frágio ou Caro") : print("O produto é Resistente e Barato");
+    3 - Verificando se um produto é frágio/caro ou frágio_e_caro/Resistente_e_Barato:
+      ehFragio ^ ehCaro ? print("O produto é Frágio ou Caro") : print("O produto é Frágio e Caro ou é Resistente e Barato");
+
+Operadores relacionais:
+  Conceito: Operadores que comparam dois valores.
+  ATENÇÃO: Retornam um valor booleano (verdadeiro ou falso).
+  Uso: Utilizados para verificar igualdade, desigualdade, maior, menor, maior ou igual, menor ou igual.
+  Exemplos: 
+    1 - Verificando se um número é maior que outro:
+      5 > 2 ? print('5 é maior que 2') : print('5 é menor que 2');
+    2 - Verificando se um número é menor que outro:
+      5 < 2 ? print('5 é menor que 2') : print('5 é maior que 2');
+    3 - Verificando se um número é igual a outro:
+      5 == 2 ? print('5 é igual a 2') : print('5 é diferente de 2');
+    4 - Verificando se um número é diferente de outro:
+      5 != 2 ? print('5 é diferente de 2') : print('5 é igual a 2');
+
+Operadores de Atribuição:
+  Conceito: Operadores que atribuem valores às variáveis.
+  Uso: Utilizados para definir ou modificar o valor de uma variável.
+  Exemplos: 
+    1 - Acrescentando valor a uma variável:
+      print('O valor da variável "num1" agora é: ${num1 += 15}');
+    2 - Diminuindo valor de uma variável:
+      print('O valor da variável "num1" agora é: ${num1 -= 15}');
+    3 - Multiplicando valor a uma variável:
+      print('O valor da variável "num1" agora é: ${num1 *= 15}');
+    4 - Dividindo valor a uma variável:
+      print('O valor da variável "num1" agora é: ${num1 /= 15}');
+
+Operadores de Incremento e Decremento:
+  Conceito: Operadores que aumentam ou diminuem o valor de uma variável.
+  ATENÇÃO: Podem ser usados antes ou depois da variável, alterando o momento da modificação (imediatamente ou posteriormente).
+  Uso: Utilizados para incrementar ou decrementar o valor de uma variável em uma unidade.
+  Exemplos: 
+    1 - Acrescentando 1 a uma variável:
+      print('O valor da variável "num1" agora é: $num1++');
+    2 - Diminuindo 1 de uma variável:
+      print('O valor da variável "num1" agora é: $num1--');
+
+Operadores de Entrada e Saída:
+  Conceito: Operadores que lidam com a entrada de dados do usuário e a saída de informações.
+  ATENÇÃO: Para seu uso é necessário importar a biblioteca "dart:io" (import 'dart:io')
+  Cuidado: É de suma importância validar as entradas do usuário para evitar erros.
+  Uso: Utilizados para interagir com o usuário, capturando entradas e exibindo saídas.
+  Exemplo: 
+    1 - Verificando se a entrada do usuário foi "s":
+      print(stdin.readLineSync()!.toLowerCase() == "s")
+    2 - Imprimindo uma saída de texto:
+      stdout.write("Está chovendo? (s/N) ");
