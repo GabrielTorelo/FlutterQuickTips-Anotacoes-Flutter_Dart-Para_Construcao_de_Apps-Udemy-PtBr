@@ -29,3 +29,14 @@ Introdução as funções:
   Exemplo:
     1 -  Função que retorna uma função de soma:
       int Function({int n2}) funcRetornaFunc({required int n1}) => ({int n2 = 0}) => n1 + n2;
+
+* Funções genéricas:
+  Conceito: Funções genéricas são funções que podem operar sobre diferentes tipos de dados sem especificar explicitamente os tipos nos parâmetros, permitindo maior flexibilidade e reutilização de código.
+  Uso: Utilizado para criar funções que podem trabalhar com qualquer tipo de dado, evitando a duplicação de código para diferentes tipos.
+  Exemplo:
+    1 -  Função genérica para imprimir uma lista de elementos:
+      void imprimeElementos<T>(List<T> elementos) {
+        for (T elemento in elementos) {
+          print(elemento);
+        }
+      }
