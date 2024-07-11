@@ -33,3 +33,14 @@ Introdução aos parâmetros:
   Exemplo:
     1 -  Função com parâmetros nomeados:
       void imprimirData(int dia, {int mes = 1, int ano = 1970}) => print("Data: $dia/$mes/$ano");
+
+* Função como Parâmetro:
+  Conceito: Uma função pode ser passada como argumento para outra função, permitindo que uma função execute outra função como parte de sua operação.
+  Uso: Utilizado para criar funções mais flexíveis e reutilizáveis, permitindo que comportamentos específicos sejam definidos fora da função principal.
+  Exemplo:
+    1 - Executar uma função várias vezes:
+      void execVariasVezes(void Function({String nome}) fn, {required int vezes}) {
+        for (int i = 0; i < vezes; i++) {
+          fn();
+        }
+      }
