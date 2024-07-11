@@ -1,0 +1,17 @@
+Introdução as funções:
+  Conceito: As funções são blocos de código reutilizáveis que realizam uma tarefa específica.
+  Uso: Permitem organizar e modularizar o código, facilitando a leitura, manutenção e reutilização.
+  Analogia: Assim como você escolhe uma chave de fenda para parafusar, você chama uma função para realizar uma operação específica no código.
+  Exemplos:
+    1 - Função que imprime uma saudação:
+      void saudar() {
+        print('Olá, mundo!');
+      }
+    1.1 - Também é possível fazer da seguinte maneira (sem chaves, pois é uma única linha)
+      void saudar() => print('Olá, mundo!');
+    2 - Função que soma dois números e retorna o resultado:
+      int somar(int a, int b) {
+        return a + b;
+      }
+    2.1 - Também é possível fazer da seguinte maneira (sem chaves, pois é uma única linha)
+      int somar(int a, int b) => a + b;
