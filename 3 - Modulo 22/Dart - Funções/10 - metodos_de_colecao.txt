@@ -1,0 +1,15 @@
+Introdução aos métodos de coleção:
+  Conceito: Métodos de coleção são funções que podem ser aplicadas a coleções (listas, conjuntos, mapas) para realizar operações específicas como filtrar, mapear, reduzir, entre outras.
+  Uso: Utilizados para manipular e transformar coleções de forma eficiente e expressiva, simplificando o código e melhorando a legibilidade.
+  Analogia: Assim como você usa ferramentas diferentes para manipular ingredientes na cozinha (panelas, facas e liquidificadores), você usa métodos de coleção para manipular e transformar dados em seu código.
+
+* Método de filtro (where):
+  Conceito: O método de filtro é usado para criar uma nova coleção contendo apenas os elementos que satisfazem uma condição específica.
+  Uso: Utilizado para selecionar elementos de uma coleção que atendem a um critério específico.
+  Exemplos:
+    1 - Filtrar números pares de uma lista:
+      final List<int> numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      print("Números pares: ${numeros.where((numero) => numero % 2 == 0).toList()}");
+    2 - Filtrar nomes que contêm a letra 'a':
+      final List<String> nomes = ['Ana', 'Bia', 'Carlos', 'Daniel', 'Eduardo', 'Felipe'];
+      print("Nomes com a letra 'a': ${nomes.where((nome) => nome.contains('a')).toList()}");
