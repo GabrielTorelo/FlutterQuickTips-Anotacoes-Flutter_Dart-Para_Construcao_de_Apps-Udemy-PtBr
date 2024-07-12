@@ -13,3 +13,11 @@ Introdução aos métodos de coleção:
     2 - Filtrar nomes que contêm a letra 'a':
       final List<String> nomes = ['Ana', 'Bia', 'Carlos', 'Daniel', 'Eduardo', 'Felipe'];
       print("Nomes com a letra 'a': ${nomes.where((nome) => nome.contains('a')).toList()}");
+
+* Método de mapeamento (map):
+  Conceito: O método de mapeamento (map) é usado para transformar cada elemento de uma coleção em um novo elemento, criando uma nova coleção com os resultados (não modifica a coleção original).
+  Uso: Utilizado para aplicar uma função a cada elemento de uma coleção, transformando os elementos de acordo com a função definida.
+  Exemplo:
+    1 - Imprimir nome dos alunos de uma lista de mapas:
+      final List<Map<String, dynamic>> alunos = [{'nome': 'Alfredo', 'nota': 9.9}];
+      final Iterable<String> nomeAlunos = alunos.map((aluno) => aluno['nome']);
