@@ -21,3 +21,11 @@ Introdução aos métodos de coleção:
     1 - Imprimir nome dos alunos de uma lista de mapas:
       final List<Map<String, dynamic>> alunos = [{'nome': 'Alfredo', 'nota': 9.9}];
       final Iterable<String> nomeAlunos = alunos.map((aluno) => aluno['nome']);
+
+* Método de redução (reduce):
+  Conceito: O método de redução (reduce) é usado para combinar todos os elementos de uma coleção em um único valor, aplicando uma função cumulativa de forma iterativa.
+  Uso: Utilizado para realizar operações como soma, produto, concatenação ou qualquer outra operação que combine elementos sequencialmente, reduzindo a coleção a um único resultado.
+  Exemplo:
+    1 - Somar todas os valores de uma lista:
+      final List<double> notas = [9.9, 9.3, 8.7, 5.1, 3.6, 4.8];
+      final double total = notas.reduce((acumulador, nota) => acumulador + nota;);
