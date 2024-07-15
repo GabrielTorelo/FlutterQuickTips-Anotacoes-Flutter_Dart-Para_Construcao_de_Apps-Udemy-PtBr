@@ -43,3 +43,29 @@ Introdução as classes:
         String nome;
         Pessoa({required this.nome});
       }
+
+* Métodos Getters:
+  Conceito: Métodos getters são métodos especiais usados para acessar o valor de uma propriedade de uma classe.
+  Ou seja: Eles permitem a leitura de uma propriedade privada ou encapsulada de uma classe.
+  Uso: Utilizados para fornecer acesso controlado a propriedades de uma classe, podendo incluir lógica adicional ao retornar o valor.
+  Exemplos:
+    1 - Definindo um getter para a classe 'Pessoa':
+      class Pessoa {
+        int _cpf = 0;
+        int get getCPF {
+          return this._cpf;
+        }
+      }
+
+* Métodos Setters:
+  Conceito: Métodos setters são métodos especiais usados para definir o valor de uma propriedade de uma classe.
+  Ou seja: Eles permitem a escrita de uma propriedade privada ou encapsulada de uma classe.
+  Uso: Utilizados para fornecer controle sobre a modificação das propriedades de uma classe, permitindo a inclusão de lógica adicional ao definir o valor.
+  Exemplos:
+    1 - Definindo um setter para a classe 'Pessoa':
+      class Pessoa {
+        int _cpf = 0;
+        void set _setCPF(int cpf) {
+          this._cpf = cpf;
+        }
+      }
