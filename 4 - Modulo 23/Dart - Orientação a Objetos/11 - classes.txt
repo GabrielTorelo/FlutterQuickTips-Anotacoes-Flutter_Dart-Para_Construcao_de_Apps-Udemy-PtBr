@@ -12,8 +12,8 @@ Introdução as classes:
         String nome = '';
       }
 
-* Metodos:
-  Conceito: Métodos são funções definidas dentro de uma classe que operam sobre os objetos dessa classe.
+* Métodos de classe:
+  Conceito: Os métodos são funções definidas dentro de uma classe que operam sobre os objetos dessa classe.
   Ou seja: Eles podem manipular os atributos do objeto e fornecer funcionalidades específicas relacionadas à classe.
   Uso: Permitem a interação e manipulação dos dados dos objetos, encapsulando a lógica de negócio dentro da classe.
   Exemplo:
@@ -23,22 +23,22 @@ Introdução as classes:
           return "Olá, seja muito bem-vindo"
       }
 
-* Construtor:
-  Conceito: O construtor é um método especial de uma classe que é chamado quando um novo objeto da classe é criado.
-  Ou seja: O construtor define o estado inicial do objeto e pode executar qualquer configuração necessária quando o objeto é instanciado.
+* Método construtor:
+  Conceito: O método construtor é um método especial de uma classe que é chamado quando um novo objeto da classe é criado.
+  Ou seja: O método construtor define o estado inicial do objeto e pode executar qualquer configuração necessária quando o objeto é instanciado.
   Uso: Utilizado para garantir que os objetos sejam criados com um estado inicial válido e para realizar qualquer configuração ou inicialização necessária.
   Exemplos:
-    1 - Criando um construtor posicional para a classe 'Pessoa':
+    1 - Criando um método construtor posicional para a classe 'Pessoa':
       class Pessoa {
         String nome;
         Pessoa(this.nome);
       }
-    2 - Criando um construtor opcional para a classe 'Pessoa':
+    2 - Criando um método construtor opcional para a classe 'Pessoa':
       class Pessoa {
         String nome;
         Pessoa([this.nome = 'Sem nome']);
       }
-    3 - Criando um construtor nomeado para a classe 'Pessoa':
+    3 - Criando um método construtor nomeado para a classe 'Pessoa':
       class Pessoa {
         String nome;
         Pessoa({required this.nome});
