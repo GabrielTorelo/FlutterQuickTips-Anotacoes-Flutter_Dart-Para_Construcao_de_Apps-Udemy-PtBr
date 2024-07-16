@@ -18,7 +18,15 @@ class PerguntaApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // MaterialApp: Widget que configura o tema da aplicação
     return MaterialApp(
-      home: Text('Olá Flutter!!!'),
-    );
+        // home: Widget que será exibido na tela
+        home: Scaffold(
+      // appBar: Barra superior
+      appBar: AppBar(
+        // title: Título da barra superior
+        title: const Text('Perguntas'),
+      ),
+      // body: Corpo do aplicativo
+      body: const Text('Olá Flutter!!!'),
+    ));
   }
 }
