@@ -1,0 +1,15 @@
+Introdução aos widgets:
+  Conceito: Widgets são os blocos de construção básicos da interface do usuário no Flutter.
+  Ou seja: Tudo no Flutter é um widget, incluindo a própria aplicação.
+  Uso: Utilizados em conjunto para criar interfaces de usuário altamente personalizáveis.
+  Analogia: Podemos fazer uma analogia a várias peças de Lego, na qual cada peça (widget) pode ser combinada com outras para construir estruturas maiores e mais complexas (interfaces de usuário).
+    
+* Widgets de estado (Stateful):
+  Conceito: São widgets que possuem um estado interno que pode mudar ao longo do tempo.
+  Ou seja: Um widget Stateful pode atualizar sua aparência em resposta a eventos ou interações do usuário.
+  Uso: Utilizados quando o widget precisa refletir mudanças dinâmicas, como um contador que aumenta ao clicar em um botão.
+
+* Widgets sem estado (Stateless):
+  Conceito: São widgets que não mantêm nenhum estado interno.
+  Ou seja: Um widget Stateless não pode mudar sua aparência após ser construído, exceto se for reconstruído.
+  Uso: Utilizados quando o widget não precisa refletir mudanças dinâmicas, como um texto estático ou um ícone.
