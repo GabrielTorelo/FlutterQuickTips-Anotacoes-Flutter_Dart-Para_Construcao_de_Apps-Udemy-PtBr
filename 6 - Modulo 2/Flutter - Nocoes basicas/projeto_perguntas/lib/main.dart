@@ -26,7 +26,36 @@ class PerguntaApp extends StatelessWidget {
         title: const Text('Perguntas'),
       ),
       // body: Corpo do aplicativo
-      body: const Text('Olá Flutter!!!'),
+      // Column: Widget que organiza os widgets em coluna
+      body: Column(
+        // Usando Ctrl + . é possível envolver uma coluna em um Widget
+        // children: Lista de widgets que serão exibidos na tela
+        children: [
+          // Text: Widget que exibe um texto
+          Text(perguntas[0]),
+          // ElevatedButton: Botão com elevação
+          ElevatedButton(
+            // onPressed: Evento que será executado ao clicar no botão
+            onPressed: () => print('Resposta 1 selecionada!'),
+            // child: Texto do botão
+            child: const Text('Resposta 1'),
+          ),
+          // ElevatedButton: Botão com elevação
+          ElevatedButton(
+            // onPressed: Evento que será executado ao clicar no botão
+            onPressed: () => print('Resposta 2 selecionada!'),
+            // child: Texto do botão
+            child: const Text('Resposta 2'),
+          ),
+          // ElevatedButton: Botão com elevação
+          ElevatedButton(
+            // onPressed: Evento que será executado ao clicar no botão
+            onPressed: () => print('Resposta 3 selecionada!'),
+            // child: Texto do botão
+            child: const Text('Resposta 3'),
+          ),
+        ],
+      ),
     ));
   }
 }

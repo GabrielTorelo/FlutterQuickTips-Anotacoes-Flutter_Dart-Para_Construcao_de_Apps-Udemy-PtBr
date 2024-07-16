@@ -18,3 +18,8 @@ Introdução aos widgets:
   Conceito: A árvore de widgets é a estrutura hierárquica que representa todos os widgets na interface do usuário do Flutter.
   Ou seja: A interface do usuário é construída como uma árvore de widgets, onde cada widget pode conter um ou mais widgets filhos.
   Uso: Utilizada para organizar e gerenciar a composição da interface do usuário, permitindo a construção de layouts complexos a partir de componentes simples.
+
+* Widgets Invisíveis:
+  Conceito: Widgets invisíveis são widgets que não possuem uma representação visual, mas que ainda assim desempenham um papel crucial.
+  Ou seja: Esses widgets são usados para controlar a estrutura e o layout dos widgets visíveis, sem que eles próprios apareçam na tela.
+  Uso: Utilizados para ajustar espaçamento, alinhar widgets, organizar a hierarquia de widgets, gerenciar a interação e o comportamento da interface.
