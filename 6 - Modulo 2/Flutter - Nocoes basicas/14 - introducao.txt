@@ -1,0 +1,26 @@
+Introdução às noções básicas de Flutter:
+  Conceito: Flutter é um framework para desenvolver aplicativos nativos para iOS e Android com uma única base de código.
+  Linguagem: Ele utiliza a linguagem de programação Dart como principal.
+
+  * Estrutura de um projeto:
+    Conceito: A estrutura de um projeto Flutter é organizada para facilitar o desenvolvimento de aplicativos multiplataforma, separando as diferentes responsabilidades em pastas e arquivos específicos.
+    Ou seja: Cada pasta tem uma função específica na organização do código e dos recursos.
+    Exemplos:  
+      1 - A pasta lib contém o código Dart principal
+      2 - As pastas android e ios contêm os arquivos de configuração específicos para cada plataforma.
+
+  * Código de um projeto:
+    Conceito: O código de um projeto Flutter é composto por widgets, que são os blocos de construção básicos de uma interface de usuário.
+    Ou seja: Cada componente visual e interativo no Flutter é um widget e widgets podem ser combinados para criar interfaces complexas.
+    Exemplos:
+      1 - Um widget Scaffold organiza a estrutura básica de um aplicativo, incluindo a barra de aplicativos, corpo principal e botão de ação flutuante.
+      2 - Um widget ListView é usado para criar listas roláveis de itens.
+
+  * Lidando com o NullSafety:
+    Conceito: NullSafety é um recurso que ajuda a evitar erros comuns relacionados a valores nulos, garantindo que variáveis não possam ser nulas a menos que sejam explicitamente permitidas.
+    Ou seja: NullSafety impede que você tente acessar ou manipular dados que não existem, reduzindo bugs e crashes no aplicativo.
+    Uso: Melhora a segurança e a confiabilidade do código, tornando-o menos propenso a erros de tempo de execução relacionados a valores nulos.
+    Exemplos:
+      1 - Declarar uma variável como "String? nome" permite que nome seja nulo
+      2 - Declarar uma variável como "String nome = 'Gabriel'" garante que nome nunca será nulo.
+      3 - Utilizar "assert(nome != null)" dentro do construtor garante que nome não será nulo durante a criação do objeto.
