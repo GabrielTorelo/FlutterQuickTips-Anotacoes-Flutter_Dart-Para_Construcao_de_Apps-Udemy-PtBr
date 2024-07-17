@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import './questao.dart';
-import './resposta.dart';
 import './resultado.dart';
+import './questionario.dart';
 
 void main() => runApp(const PerguntaApp());
 
@@ -33,6 +32,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
     }
   }
 
+  // Método para verificar se ainda existem perguntas a serem respondidas
   bool get temPerguntaSelecionada {
     return _perguntaSelecionada < _perguntas.length;
   }
@@ -42,11 +42,6 @@ class _PerguntaAppState extends State<PerguntaApp> {
   // Contexto: Informações sobre a árvore de widgets
   // Widget: Componente visual
   Widget build(BuildContext context) {
-    // Lista de respostas
-    final List<String> respostas = temPerguntaSelecionada
-        ? _perguntas[_perguntaSelecionada].cast()['respostas']
-        : [];
-
     // MaterialApp: Widget que configura o tema da aplicação
     return MaterialApp(
       // home: Widget que será exibido na tela
@@ -65,23 +60,10 @@ class _PerguntaAppState extends State<PerguntaApp> {
         // body: Corpo do aplicativo
         // Column: Widget que organiza os widgets em coluna
         body: temPerguntaSelecionada
-            ? Column(
-                // Usando Ctrl + . é possível envolver uma coluna em um Widget
-                // children: Lista de widgets que serão exibidos na tela
-                children: [
-                  // Questao: Widget que exibe a pergunta (criado em questao.dart)
-                  Questao(
-                      texto:
-                          _perguntas[_perguntaSelecionada]['texto'].toString()),
-                  // Spread operator (...): Permite adicionar uma lista de widgets em outra lista de widgets
-                  // Mapeando a lista de respostas e retornando um widget para cada resposta
-                  ...respostas.map((textoResp) {
-                    return Resposta(
-                      texto: textoResp,
-                      funcao: _responder,
-                    );
-                  }),
-                ],
+            ? Questionario(
+                perguntaSelecionada: _perguntaSelecionada,
+                perguntas: _perguntas,
+                responder: _responder,
               )
             : const Resultado(),
       ),
