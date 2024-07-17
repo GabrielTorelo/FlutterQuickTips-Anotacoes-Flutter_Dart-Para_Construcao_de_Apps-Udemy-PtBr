@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './questao.dart';
-import 'resposta.dart';
+import './resposta.dart';
+import './resultado.dart';
 
 void main() => runApp(const PerguntaApp());
 
@@ -48,49 +49,43 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
     // MaterialApp: Widget que configura o tema da aplicação
     return MaterialApp(
-        // home: Widget que será exibido na tela
-        home: Scaffold(
-            // appBar: Barra superior
-            appBar: AppBar(
-                // title: Título da barra superior
-                title: const Text('Perguntas'), // Setando o texto do título
-                backgroundColor: Colors.blue, // Setando a cor de fundo
-                centerTitle: true, // Centraliza o título
-                titleTextStyle: const TextStyle(
-                  color: Colors.white, // Setando a cor do texto
-                  fontSize: 20, // Setando o tamanho da fonte
-                  fontWeight: FontWeight.bold, // Setando o peso da fonte
-                )),
-            // body: Corpo do aplicativo
-            // Column: Widget que organiza os widgets em coluna
-            body: temPerguntaSelecionada
-                ? Column(
-                    // Usando Ctrl + . é possível envolver uma coluna em um Widget
-                    // children: Lista de widgets que serão exibidos na tela
-                    children: [
-                      // Questao: Widget que exibe a pergunta (criado em questao.dart)
-                      Questao(
-                          texto: _perguntas[_perguntaSelecionada]['texto']
-                              .toString()),
-                      // Spread operator (...): Permite adicionar uma lista de widgets em outra lista de widgets
-                      // Mapeando a lista de respostas e retornando um widget para cada resposta
-                      ...respostas.map((textoResp) {
-                        return Resposta(
-                          texto: textoResp,
-                          funcao: _responder,
-                        );
-                      }),
-                    ],
-                  )
-                : const Center(
-                    child: Text(
-                      'Parabéns!',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )));
+      // home: Widget que será exibido na tela
+      home: Scaffold(
+        // appBar: Barra superior
+        appBar: AppBar(
+            // title: Título da barra superior
+            title: const Text('Perguntas'), // Setando o texto do título
+            backgroundColor: Colors.blue, // Setando a cor de fundo
+            centerTitle: true, // Centraliza o título
+            titleTextStyle: const TextStyle(
+              color: Colors.white, // Setando a cor do texto
+              fontSize: 20, // Setando o tamanho da fonte
+              fontWeight: FontWeight.bold, // Setando o peso da fonte
+            )),
+        // body: Corpo do aplicativo
+        // Column: Widget que organiza os widgets em coluna
+        body: temPerguntaSelecionada
+            ? Column(
+                // Usando Ctrl + . é possível envolver uma coluna em um Widget
+                // children: Lista de widgets que serão exibidos na tela
+                children: [
+                  // Questao: Widget que exibe a pergunta (criado em questao.dart)
+                  Questao(
+                      texto:
+                          _perguntas[_perguntaSelecionada]['texto'].toString()),
+                  // Spread operator (...): Permite adicionar uma lista de widgets em outra lista de widgets
+                  // Mapeando a lista de respostas e retornando um widget para cada resposta
+                  ...respostas.map((textoResp) {
+                    return Resposta(
+                      texto: textoResp,
+                      funcao: _responder,
+                    );
+                  }),
+                ],
+              )
+            : const Resultado(),
+      ),
+    );
   }
 }
 
