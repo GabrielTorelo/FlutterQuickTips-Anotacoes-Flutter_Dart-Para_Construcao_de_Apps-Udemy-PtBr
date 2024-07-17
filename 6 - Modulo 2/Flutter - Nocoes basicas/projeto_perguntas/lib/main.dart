@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './questao.dart';
+import 'resposta.dart';
 
 void main() => runApp(const PerguntaApp());
 
@@ -7,7 +8,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
   var _perguntaSelecionada = 0;
 
   // Método para responder a pergunta
-  void _responder({required int opcao}) {
+  void _responder(int opcao) {
     // setState: Método que atualiza o estado do widget
     // O método build é chamado novamente
     setState(() {
@@ -43,27 +44,10 @@ class _PerguntaAppState extends State<PerguntaApp> {
         children: [
           // Questao: Widget que exibe a pergunta (criado em questao.dart)
           Questao(texto: perguntas[_perguntaSelecionada]),
-          // ElevatedButton: Botão com elevação
-          ElevatedButton(
-            // onPressed: Evento que será executado ao clicar no botão
-            onPressed: () => _responder(opcao: 1),
-            // child: Texto do botão
-            child: const Text('Resposta 1'),
-          ),
-          // ElevatedButton: Botão com elevação
-          ElevatedButton(
-            // onPressed: Evento que será executado ao clicar no botão
-            onPressed: () => _responder(opcao: 2),
-            // child: Texto do botão
-            child: const Text('Resposta 2'),
-          ),
-          // ElevatedButton: Botão com elevação
-          ElevatedButton(
-            // onPressed: Evento que será executado ao clicar no botão
-            onPressed: () => _responder(opcao: 3),
-            // child: Texto do botão
-            child: const Text('Resposta 3'),
-          ),
+          // Resposta: Widgets que exibem as respostas (criado em resposta.dart)
+          Resposta(texto: 'Resposta 1', opcao: 1, funcao: _responder),
+          Resposta(texto: 'Resposta 2', opcao: 2, funcao: _responder),
+          Resposta(texto: 'Resposta 3', opcao: 3, funcao: _responder),
         ],
       ),
     ));
