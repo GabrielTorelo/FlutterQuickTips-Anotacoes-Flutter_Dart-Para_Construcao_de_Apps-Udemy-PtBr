@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 
 class Resposta extends StatelessWidget {
   final String texto;
-  final int opcao;
-  final void Function(int) funcao;
+  final void Function() funcao;
 
-  const Resposta(
-      {super.key,
-      required this.texto,
-      required this.opcao,
-      required this.funcao});
+  const Resposta({super.key, required this.texto, required this.funcao});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +22,7 @@ class Resposta extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10),
         ),
         // onPressed: Evento que será executado ao clicar no botão
-        onPressed: () => funcao(opcao),
+        onPressed: funcao,
         // child: Texto do botão
         child: Text(texto),
       ),
