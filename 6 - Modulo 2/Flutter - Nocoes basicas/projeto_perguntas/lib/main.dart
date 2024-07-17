@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './questao.dart';
 
 void main() => runApp(const PerguntaApp());
 
@@ -40,8 +41,8 @@ class _PerguntaAppState extends State<PerguntaApp> {
         // Usando Ctrl + . é possível envolver uma coluna em um Widget
         // children: Lista de widgets que serão exibidos na tela
         children: [
-          // Text: Widget que exibe um texto
-          Text(perguntas[_perguntaSelecionada]),
+          // Questao: Widget que exibe a pergunta (criado em questao.dart)
+          Questao(texto: perguntas[_perguntaSelecionada]),
           // ElevatedButton: Botão com elevação
           ElevatedButton(
             // onPressed: Evento que será executado ao clicar no botão
