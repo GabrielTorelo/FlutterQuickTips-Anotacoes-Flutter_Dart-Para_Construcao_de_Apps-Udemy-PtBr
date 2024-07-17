@@ -14,11 +14,23 @@ class Resposta extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ElevatedButton: Botão com elevação
-    return ElevatedButton(
-      // onPressed: Evento que será executado ao clicar no botão
-      onPressed: () => funcao(opcao),
-      // child: Texto do botão
-      child: Text(texto),
+    return SizedBox(
+      width: MediaQuery.of(context).size.width - 50,
+      child: ElevatedButton(
+        // style: Estilo do botão
+        style: ElevatedButton.styleFrom(
+          // shape: const RoundedRectangleBorder(
+          //   borderRadius: BorderRadius.zero,
+          // ),
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 10),
+        ),
+        // onPressed: Evento que será executado ao clicar no botão
+        onPressed: () => funcao(opcao),
+        // child: Texto do botão
+        child: Text(texto),
+      ),
     );
   }
 }

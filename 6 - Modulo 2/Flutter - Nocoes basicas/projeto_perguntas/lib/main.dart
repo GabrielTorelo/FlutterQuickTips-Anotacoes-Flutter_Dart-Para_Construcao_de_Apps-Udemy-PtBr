@@ -33,9 +33,14 @@ class _PerguntaAppState extends State<PerguntaApp> {
         home: Scaffold(
       // appBar: Barra superior
       appBar: AppBar(
-        // title: Título da barra superior
-        title: const Text('Perguntas'),
-      ),
+          title: const Text('Perguntas'),
+          backgroundColor: Colors.blue,
+          centerTitle: true,
+          titleTextStyle: const TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          )),
       // body: Corpo do aplicativo
       // Column: Widget que organiza os widgets em coluna
       body: Column(
