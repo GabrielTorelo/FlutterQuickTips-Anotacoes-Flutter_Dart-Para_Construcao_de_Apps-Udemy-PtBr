@@ -76,6 +76,8 @@ class PerguntaAppState extends State<PerguntaApp> {
 // StatefulWidget: Widget que possui estado
 //
 class PerguntaApp extends StatefulWidget {
+  const PerguntaApp({super.key});
+
   // O decorator @override é opcional
   // Ele indentifica que o método abaixo está sobrescrevendo um método da classe pai (StatefulWidget)
   @override
