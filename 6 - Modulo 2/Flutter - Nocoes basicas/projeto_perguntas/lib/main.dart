@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(PerguntaApp());
+void main() => runApp(const PerguntaApp());
 
-class PerguntaAppState extends State<PerguntaApp> {
-  var perguntaSelecionada = 0;
+class _PerguntaAppState extends State<PerguntaApp> {
+  var _perguntaSelecionada = 0;
 
   // Método para responder a pergunta
-  void responder({required int opcao}) {
+  void _responder({required int opcao}) {
     // setState: Método que atualiza o estado do widget
     // O método build é chamado novamente
     setState(() {
-      perguntaSelecionada++;
+      _perguntaSelecionada++;
       print('Resposta $opcao selecionada!');
     });
   }
@@ -41,25 +41,25 @@ class PerguntaAppState extends State<PerguntaApp> {
         // children: Lista de widgets que serão exibidos na tela
         children: [
           // Text: Widget que exibe um texto
-          Text(perguntas[perguntaSelecionada]),
+          Text(perguntas[_perguntaSelecionada]),
           // ElevatedButton: Botão com elevação
           ElevatedButton(
             // onPressed: Evento que será executado ao clicar no botão
-            onPressed: () => responder(opcao: 1),
+            onPressed: () => _responder(opcao: 1),
             // child: Texto do botão
             child: const Text('Resposta 1'),
           ),
           // ElevatedButton: Botão com elevação
           ElevatedButton(
             // onPressed: Evento que será executado ao clicar no botão
-            onPressed: () => responder(opcao: 2),
+            onPressed: () => _responder(opcao: 2),
             // child: Texto do botão
             child: const Text('Resposta 2'),
           ),
           // ElevatedButton: Botão com elevação
           ElevatedButton(
             // onPressed: Evento que será executado ao clicar no botão
-            onPressed: () => responder(opcao: 3),
+            onPressed: () => _responder(opcao: 3),
             // child: Texto do botão
             child: const Text('Resposta 3'),
           ),
@@ -82,7 +82,7 @@ class PerguntaApp extends StatefulWidget {
   // Ele indentifica que o método abaixo está sobrescrevendo um método da classe pai (StatefulWidget)
   @override
   // O método createState é responsável por criar o estado do widget
-  PerguntaAppState createState() {
-    return PerguntaAppState();
+  State<PerguntaApp> createState() {
+    return _PerguntaAppState();
   }
 }
