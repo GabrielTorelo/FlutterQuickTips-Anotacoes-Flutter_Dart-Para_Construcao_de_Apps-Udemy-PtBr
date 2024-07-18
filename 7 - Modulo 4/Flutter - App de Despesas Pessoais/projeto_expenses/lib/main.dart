@@ -18,6 +18,9 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
   final List<Transaction> _transactions = [
     Transaction(
       id: const Uuid().v4(),
@@ -63,67 +66,111 @@ class MyHomePage extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.bold,
             )),
-        body: Column(children: [
-          const SizedBox(
-            width: double.infinity,
-            child: Card(
-              color: Colors.blue,
-              elevation: 5,
-              child: Text('Graphic!'),
+        body: Column(
+          children: [
+            const SizedBox(
+              width: double.infinity,
+              child: Card(
+                color: Colors.blue,
+                elevation: 5,
+                child: Text('Graphic!'),
+              ),
             ),
-          ),
-          Column(
-            children: getTransactions.map((transaction) {
-              return Card(
-                child: Row(
+            Column(
+              children: getTransactions.map((transaction) {
+                return Card(
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 15,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.purple,
+                            width: 2,
+                          ),
+                        ),
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          '\$ ${transaction.amount.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.purple,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              transaction.title,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              DateFormat('d MMM y').format(transaction.date),
+                              style: const TextStyle(
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
+            Card(
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
                   children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 15,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.purple,
-                          width: 2,
-                        ),
-                      ),
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        'R\$ ${transaction.amount.toStringAsFixed(2)}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.purple,
-                        ),
+                    TextField(
+                      controller: titleController,
+                      decoration: const InputDecoration(labelText: 'Title'),
+                      keyboardType: TextInputType.text,
+                    ),
+                    TextField(
+                      controller: amountController,
+                      decoration:
+                          const InputDecoration(labelText: 'Amount (\$)'),
+                      keyboardType: const TextInputType.numberWithOptions(
+                        decimal: true,
                       ),
                     ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            transaction.title,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          onPressed: () => {
+                            print(titleController.text),
+                            print(amountController.text),
+                          },
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.purple,
                           ),
-                          Text(
-                            DateFormat('d MMM y').format(transaction.date),
-                            style: const TextStyle(
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
+                          child: const Text('Add Transaction'),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              );
-            }).toList(),
-          ),
-        ]),
+              ),
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () {},
+        ),
       ),
     );
   }
