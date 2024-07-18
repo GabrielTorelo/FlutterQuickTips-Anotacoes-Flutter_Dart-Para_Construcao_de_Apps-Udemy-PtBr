@@ -49,6 +49,14 @@ class _PerguntaAppState extends State<PerguntaApp> {
     }
   }
 
+  // Método para reiniciar o questionário
+  void _reiniciarQuestionario() {
+    setState(() {
+      _perguntaSelecionada = 0;
+      _pontuacaoTotal = 0;
+    });
+  }
+
   // Método para verificar se ainda existem perguntas a serem respondidas
   bool get temPerguntaSelecionada {
     return _perguntaSelecionada < _perguntas.length;
@@ -84,6 +92,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
               )
             : Resultado(
                 pontuacao: _pontuacaoTotal,
+                funcao: _reiniciarQuestionario,
               ),
       ),
     );

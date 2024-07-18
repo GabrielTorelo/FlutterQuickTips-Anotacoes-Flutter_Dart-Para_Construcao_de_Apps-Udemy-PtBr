@@ -14,9 +14,6 @@ class Resposta extends StatelessWidget {
       child: ElevatedButton(
         // style: Estilo do botão
         style: ElevatedButton.styleFrom(
-          // shape: const RoundedRectangleBorder(
-          //   borderRadius: BorderRadius.zero,
-          // ),
           backgroundColor: Colors.blue,
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(vertical: 10),
