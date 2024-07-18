@@ -1,5 +1,5 @@
+import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
-import 'models/transaction.dart';
 import 'package:uuid/uuid.dart';
 
 void main() => runApp(const ExpensesApp());
@@ -17,7 +17,7 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final _transactions = [
+  final List<Transaction> _transactions = [
     Transaction(
       id: const Uuid().v4(),
       title: 'New Shoes',
@@ -31,6 +31,21 @@ class MyHomePage extends StatelessWidget {
       date: DateTime.now(),
     ),
   ];
+
+  // Método Getter
+  List<Transaction> get getTransactions {
+    return _transactions;
+  }
+
+  // Método Setter
+  void addTransaction(String title, double amount) {
+    _transactions.add(Transaction(
+      id: const Uuid().v4(),
+      title: title,
+      amount: amount,
+      date: DateTime.now(),
+    ));
+  }
 
   MyHomePage({super.key});
 
@@ -47,8 +62,8 @@ class MyHomePage extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.bold,
             )),
-        body: const Column(children: [
-          SizedBox(
+        body: Column(children: [
+          const SizedBox(
             width: double.infinity,
             child: Card(
               color: Colors.blue,
@@ -56,8 +71,56 @@ class MyHomePage extends StatelessWidget {
               child: Text('Graphic!'),
             ),
           ),
-          Card(
-            child: Text('List of transactions!'),
+          Column(
+            children: getTransactions.map((transaction) {
+              return Card(
+                child: Row(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 15,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.purple,
+                          width: 2,
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        transaction.amount.toString(),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.purple,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            transaction.title,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            transaction.date.toString(),
+                            style: const TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
           ),
         ]),
       ),
