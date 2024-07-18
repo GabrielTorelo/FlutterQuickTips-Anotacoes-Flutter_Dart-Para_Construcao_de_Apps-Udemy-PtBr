@@ -22,11 +22,27 @@ class MyHomePage extends StatelessWidget {
     return Center(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Personal Expenses'),
-        ),
-        body: const Center(
-          child: Text('Initial Version'),
-        ),
+            title: const Text('Personal Expenses'),
+            backgroundColor: Colors.blue,
+            centerTitle: true,
+            titleTextStyle: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            )),
+        body: const Column(children: [
+          SizedBox(
+            width: double.infinity,
+            child: Card(
+              color: Colors.blue,
+              elevation: 5,
+              child: Text('Graphic!'),
+            ),
+          ),
+          Card(
+            child: Text('List of transactions!'),
+          ),
+        ]),
       ),
     );
   }
