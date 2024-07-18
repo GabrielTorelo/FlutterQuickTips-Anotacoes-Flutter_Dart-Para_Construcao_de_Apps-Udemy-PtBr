@@ -5,7 +5,7 @@ import './resposta.dart';
 class Questionario extends StatelessWidget {
   final int perguntaSelecionada;
   final List<Map<String, Object>> perguntas;
-  final void Function() responder;
+  final void Function(int) responder;
 
   const Questionario(
       {super.key,
@@ -21,7 +21,7 @@ class Questionario extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Lista de respostas
-    final List<String> respostas = temPerguntaSelecionada
+    final List<Map<String, Object>> respostas = temPerguntaSelecionada
         ? perguntas[perguntaSelecionada].cast()['respostas']
         : [];
 
@@ -35,8 +35,9 @@ class Questionario extends StatelessWidget {
         // Mapeando a lista de respostas e retornando um widget para cada resposta
         ...respostas.map((textoResp) {
           return Resposta(
-            texto: textoResp,
-            funcao: responder,
+            texto: textoResp['texto'].toString(),
+            funcao: () =>
+                responder(int.parse(textoResp['pontuacao'].toString())),
           );
         }),
       ],

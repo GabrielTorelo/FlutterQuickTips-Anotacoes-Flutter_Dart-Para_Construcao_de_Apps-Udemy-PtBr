@@ -5,29 +5,46 @@ import './questionario.dart';
 void main() => runApp(const PerguntaApp());
 
 class _PerguntaAppState extends State<PerguntaApp> {
-  var _perguntaSelecionada = 0;
-  final List<Map<String, Object>> _perguntas = const [
+  int _perguntaSelecionada = 0;
+  int _pontuacaoTotal = 0;
+  final List<Map<String, Object>> _perguntas = [
     {
       'texto': 'Qual é a sua cor favorita?',
-      'respostas': ['⚫ Preto', '🔴 Vermelho', '🟢 Verde', '⚪ Branco'],
+      'respostas': List<Map<String, Object>>.from([
+        {'texto': '🔴 Vermelho', 'pontuacao': 10},
+        {'texto': '🔵 Azul', 'pontuacao': 5},
+        {'texto': '🟢 Verde', 'pontuacao': 3},
+        {'texto': '🟡 Amarelo', 'pontuacao': 1},
+      ])
     },
     {
       'texto': 'Qual é o seu animal favorito?',
-      'respostas': ['🐇 Coelho', '🐍 Cobra', '🐘 Elefante', '🦁 Leão'],
+      'respostas': List<Map<String, Object>>.from([
+        {'texto': '🐇 Coelho', 'pontuacao': 10},
+        {'texto': '🐍 Cobra', 'pontuacao': 5},
+        {'texto': '🐘 Elefante', 'pontuacao': 3},
+        {'texto': '🦁 Leão', 'pontuacao': 1},
+      ])
     },
     {
       'texto': 'Qual é o seu veiculo favorito?',
-      'respostas': ['🚗 Carro', '🚲 Bicicleta', '✈️ Avião', '🚢 Navio'],
-    },
+      'respostas': List<Map<String, Object>>.from([
+        {'texto': '🚗 Carro', 'pontuacao': 10},
+        {'texto': '🚲 Bicicleta', 'pontuacao': 5},
+        {'texto': '✈️ Avião', 'pontuacao': 3},
+        {'texto': '🚢 Navio', 'pontuacao': 1},
+      ])
+    }
   ];
 
   // Método para responder a pergunta
-  void _responder() {
+  void _responder(int pontuacao) {
     if (temPerguntaSelecionada) {
       // setState: Método que atualiza o estado do widget
       // O método build é chamado novamente
       setState(() {
         _perguntaSelecionada++;
+        _pontuacaoTotal += pontuacao;
       });
     }
   }
@@ -65,7 +82,9 @@ class _PerguntaAppState extends State<PerguntaApp> {
                 perguntas: _perguntas,
                 responder: _responder,
               )
-            : const Resultado(),
+            : Resultado(
+                pontuacao: _pontuacaoTotal,
+              ),
       ),
     );
   }
