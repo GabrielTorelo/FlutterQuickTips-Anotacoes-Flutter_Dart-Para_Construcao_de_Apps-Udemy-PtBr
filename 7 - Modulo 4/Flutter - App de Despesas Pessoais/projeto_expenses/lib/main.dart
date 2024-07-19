@@ -31,18 +31,20 @@ class MyHomePage extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.bold,
             )),
-        body: const Column(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              child: Card(
-                color: Colors.blue,
-                elevation: 5,
-                child: Text('Graphic!'),
+        body: const SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                child: Card(
+                  color: Colors.blue,
+                  elevation: 5,
+                  child: Text('Graphic!'),
+                ),
               ),
-            ),
-            TransactionsUser(),
-          ],
+              TransactionsUser(),
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
