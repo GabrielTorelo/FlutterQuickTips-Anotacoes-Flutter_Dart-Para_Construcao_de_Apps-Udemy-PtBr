@@ -1,5 +1,8 @@
-import 'package:expenses/components/transactions_user.dart';
+import 'package:expenses/components/transaction_form.dart';
+import 'package:expenses/components/transaction_list.dart';
+import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 void main() => runApp(const ExpensesApp());
 
@@ -15,8 +18,43 @@ class ExpensesApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final List<Transaction> _transactions = [];
+
+  // Método Getter
+  List<Transaction> get getTransactions {
+    return _transactions;
+  }
+
+  // Método Setter
+  void addTransaction(String title, double amount) {
+    setState(() {
+      _transactions.add(Transaction(
+        id: const Uuid().v4(),
+        title: title,
+        amount: amount,
+        date: DateTime.now(),
+      ));
+    });
+
+    Navigator.of(context).pop();
+  }
+
+  _openTransactionFormModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return TransactionForm(setTransaction: addTransaction);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +69,10 @@ class MyHomePage extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.bold,
             )),
-        body: const SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 width: double.infinity,
                 child: Card(
                   color: Colors.blue,
@@ -42,13 +80,20 @@ class MyHomePage extends StatelessWidget {
                   child: Text('Graphic!'),
                 ),
               ),
-              TransactionsUser(),
+              TransactionList(transactions: getTransactions),
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () {},
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+          backgroundColor: Colors.blue,
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          onPressed: () => _openTransactionFormModal(context),
         ),
       ),
     );

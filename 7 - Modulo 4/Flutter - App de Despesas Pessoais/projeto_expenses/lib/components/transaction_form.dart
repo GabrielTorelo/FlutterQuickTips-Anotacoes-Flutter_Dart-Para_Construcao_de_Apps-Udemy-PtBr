@@ -1,11 +1,31 @@
 import 'package:flutter/material.dart';
 
-class TransactionForm extends StatelessWidget {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+class TransactionForm extends StatefulWidget {
   final void Function(String, double) setTransaction;
 
-  TransactionForm({super.key, required this.setTransaction});
+  const TransactionForm({super.key, required this.setTransaction});
+
+  @override
+  State<TransactionForm> createState() => _TransactionFormState();
+}
+
+class _TransactionFormState extends State<TransactionForm> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
+
+  void _submitData() {
+    final enteredTitle = titleController.text;
+    final enteredAmount = double.tryParse(amountController.text) ?? 0.0;
+
+    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+      return;
+    }
+
+    widget.setTransaction(enteredTitle, enteredAmount);
+    titleController.clear();
+    amountController.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +38,13 @@ class TransactionForm extends StatelessWidget {
             TextField(
               controller: titleController,
               decoration: const InputDecoration(labelText: 'Title'),
+              onSubmitted: (_) => _submitData(),
               keyboardType: TextInputType.text,
             ),
             TextField(
               controller: amountController,
               decoration: const InputDecoration(labelText: 'Amount (\$)'),
+              onSubmitted: (_) => _submitData(),
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
               ),
@@ -31,14 +53,7 @@ class TransactionForm extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
-                  onPressed: () => {
-                    setTransaction(
-                      titleController.text,
-                      double.parse(amountController.text),
-                    ),
-                    titleController.clear(),
-                    amountController.clear(),
-                  },
+                  onPressed: () => _submitData(),
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.purple,
                   ),
