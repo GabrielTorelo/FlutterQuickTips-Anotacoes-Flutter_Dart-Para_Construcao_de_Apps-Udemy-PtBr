@@ -1,7 +1,5 @@
-import 'package:expenses/models/transaction.dart';
+import 'package:expenses/components/transactions_user.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
-import 'package:intl/intl.dart';
 
 void main() => runApp(const ExpensesApp());
 
@@ -10,7 +8,7 @@ class ExpensesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Expenses',
       home: MyHomePage(),
     );
@@ -18,40 +16,7 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
-
-  final List<Transaction> _transactions = [
-    Transaction(
-      id: const Uuid().v4(),
-      title: 'New Shoes',
-      amount: 69.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: const Uuid().v4(),
-      title: 'Energy Bill',
-      amount: 156.85,
-      date: DateTime.now(),
-    ),
-  ];
-
-  // Método Getter
-  List<Transaction> get getTransactions {
-    return _transactions;
-  }
-
-  // Método Setter
-  void addTransaction(String title, double amount) {
-    _transactions.add(Transaction(
-      id: const Uuid().v4(),
-      title: title,
-      amount: amount,
-      date: DateTime.now(),
-    ));
-  }
-
-  MyHomePage({super.key});
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +31,9 @@ class MyHomePage extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.bold,
             )),
-        body: Column(
+        body: const Column(
           children: [
-            const SizedBox(
+            SizedBox(
               width: double.infinity,
               child: Card(
                 color: Colors.blue,
@@ -76,95 +41,7 @@ class MyHomePage extends StatelessWidget {
                 child: Text('Graphic!'),
               ),
             ),
-            Column(
-              children: getTransactions.map((transaction) {
-                return Card(
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 15,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.purple,
-                            width: 2,
-                          ),
-                        ),
-                        padding: const EdgeInsets.all(10),
-                        child: Text(
-                          '\$ ${transaction.amount.toStringAsFixed(2)}',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.purple,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              transaction.title,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              DateFormat('d MMM y').format(transaction.date),
-                              style: const TextStyle(
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }).toList(),
-            ),
-            Card(
-              elevation: 5,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    TextField(
-                      controller: titleController,
-                      decoration: const InputDecoration(labelText: 'Title'),
-                      keyboardType: TextInputType.text,
-                    ),
-                    TextField(
-                      controller: amountController,
-                      decoration:
-                          const InputDecoration(labelText: 'Amount (\$)'),
-                      keyboardType: const TextInputType.numberWithOptions(
-                        decimal: true,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                          onPressed: () => {
-                            print(titleController.text),
-                            print(amountController.text),
-                          },
-                          style: TextButton.styleFrom(
-                            foregroundColor: Colors.purple,
-                          ),
-                          child: const Text('Add Transaction'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            TransactionsUser(),
           ],
         ),
         floatingActionButton: FloatingActionButton(
