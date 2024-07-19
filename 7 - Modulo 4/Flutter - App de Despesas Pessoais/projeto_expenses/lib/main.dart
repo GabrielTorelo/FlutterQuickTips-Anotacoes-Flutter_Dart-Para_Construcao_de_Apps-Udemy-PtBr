@@ -1,3 +1,4 @@
+import 'package:expenses/components/chart.dart';
 import 'package:expenses/components/transaction_form.dart';
 import 'package:expenses/components/transaction_list.dart';
 import 'package:expenses/models/transaction.dart';
@@ -61,7 +62,35 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _transactions = [];
+  final List<Transaction> _transactions = [
+    Transaction(
+      id: 't1',
+      title: 'New Shoes',
+      amount: 69.99,
+      date: DateTime.now().subtract(const Duration(days: 1)),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Energy Bill',
+      amount: 16.53,
+      date: DateTime.now().subtract(const Duration(days: 2)),
+    ),
+    Transaction(
+      id: 't3',
+      title: 'New T-Shirt',
+      amount: 45.78,
+      date: DateTime.now().subtract(const Duration(days: 55)),
+    ),
+  ];
+
+  // Método Getter
+  List<Transaction> get getRecentTransactions {
+    return _transactions.where((transaction) {
+      return transaction.date.isAfter(
+        DateTime.now().subtract(const Duration(days: 7)),
+      );
+    }).toList();
+  }
 
   // Método Getter
   List<Transaction> get getTransactions {
@@ -103,14 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                width: double.infinity,
-                child: Card(
-                  color: Theme.of(context).colorScheme.secondary,
-                  elevation: 5,
-                  child: const Text('Graphic!'),
-                ),
-              ),
+              Chart(recentTransactions: getRecentTransactions),
               TransactionList(transactions: getTransactions),
             ],
           ),
