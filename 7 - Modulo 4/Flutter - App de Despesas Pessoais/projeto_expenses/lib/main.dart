@@ -11,9 +11,44 @@ class ExpensesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    final ThemeData theme = ThemeData();
+
+    return MaterialApp(
       title: 'Expenses',
-      home: MyHomePage(),
+      home: const MyHomePage(),
+      theme: theme.copyWith(
+        colorScheme: theme.colorScheme.copyWith(
+          primary: Colors.purple,
+          secondary: Colors.amber,
+          tertiary: Colors.grey,
+        ),
+        textTheme: theme.textTheme.copyWith(
+          titleLarge: const TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.purple,
+          ),
+          titleMedium: const TextStyle(
+            fontFamily: 'Quicksand',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+          titleSmall: const TextStyle(
+            fontFamily: 'Quicksand',
+            fontSize: 12,
+            color: Colors.grey,
+          ),
+        ),
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
     );
   }
 }
@@ -61,23 +96,19 @@ class _MyHomePageState extends State<MyHomePage> {
     return Center(
       child: Scaffold(
         appBar: AppBar(
-            title: const Text('Personal Expenses'),
-            backgroundColor: Colors.blue,
-            centerTitle: true,
-            titleTextStyle: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            )),
+          title: const Text('Personal Expenses'),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          centerTitle: true,
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(
+              SizedBox(
                 width: double.infinity,
                 child: Card(
-                  color: Colors.blue,
+                  color: Theme.of(context).colorScheme.secondary,
                   elevation: 5,
-                  child: Text('Graphic!'),
+                  child: const Text('Graphic!'),
                 ),
               ),
               TransactionList(transactions: getTransactions),
@@ -88,11 +119,8 @@ class _MyHomePageState extends State<MyHomePage> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50),
           ),
-          backgroundColor: Colors.blue,
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          child: const Icon(Icons.add),
           onPressed: () => _openTransactionFormModal(context),
         ),
       ),

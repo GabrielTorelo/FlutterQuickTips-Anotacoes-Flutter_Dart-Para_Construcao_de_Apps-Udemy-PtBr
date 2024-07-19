@@ -29,40 +29,37 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            TextField(
-              controller: titleController,
-              decoration: const InputDecoration(labelText: 'Title'),
-              onSubmitted: (_) => _submitData(),
-              keyboardType: TextInputType.text,
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        children: [
+          TextField(
+            controller: titleController,
+            decoration: const InputDecoration(labelText: 'Title'),
+            onSubmitted: (_) => _submitData(),
+            keyboardType: TextInputType.text,
+          ),
+          TextField(
+            controller: amountController,
+            decoration: const InputDecoration(labelText: 'Amount (\$)'),
+            onSubmitted: (_) => _submitData(),
+            keyboardType: const TextInputType.numberWithOptions(
+              decimal: true,
             ),
-            TextField(
-              controller: amountController,
-              decoration: const InputDecoration(labelText: 'Amount (\$)'),
-              onSubmitted: (_) => _submitData(),
-              keyboardType: const TextInputType.numberWithOptions(
-                decimal: true,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () => _submitData(),
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.purple,
-                  ),
-                  child: const Text('Add Transaction'),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () => _submitData(),
+                style: TextButton.styleFrom(
+                  foregroundColor: Theme.of(context).colorScheme.primary,
                 ),
-              ],
-            ),
-          ],
-        ),
+                child: const Text('Add Transaction'),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
