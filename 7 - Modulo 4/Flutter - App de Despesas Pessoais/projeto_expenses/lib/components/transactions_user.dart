@@ -12,20 +12,7 @@ class TransactionsUser extends StatefulWidget {
 }
 
 class _TransactionsUserState extends State<TransactionsUser> {
-  final List<Transaction> _transactions = [
-    Transaction(
-      id: const Uuid().v4(),
-      title: 'New Shoes',
-      amount: 69.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: const Uuid().v4(),
-      title: 'Energy Bill',
-      amount: 156.85,
-      date: DateTime.now(),
-    ),
-  ];
+  final List<Transaction> _transactions = [];
 
   // Método Getter
   List<Transaction> get getTransactions {
@@ -34,12 +21,14 @@ class _TransactionsUserState extends State<TransactionsUser> {
 
   // Método Setter
   void addTransaction(String title, double amount) {
-    _transactions.add(Transaction(
-      id: const Uuid().v4(),
-      title: title,
-      amount: amount,
-      date: DateTime.now(),
-    ));
+    setState(() {
+      _transactions.add(Transaction(
+        id: const Uuid().v4(),
+        title: title,
+        amount: amount,
+        date: DateTime.now(),
+      ));
+    });
   }
 
   @override
@@ -47,7 +36,7 @@ class _TransactionsUserState extends State<TransactionsUser> {
     return Column(
       children: [
         TransactionList(transactions: getTransactions),
-        TransactionForm(),
+        TransactionForm(setTransaction: addTransaction),
       ],
     );
   }
