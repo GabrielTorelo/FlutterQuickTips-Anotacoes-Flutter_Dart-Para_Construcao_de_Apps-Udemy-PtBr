@@ -41,6 +41,11 @@ class ExpensesApp extends StatelessWidget {
             fontSize: 12,
             color: Colors.grey,
           ),
+          labelMedium: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
         ),
         appBarTheme: const AppBarTheme(
           titleTextStyle: TextStyle(
@@ -111,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.of(context).pop();
   }
 
-  _openTransactionFormModal(BuildContext context) {
+  void _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
       builder: (_) {
