@@ -39,23 +39,37 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 6,
       margin: const EdgeInsets.all(20),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: groupedTransaction.map((data) {
-            return Flexible(
-              fit: FlexFit.tight,
-              child: ChartBar(
-                label: data['day'].toString(),
-                value: data['amount'] as double,
-                percentage: _weekTotalValue <= 0
-                    ? 0
-                    : (data['amount'] as double) / _weekTotalValue,
-              ),
-            );
-          }).toList(),
-        ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Text(
+              'Weekly Expenses',
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontFamily: 'Quicksand',
+                    color: Colors.black,
+                  ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: groupedTransaction.map((data) {
+                return Flexible(
+                  fit: FlexFit.tight,
+                  child: ChartBar(
+                    label: data['day'].toString(),
+                    value: data['amount'] as double,
+                    percentage: _weekTotalValue <= 0
+                        ? 0
+                        : (data['amount'] as double) / _weekTotalValue,
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
       ),
     );
   }
