@@ -33,39 +33,33 @@ class TransactionList extends StatelessWidget {
               itemBuilder: (ctx, index) {
                 final transaction = transactions[index];
                 return Card(
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 15,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Theme.of(context).colorScheme.primary,
-                            width: 2,
+                  elevation: 5,
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 5,
+                  ),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      radius: 30,
+                      child: Padding(
+                        padding: const EdgeInsets.all(6),
+                        child: FittedBox(
+                          child: Text(
+                            '\$ ${transaction.amount.toStringAsFixed(2)}',
+                            style: Theme.of(context).textTheme.titleLarge,
                           ),
                         ),
-                        padding: const EdgeInsets.all(10),
-                        child: Text(
-                          '\$ ${transaction.amount.toStringAsFixed(2)}',
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
                       ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              transaction.title.toUpperCase(),
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            Text(DateFormat('d MMM y').format(transaction.date),
-                                style: Theme.of(context).textTheme.titleSmall),
-                          ],
-                        ),
-                      ),
-                    ],
+                    ),
+                    title: Text(
+                      transaction.title.toUpperCase(),
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    subtitle: Text(
+                      DateFormat('d MMM y').format(transaction.date),
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
                   ),
                 );
               },
