@@ -115,6 +115,15 @@ class _MyHomePageState extends State<MyHomePage> {
           title: const Text('Personal Expenses'),
           backgroundColor: Theme.of(context).colorScheme.primary,
           centerTitle: true,
+          actions: [
+            IconButton(
+              icon: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+              onPressed: () => _openTransactionFormModal(context),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -135,6 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: const Icon(Icons.add),
           onPressed: () => _openTransactionFormModal(context),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
   }

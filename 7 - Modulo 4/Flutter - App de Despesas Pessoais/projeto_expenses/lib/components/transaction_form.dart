@@ -48,58 +48,65 @@ class _TransactionFormState extends State<TransactionForm> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        children: [
-          Text(
-            'Add New Transaction',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          TextField(
-            controller: _titleController,
-            decoration: const InputDecoration(labelText: 'Title'),
-            onSubmitted: (_) => _submitData(),
-            keyboardType: TextInputType.text,
-          ),
-          TextField(
-            controller: _amountController,
-            decoration: const InputDecoration(labelText: 'Amount (\$)'),
-            onSubmitted: (_) => _submitData(),
-            keyboardType: const TextInputType.numberWithOptions(
-              decimal: true,
+      padding: EdgeInsets.only(
+        top: 10,
+        left: 10,
+        right: 10,
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Text(
+              'Add New Transaction',
+              style: Theme.of(context).textTheme.titleMedium,
             ),
-          ),
-          SizedBox(
-            height: 70,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    'Picked Date: ${DateFormat('dd/MM/yyyy').format(_selectedDate)}',
-                    style: Theme.of(context).textTheme.labelMedium,
+            TextField(
+              controller: _titleController,
+              decoration: const InputDecoration(labelText: 'Title'),
+              onSubmitted: (_) => _submitData(),
+              keyboardType: TextInputType.text,
+            ),
+            TextField(
+              controller: _amountController,
+              decoration: const InputDecoration(labelText: 'Amount (\$)'),
+              onSubmitted: (_) => _submitData(),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
+            ),
+            SizedBox(
+              height: 70,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'Picked Date: ${DateFormat('dd/MM/yyyy').format(_selectedDate)}',
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
                   ),
-                ),
-                TextButton(
-                  onPressed: () => _showDatePicker(),
-                  child: const Text('Choose Date'),
+                  TextButton(
+                    onPressed: () => _showDatePicker(),
+                    child: const Text('Choose Date'),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    foregroundColor: Colors.white,
+                  ),
+                  onPressed: () => _submitData(),
+                  child: const Text('Add Transaction'),
                 ),
               ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  foregroundColor: Colors.white,
-                ),
-                onPressed: () => _submitData(),
-                child: const Text('Add Transaction'),
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
