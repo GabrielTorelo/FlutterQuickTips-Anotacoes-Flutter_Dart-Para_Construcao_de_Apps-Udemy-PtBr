@@ -67,26 +67,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _transactions = [
-    Transaction(
-      id: 't1',
-      title: 'New Shoes',
-      amount: 69.99,
-      date: DateTime.now().subtract(const Duration(days: 1)),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Energy Bill',
-      amount: 16.53,
-      date: DateTime.now().subtract(const Duration(days: 2)),
-    ),
-    Transaction(
-      id: 't3',
-      title: 'New T-Shirt',
-      amount: 45.78,
-      date: DateTime.now().subtract(const Duration(days: 55)),
-    ),
-  ];
+  final List<Transaction> _transactions = [];
 
   // Método Getter
   List<Transaction> get getRecentTransactions {
@@ -103,13 +84,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   // Método Setter
-  void addTransaction(String title, double amount) {
+  void addTransaction(String title, double amount, DateTime date) {
     setState(() {
       _transactions.add(Transaction(
         id: const Uuid().v4(),
         title: title,
         amount: amount,
-        date: DateTime.now(),
+        date: date,
       ));
     });
 
