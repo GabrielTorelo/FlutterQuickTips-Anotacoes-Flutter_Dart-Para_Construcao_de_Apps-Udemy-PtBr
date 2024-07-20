@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [];
 
   // Método Getter
-  List<Transaction> get getRecentTransactions {
+  List<Transaction> get _getRecentTransactions {
     return _transactions.where((transaction) {
       return transaction.date.isAfter(
         DateTime.now().subtract(const Duration(days: 7)),
@@ -78,13 +78,8 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  // Método Getter
-  List<Transaction> get getTransactions {
-    return _transactions;
-  }
-
   // Método Setter
-  void addTransaction(String title, double amount, DateTime date) {
+  void _addTransaction(String title, double amount, DateTime date) {
     setState(() {
       _transactions.add(Transaction(
         id: const Uuid().v4(),
@@ -97,11 +92,17 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.of(context).pop();
   }
 
+  void _deleteTransaction(String id) {
+    setState(() {
+      _transactions.removeWhere((transaction) => transaction.id == id);
+    });
+  }
+
   void _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
       builder: (_) {
-        return TransactionForm(setTransaction: addTransaction);
+        return TransactionForm(setTransaction: _addTransaction);
       },
     );
   }
@@ -118,8 +119,11 @@ class _MyHomePageState extends State<MyHomePage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Chart(recentTransactions: getRecentTransactions),
-              TransactionList(transactions: getTransactions),
+              Chart(recentTransactions: _getRecentTransactions),
+              TransactionList(
+                transactions: _transactions,
+                deleteTransaction: _deleteTransaction,
+              ),
             ],
           ),
         ),

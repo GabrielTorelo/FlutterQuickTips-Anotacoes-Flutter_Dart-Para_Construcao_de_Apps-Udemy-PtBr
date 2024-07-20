@@ -51,6 +51,10 @@ class _TransactionFormState extends State<TransactionForm> {
       padding: const EdgeInsets.all(10),
       child: Column(
         children: [
+          Text(
+            'Add New Transaction',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           TextField(
             controller: _titleController,
             decoration: const InputDecoration(labelText: 'Title'),
