@@ -1,0 +1,16 @@
+O que é Responsividade?
+  Resposta: Responsividade é a capacidade de um aplicativo ajustar seu layout e conteúdo de forma eficiente e atraente em diferentes dispositivos.
+  Ou seja: Um design responsivo garante que a interface do usuário seja funcional e visualmente agradável no smartphone, tablet ou desktop.
+
+O que é Adaptatividade?
+  Resposta: Adaptatividade é a capacidade de um aplicativo ajustar o comportamento e os recursos em função do dispositivo e contexto de uso.
+  Ou seja: Um design adaptativo proporciona uma experiência de usuário otimizada, modificando as funcionalidades com base nas características do dispositivo.
+
+* Sub-Árvore:
+  Conceito: Uma sub-árvore é uma parte específica da árvore de widgets que pode ser alterada ou configurada de maneira diferente com base no dispositivo/plataforma.
+  Ou seja: A sub-árvore permite que diferentes seções da interface do usuário sejam personalizadas para dispositivos/plataformas específicas. 
+  Uso: Utilizada para adaptar a interface do usuário de acordo com o dispositivo/plataforma.
+  Exemplo:
+    * Pode-se ter uma sub-árvore para iOS com widgets específicos para iOS.
+    * Pode-se ter outra sub-árvore para Android com widgets específicos para Android.
+    Assim: Garante uma experiência nativa para os usuários em ambas as plataformas.
