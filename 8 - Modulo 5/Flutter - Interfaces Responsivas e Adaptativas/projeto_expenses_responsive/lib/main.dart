@@ -109,6 +109,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final double availableHeight = MediaQuery.of(context).size.height -
+        AppBar().preferredSize.height -
+        MediaQuery.of(context).padding.top;
+
     return Center(
       child: Scaffold(
         appBar: AppBar(
@@ -128,10 +132,16 @@ class _MyHomePageState extends State<MyHomePage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Chart(recentTransactions: _getRecentTransactions),
-              TransactionList(
-                transactions: _transactions,
-                deleteTransaction: _deleteTransaction,
+              SizedBox(
+                height: availableHeight * 0.3,
+                child: Chart(recentTransactions: _getRecentTransactions),
+              ),
+              SizedBox(
+                height: availableHeight * 0.7,
+                child: TransactionList(
+                  transactions: _transactions,
+                  deleteTransaction: _deleteTransaction,
+                ),
               ),
             ],
           ),
