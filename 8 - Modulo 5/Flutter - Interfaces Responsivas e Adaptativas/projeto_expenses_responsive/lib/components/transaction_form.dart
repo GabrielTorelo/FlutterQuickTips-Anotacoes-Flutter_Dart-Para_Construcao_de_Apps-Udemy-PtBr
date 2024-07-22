@@ -47,15 +47,16 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: 10,
-        left: 10,
-        right: 10,
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-      ),
-      child: SingleChildScrollView(
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.only(
+          top: 10,
+          left: 10,
+          right: 10,
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               'Add New Transaction',

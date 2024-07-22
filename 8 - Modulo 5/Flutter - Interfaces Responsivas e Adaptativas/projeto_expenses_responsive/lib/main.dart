@@ -157,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
               if (!_showChart || !isLandscape)
                 Center(
                   child: SizedBox(
-                    height: availableHeight * 0.7,
+                    height: availableHeight * (isLandscape ? 1 : 0.7),
                     child: TransactionList(
                       transactions: _transactions,
                       deleteTransaction: _deleteTransaction,
