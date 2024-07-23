@@ -1,6 +1,7 @@
 import 'package:expenses/components/chart.dart';
 import 'package:expenses/components/transaction_form.dart';
 import 'package:expenses/components/transaction_list.dart';
+import 'package:expenses/extensions/platform.dart';
 import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
@@ -116,12 +117,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final MediaQueryData mediaQuery = MediaQuery.of(context);
+    final bool isLandscape = mediaQuery.orientation == Orientation.landscape;
 
-    final double availableHeight = MediaQuery.of(context).size.height -
+    final double availableHeight = mediaQuery.size.height -
         AppBar().preferredSize.height -
-        MediaQuery.of(context).padding.top;
+        mediaQuery.padding.top;
 
     return Center(
       child: Scaffold(
@@ -167,14 +168,16 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
-          ),
-          backgroundColor: Theme.of(context).colorScheme.secondary,
-          child: const Icon(Icons.add),
-          onPressed: () => _openTransactionFormModal(context),
-        ),
+        floatingActionButton: Device.isIOS
+            ? Container()
+            : FloatingActionButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                backgroundColor: Theme.of(context).colorScheme.secondary,
+                child: const Icon(Icons.add),
+                onPressed: () => _openTransactionFormModal(context),
+              ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
