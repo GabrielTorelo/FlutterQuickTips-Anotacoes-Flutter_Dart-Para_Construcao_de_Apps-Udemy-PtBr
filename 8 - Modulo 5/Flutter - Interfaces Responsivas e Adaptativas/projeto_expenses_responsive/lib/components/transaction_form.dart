@@ -1,4 +1,5 @@
 import 'package:expenses/components/adaptative_button.dart';
+import 'package:expenses/components/adaptative_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -63,16 +64,15 @@ class _TransactionFormState extends State<TransactionForm> {
               'Add New Transaction',
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            TextField(
+            AdaptativeTextField(
               controller: _titleController,
-              decoration: const InputDecoration(labelText: 'Title'),
-              onSubmitted: (_) => _submitData(),
-              keyboardType: TextInputType.text,
+              label: "Title",
+              onSubmitted: _submitData,
             ),
-            TextField(
+            AdaptativeTextField(
               controller: _amountController,
-              decoration: const InputDecoration(labelText: 'Amount (\$)'),
-              onSubmitted: (_) => _submitData(),
+              label: "Amount (\$)",
+              onSubmitted: _submitData,
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
               ),
