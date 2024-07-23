@@ -1,7 +1,7 @@
 import 'package:expenses/components/adaptative_button.dart';
+import 'package:expenses/components/adaptative_date_picker.dart';
 import 'package:expenses/components/adaptative_field.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class TransactionForm extends StatefulWidget {
   final void Function(String, double, DateTime) setTransaction;
@@ -28,23 +28,6 @@ class _TransactionFormState extends State<TransactionForm> {
     widget.setTransaction(enteredTitle, enteredAmount, _selectedDate);
     _titleController.clear();
     _amountController.clear();
-  }
-
-  void _showDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2021),
-      lastDate: DateTime.now(),
-    ).then((pickedDate) {
-      if (pickedDate == null) {
-        return;
-      }
-
-      setState(() {
-        _selectedDate = pickedDate;
-      });
-    });
   }
 
   @override
@@ -77,22 +60,13 @@ class _TransactionFormState extends State<TransactionForm> {
                 decimal: true,
               ),
             ),
-            SizedBox(
-              height: 70,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      'Picked Date: ${DateFormat('dd/MM/yyyy').format(_selectedDate)}',
-                      style: Theme.of(context).textTheme.labelMedium,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () => _showDatePicker(),
-                    child: const Text('Choose Date'),
-                  ),
-                ],
-              ),
+            AdaptativeDatePicker(
+              selectedDate: _selectedDate,
+              onDateChanged: (newDate) {
+                setState(() {
+                  _selectedDate = newDate;
+                });
+              },
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
