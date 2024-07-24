@@ -1,0 +1,40 @@
+Introdução aos métodos de ciclo de vida:
+  Conceito: Os métodos de ciclo de vida são funções específicas que são chamadas em diferentes momentos do ciclo de vida de um widget.
+  Ou seja: Eles ajudam a gerenciar o estado e os recursos do widget ao longo do tempo, garantindo uma resposta eficiente às mudanças no estado do aplicativo.
+  Uso: Utilizados para executar código em momentos críticos do ciclo de vida de um widget, garantindo a uma resposta às mudanças de estado.
+
+Método do ciclo de vida:
+  Conceito: Os métodos de ciclo de vida permitem que você controle o comportamento do widget em diferentes fases, como sua criação, atualização e descarte.
+  Ou seja: Eles ajudam a gerenciar o estado e os recursos do widget ao longo do tempo.
+
+  * Método chamado ao criar/reconstruir o widget (createState):
+    Conceito: É um método chamado quando um novo widget de estado é criado, retornando uma instância da classe de estado associada ao widget.
+    Ou seja: Este método é responsável por associar um objeto de estado ao widget, iniciando seu ciclo de vida.
+    Uso: Utilizado para definir e retornar uma instância de um objeto de estado que gerenciará a lógica e os dados do widget.
+
+  * Método chamado ao inicializar o widget (initState):
+    Conceito: É um método chamado quando o objeto de estado é inserido na árvore de widgets.
+    Ou seja: É importante para inicializar dados que dependem da construção inicial do widget.
+    Uso: Utilizado para configurar o estado inicial do widget, como inicializar variáveis e configurar controladores.
+
+  * Método chamado ao atualizar o widget (didUpdateWidget):
+    Conceito: É um método chamado quando o widget associado ao objeto de estado é atualizado.
+    Ou seja: Permite que o estado responda às mudanças no widget e atualize suas dependências conforme necessário.
+    Uso: Utilizado para responder a alterações nas propriedades do widget que requerem uma atualização no estado.
+
+  * Método chamado ao descartar o widget (dispose):
+    Conceito: É um método chamado quando o objeto de estado é removido permanentemente da árvore de widgets.
+    Uso: Utilizado para liberar qualquer recurso que foi alocado durante o ciclo de vida do widget.
+
+Estados do ciclo de vida:
+  * Inativo (inactive):
+    Conceito: Um estado em que o aplicativo não está interagindo com o usuário.
+    Uso: Utilizado para realizar operações que não requerem a interação direta do usuário, como atualizar dados em segundo plano.
+
+  * Pausado (paused):
+    Conceito: Um estado em que o aplicativo está em segundo plano, mas ainda mantém seu estado na memória.
+    Uso: Utilizado para pausar operações que consomem muitos recursos e que não são necessárias quando o aplicativo não está visível.
+
+  * Retomado (resumed):
+    Conceito: Um estado em que o aplicativo está ativo e interagindo com o usuário.
+    Uso: Utilizado para retomar operações que foram pausadas quando o aplicativo estava em segundo plano e para atualizar a interface do usuário.

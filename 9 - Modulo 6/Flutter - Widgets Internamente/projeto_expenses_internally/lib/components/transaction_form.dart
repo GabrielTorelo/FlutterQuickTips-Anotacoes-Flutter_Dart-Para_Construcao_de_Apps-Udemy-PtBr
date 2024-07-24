@@ -4,20 +4,51 @@ import 'package:expenses/components/adaptative_field.dart';
 import 'package:flutter/material.dart';
 
 class TransactionForm extends StatefulWidget {
-  final void Function(String, double, DateTime)
-      setTransaction; // Atributo final
+  final void Function(String, double, DateTime) setTransaction;
 
-  // Para definir um construtor como "const", todos os atributos devem ser "final"
-  const TransactionForm({super.key, required this.setTransaction});
+  // O construtor é chamado sempre que o widget é reconstruído
+  TransactionForm({super.key, required this.setTransaction}) {
+    print('Constructor TransactionForm');
+  }
 
+  // O método 'createState' é chamado sempre que o widget é reconstruído
   @override
-  State<TransactionForm> createState() => _TransactionFormState();
+  State<TransactionForm> createState() {
+    print('CreateState TransactionForm');
+    return _TransactionFormState();
+  }
 }
 
 class _TransactionFormState extends State<TransactionForm> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
+
+  // O construtor é chamado sempre que o widget é reconstruído
+  _TransactionFormState() {
+    print('Constructor _TransactionFormState');
+  }
+
+  // O método 'initState' é chamado uma única vez, quando o widget é inserido na árvore de widgets
+  @override
+  void initState() {
+    super.initState();
+    print('InitState _TransactionFormState');
+  }
+
+  // O método 'didUpdateWidget' é chamado sempre que o widget pai for reconstruído
+  @override
+  void didUpdateWidget(covariant TransactionForm oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print('DidUpdateWidget _TransactionFormState');
+  }
+
+  // O método 'dispose' é chamado uma única vez, quando o widget é removido da árvore de widgets
+  @override
+  void dispose() {
+    super.dispose();
+    print('Dispose _TransactionFormState');
+  }
 
   void _submitData() {
     final enteredTitle = _titleController.text;

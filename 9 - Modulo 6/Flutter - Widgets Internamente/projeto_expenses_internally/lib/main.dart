@@ -68,9 +68,35 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   final List<Transaction> _transactions = [];
   bool _showChart = false;
+
+  // O método 'initState' é chamado uma única vez, quando o widget é inserido na árvore de widgets
+  @override
+  void initState() {
+    super.initState();
+    print('InitState _TransactionFormState');
+
+    // O método 'addObserver' é chamado para adicionar um observador de ciclo de vida do aplicativo
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  // O método 'didChangeAppLifecycleState' é chamado sempre que o ciclo de vida do aplicativo muda
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print('AppLifecycleState: $state');
+  }
+
+  // O método 'dispose' é chamado uma única vez, quando o widget é removido da árvore de widgets
+  @override
+  void dispose() {
+    super.dispose();
+    print('Dispose _TransactionFormState');
+
+    // O método 'removeObserver' é chamado para remover um observador de ciclo de vida do aplicativo
+    WidgetsBinding.instance.removeObserver(this);
+  }
 
   // Método Getter
   List<Transaction> get _getRecentTransactions {
