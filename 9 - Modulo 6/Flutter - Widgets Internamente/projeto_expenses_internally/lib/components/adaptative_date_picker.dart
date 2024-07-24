@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AdaptativeDatePicker extends StatelessWidget {
-  final DateTime? selectedDate;
-  final Function(DateTime) onDateChanged;
+  final DateTime? selectedDate; // Atributo final
+  final Function(DateTime) onDateChanged; // Atributo final
 
+  // Para definir um construtor como "const", todos os atributos devem ser "final"
   const AdaptativeDatePicker({
     super.key,
     this.selectedDate,

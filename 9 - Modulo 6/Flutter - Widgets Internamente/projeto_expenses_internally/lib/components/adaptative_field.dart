@@ -3,11 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AdaptativeTextField extends StatelessWidget {
-  final TextEditingController controller;
-  final String label;
-  final void Function() onSubmitted;
-  final TextInputType keyboardType;
+  final TextEditingController controller; // Atributo final
+  final String label; // Atributo final
+  final void Function() onSubmitted; // Atributo final
+  final TextInputType keyboardType; // Atributo final
 
+  // Para definir um construtor como "const", todos os atributos devem ser "final"
   const AdaptativeTextField({
     super.key,
     required this.controller,

@@ -4,11 +4,10 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 class Chart extends StatelessWidget {
-  final List<Transaction> recentTransactions;
+  final List<Transaction> recentTransactions; // Atributo final
 
-  Chart({super.key, required this.recentTransactions}) {
-    print('Constructor Chart');
-  }
+  // Para definir um construtor como "const", todos os atributos devem ser "final"
+  const Chart({super.key, required this.recentTransactions});
 
   List<Map<String, Object>> get groupedTransaction {
     return List.generate(7, (index) {
@@ -38,7 +37,6 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('build() Chart');
     return Card(
       elevation: 6,
       margin: const EdgeInsets.all(20),

@@ -4,8 +4,10 @@ import 'package:expenses/components/adaptative_field.dart';
 import 'package:flutter/material.dart';
 
 class TransactionForm extends StatefulWidget {
-  final void Function(String, double, DateTime) setTransaction;
+  final void Function(String, double, DateTime)
+      setTransaction; // Atributo final
 
+  // Para definir um construtor como "const", todos os atributos devem ser "final"
   const TransactionForm({super.key, required this.setTransaction});
 
   @override
@@ -32,7 +34,6 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    print('build() _TransactionFormState');
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(

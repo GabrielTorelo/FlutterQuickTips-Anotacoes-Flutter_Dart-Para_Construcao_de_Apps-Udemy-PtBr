@@ -1,10 +1,11 @@
 class Transaction {
-  final String id;
-  final String title;
-  final double amount;
-  final DateTime date;
+  final String id; // Atributo final
+  final String title; // Atributo final
+  final double amount; // Atributo final
+  final DateTime date; // Atributo final
 
-  Transaction({
+  // Para definir um construtor como "const", todos os atributos devem ser "final"
+  const Transaction({
     required this.id,
     required this.title,
     required this.amount,

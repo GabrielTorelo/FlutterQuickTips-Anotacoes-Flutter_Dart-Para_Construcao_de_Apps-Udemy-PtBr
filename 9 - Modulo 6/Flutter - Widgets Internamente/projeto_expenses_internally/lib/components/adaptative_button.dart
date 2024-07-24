@@ -3,9 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AdaptativeButton extends StatelessWidget {
-  final String label;
-  final void Function() onPressed;
+  final String label; // Atributo final
+  final void Function() onPressed; // Atributo final
 
+  // Para definir um construtor como "const", todos os atributos devem ser "final"
   const AdaptativeButton(
       {super.key, required this.label, required this.onPressed});
 

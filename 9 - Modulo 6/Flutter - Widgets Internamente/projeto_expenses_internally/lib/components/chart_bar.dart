@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ChartBar extends StatelessWidget {
-  final String label;
-  final double value;
-  final double percentage;
+  final String label; // Atributo final
+  final double value; // Atributo final
+  final double percentage; // Atributo final
 
+  // Para definir um construtor como "const", todos os atributos devem ser "final"
   const ChartBar({
     super.key,
     required this.label,
@@ -14,7 +15,6 @@ class ChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('build() ChartBar');
     return LayoutBuilder(
       builder: (ctx, constraints) {
         return Column(

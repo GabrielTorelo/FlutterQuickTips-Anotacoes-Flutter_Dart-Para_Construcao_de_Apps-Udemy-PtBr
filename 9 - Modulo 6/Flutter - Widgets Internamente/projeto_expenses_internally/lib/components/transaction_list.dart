@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
-  final List<Transaction> transactions;
-  final void Function(String) deleteTransaction;
+  final List<Transaction> transactions; // Atributo final
+  final void Function(String) deleteTransaction; // Atributo final
 
+  // Para definir um construtor como "const", todos os atributos devem ser "final"
   const TransactionList({
     super.key,
     required this.transactions,
@@ -14,7 +15,6 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('build() TransactionList');
     return transactions.isEmpty
         ? LayoutBuilder(
             builder: (ctx, constraints) {
