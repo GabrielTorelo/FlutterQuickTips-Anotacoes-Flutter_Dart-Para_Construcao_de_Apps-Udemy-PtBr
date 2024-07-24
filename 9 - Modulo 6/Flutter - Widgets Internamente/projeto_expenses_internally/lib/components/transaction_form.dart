@@ -32,6 +32,7 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
+    print('build() _TransactionFormState');
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(
