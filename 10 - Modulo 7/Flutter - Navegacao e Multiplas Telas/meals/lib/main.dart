@@ -32,6 +32,11 @@ class MyApp extends StatelessWidget {
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
+          iconTheme: IconThemeData(
+            color: Colors.white,
+          ),
+          backgroundColor: Colors.pink,
+          centerTitle: true,
         ),
       ),
       home: const CategoriesScreen(),
