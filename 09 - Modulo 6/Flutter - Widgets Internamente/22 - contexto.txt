@@ -1,0 +1,13 @@
+Introdução ao contexto:
+  Conceito: Referência que permite o acesso à árvore de widgets e às informações de configuração associadas a um widget específico.
+  Ou seja: O contexto é uma ponte que conecta um widget à sua posição na árvore de widgets, possibilitando o acesso aos seus antecessores e às suas propriedades.
+  Uso: Utilizado para acessar informações e métodos fornecidos por widgets ancestrais.
+
+* Meta informação:
+  Conceito: Refere-se aos dados adicionais que descrevem ou fornecem contextos sobre os widgets.
+  Ou seja: São dados que ajudam a contextualizar ou configurar o comportamento de widgets.
+
+* Túnel Direto de conexão (InheritedWidget):
+  Conceito: É um tipo especial de widget que permite que dados e propriedades sejam compartilhados eficientemente através da árvore de widgets.
+  Ou seja: Permite que informações sejam transmitidas de um widget pai para seus filhos sem a necessidade de passar explicitamente esses dados por todos os níveis intermediários.
+  Uso: Utilizado para gerenciar estados e dados compartilhados de forma eficiente (usando o método of).

@@ -1,0 +1,42 @@
+Introdução as funções:
+  Conceito: As funções são blocos de código reutilizáveis que realizam uma tarefa específica.
+  Uso: Permitem organizar e modularizar o código, facilitando a leitura, manutenção e reutilização.
+  Analogia: Assim como você escolhe uma chave de fenda para parafusar, você chama uma função para realizar uma operação específica no código.
+  Exemplos:
+    1 - Função que imprime uma saudação:
+      void saudar() {
+        print('Olá, mundo!');
+      }
+    1.1 - Também é possível fazer da seguinte maneira (sem chaves, pois é uma única linha)
+      void saudar() => print('Olá, mundo!');
+    2 - Função que soma dois números e retorna o resultado:
+      int somar(int a, int b) {
+        return a + b;
+      }
+    2.1 - Também é possível fazer da seguinte maneira (sem chaves, pois é uma única linha)
+      int somar(int a, int b) => a + b;
+
+* Funções anônimas:
+  Conceito: Funções anônimas são funções que não têm um nome explicitamente declarado.
+  Uso: Utilizadas para realizar operações rápidas e pontuais, muitas vezes em contextos onde uma função nomeada seria excessiva.
+  Exemplo:
+    1 - Função anônima atribuída a uma variável para somar 2 valores inteiros:
+      final somar = (int a, int b) => a + b;
+
+* Funções que retornam funções:
+  Conceito: Permite a criação de funções de ordem superior que podem gerar outras funções com base em parâmetros específicos.
+  Uso: Utilizado para criar comportamentos dinâmicos e personalizados, onde a função retornada pode encapsular lógicas diferentes dependendo dos parâmetros fornecidos à função de ordem superior.
+  Exemplo:
+    1 -  Função que retorna uma função de soma:
+      int Function({int n2}) funcRetornaFunc({required int n1}) => ({int n2 = 0}) => n1 + n2;
+
+* Funções genéricas:
+  Conceito: Funções genéricas são funções que podem operar sobre diferentes tipos de dados sem especificar explicitamente os tipos nos parâmetros, permitindo maior flexibilidade e reutilização de código.
+  Uso: Utilizado para criar funções que podem trabalhar com qualquer tipo de dado, evitando a duplicação de código para diferentes tipos.
+  Exemplo:
+    1 -  Função genérica para imprimir uma lista de elementos:
+      void imprimeElementos<T>(List<T> elementos) {
+        for (T elemento in elementos) {
+          print(elemento);
+        }
+      }

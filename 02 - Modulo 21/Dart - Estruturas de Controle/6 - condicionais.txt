@@ -1,0 +1,39 @@
+Introdução aos condicionais:
+  Conceito: Condicionais são estruturas de controle que permitem executar diferentes blocos de código com base em certas condições.
+  Uso: Utilizados para tomar decisões no fluxo do programa, permitindo que diferentes caminhos de execução sejam seguidos dependendo dos valores das variáveis ou das expressões.
+  Analogia: Podemos fazer uma analogia a uma estrada, dependendo das placas de trânsito (condições), você decide qual caminho seguirá.
+
+* Se (if)
+  Conceito: Caso seja verdadeira a sentença, entra em seu escopo
+  Exemplo:
+    1 - Verificando se um número é par:
+      if (numero % 2 == 0) print("O número $numero é par");
+
+* Se não se (else if)
+  Conceito: Caso não seja verdadeira a primeira sentença, irá verificar essa sentença e caso seja verdadeira entra em seu escopo
+  Exemplo:
+    1 - Verificando se um número é ímpar:
+      else if (numero % 2 != 0) print("O número $numero é ímpar");
+
+* Se não (else)
+  Conceito: Caso não seja verdadeira as outras sentenças entra em seu escopo
+  Exemplo:
+    1 - Verificando se um número é neutro:
+      else print("O número $numero é neutro");
+
+* Trocar (Switch):
+  Conceito: Uma estrutura de controle que permite a execução de diferentes blocos de código com base no valor de uma expressão.
+  Uso: Utilizado quando se deseja comparar a mesma variável com diferentes valores.
+  Exemplos:
+    1 - Verificando e imprimindo o dia da semana:
+      String dia = "segunda";
+      switch (dia) {
+        case "segunda":
+          print("Hoje é segunda-feira");
+          break;
+        case "terça":
+          print("Hoje é terça-feira");
+          break;
+        default:
+          print("Hoje não é segunda-feira e nem terça-feira");
+      }
