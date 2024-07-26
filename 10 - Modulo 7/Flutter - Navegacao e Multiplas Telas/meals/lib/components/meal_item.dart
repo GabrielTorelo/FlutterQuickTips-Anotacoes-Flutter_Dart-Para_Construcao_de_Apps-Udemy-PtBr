@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:meals/models/meal.dart';
+import 'package:meals/routes/app_routes.dart';
 
 class MealItem extends StatelessWidget {
   final Meal meal;
 
   const MealItem({super.key, required this.meal});
 
-  void _selectMeal(BuildContext context) {}
+  void _selectMeal(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      AppRoutes.mealDetail,
+      arguments: meal,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
