@@ -68,12 +68,30 @@ List<Meal> MOCK_MEALS_DATA = [
     imageUrl: MealsImage.spaghetti(),
     duration: 20,
     ingredients: [
-      Ingredient(quantity: '4', name: 'Tomatoes'),
-      Ingredient(quantity: '1 Tablespoon', name: 'Olive Oil'),
-      Ingredient(quantity: '1', name: 'Onion'),
-      Ingredient(quantity: '250g', name: 'Spaghetti'),
-      Ingredient(quantity: '[Some]', name: 'Spices'),
-      Ingredient(quantity: '[optional]', name: 'Cheese'),
+      Ingredient(
+        quantity: '4',
+        measure: IngredientMeasure.item,
+        name: 'Tomatoes',
+      ),
+      Ingredient(
+          quantity: '1',
+          measure: IngredientMeasure.tablespoon,
+          name: 'Olive Oil'),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.item,
+        name: 'Onion',
+      ),
+      Ingredient(
+        quantity: '250',
+        measure: IngredientMeasure.gram,
+        name: 'Spaghetti',
+      ),
+      Ingredient(
+        quantity: 'Some',
+        measure: IngredientMeasure.item,
+        name: 'Spices',
+      ),
     ],
     steps: [
       'Cut the tomatoes and the onion into small pieces.',
@@ -98,11 +116,31 @@ List<Meal> MOCK_MEALS_DATA = [
     imageUrl: MealsImage.toastHawaii(),
     duration: 10,
     ingredients: [
-      Ingredient(quantity: '1 Slice', name: 'White Bread'),
-      Ingredient(quantity: '1 Slice', name: 'Ham'),
-      Ingredient(quantity: '1 Slice', name: 'Pineapple'),
-      Ingredient(quantity: '1-2 Slices', name: 'Cheese'),
-      Ingredient(quantity: '[Some]', name: 'Butter'),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.slice,
+        name: 'White Bread',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.slice,
+        name: 'Ham',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.slice,
+        name: 'Pineapple',
+      ),
+      Ingredient(
+        quantity: '1-2',
+        measure: IngredientMeasure.slice,
+        name: 'Cheese',
+      ),
+      Ingredient(
+        quantity: 'Some',
+        measure: IngredientMeasure.item,
+        name: 'Butter',
+      ),
     ],
     steps: [
       'Butter one side of the white bread',
@@ -123,12 +161,36 @@ List<Meal> MOCK_MEALS_DATA = [
     imageUrl: MealsImage.classicHamburger(),
     duration: 45,
     ingredients: [
-      Ingredient(quantity: '300g', name: 'Cattle Hack'),
-      Ingredient(quantity: '1', name: 'Tomato'),
-      Ingredient(quantity: '1', name: 'Cucumber'),
-      Ingredient(quantity: '1', name: 'Onion'),
-      Ingredient(quantity: '[Some]', name: 'Ketchup'),
-      Ingredient(quantity: '2', name: 'Burger Buns'),
+      Ingredient(
+        quantity: '300',
+        measure: IngredientMeasure.gram,
+        name: 'Cattle Hack',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.item,
+        name: 'Tomato',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.item,
+        name: 'Cucumber',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.item,
+        name: 'Onion',
+      ),
+      Ingredient(
+        quantity: 'Some',
+        measure: IngredientMeasure.item,
+        name: 'Ketchup',
+      ),
+      Ingredient(
+        quantity: '2',
+        measure: IngredientMeasure.item,
+        name: 'Burger Buns',
+      ),
     ],
     steps: [
       'Form 2 patties',
@@ -151,14 +213,46 @@ List<Meal> MOCK_MEALS_DATA = [
     imageUrl: MealsImage.wienerSchnitzel(),
     duration: 60,
     ingredients: [
-      Ingredient(quantity: '8', name: 'Veal Cutlets'),
-      Ingredient(quantity: '4', name: 'Eggs'),
-      Ingredient(quantity: '200g', name: 'Bread Crumbs'),
-      Ingredient(quantity: '100g', name: 'Flour'),
-      Ingredient(quantity: '300ml', name: 'Butter'),
-      Ingredient(quantity: '100g', name: 'Vegetable Oil'),
-      Ingredient(quantity: '[Some]', name: 'Salt'),
-      Ingredient(quantity: '[Some]', name: 'Lemon Slices'),
+      Ingredient(
+        quantity: '8',
+        measure: IngredientMeasure.item,
+        name: 'Veal Cutlets',
+      ),
+      Ingredient(
+        quantity: '4',
+        measure: IngredientMeasure.item,
+        name: 'Eggs',
+      ),
+      Ingredient(
+        quantity: '200',
+        measure: IngredientMeasure.gram,
+        name: 'Bread Crumbs',
+      ),
+      Ingredient(
+        quantity: '100',
+        measure: IngredientMeasure.gram,
+        name: 'Flour',
+      ),
+      Ingredient(
+        quantity: '300',
+        measure: IngredientMeasure.milliliter,
+        name: 'Butter',
+      ),
+      Ingredient(
+        quantity: '100',
+        measure: IngredientMeasure.gram,
+        name: 'Vegetable Oil',
+      ),
+      Ingredient(
+        quantity: 'Some',
+        measure: IngredientMeasure.item,
+        name: 'Salt',
+      ),
+      Ingredient(
+        quantity: 'Some',
+        measure: IngredientMeasure.item,
+        name: 'Lemon Slices',
+      ),
     ],
     steps: [
       'Tenderize the veal to about 2–4mm, and salt on both sides.',
@@ -187,15 +281,51 @@ List<Meal> MOCK_MEALS_DATA = [
     imageUrl: MealsImage.saladSalmon(),
     duration: 15,
     ingredients: [
-      Ingredient(quantity: '50g', name: 'Arugula'),
-      Ingredient(quantity: '150g', name: 'Lamb\'s Lettuce'),
-      Ingredient(quantity: '50g', name: 'Parsley'),
-      Ingredient(quantity: '50g', name: 'Fennel'),
-      Ingredient(quantity: '200g', name: 'Smoked Salmon'),
-      Ingredient(quantity: '[Some]', name: 'Mustard'),
-      Ingredient(quantity: '[Some]', name: 'Balsamic Vinegar'),
-      Ingredient(quantity: '[Some]', name: 'Olive Oil'),
-      Ingredient(quantity: '[Some]', name: 'Salt and Pepper'),
+      Ingredient(
+        quantity: '50',
+        measure: IngredientMeasure.gram,
+        name: 'Arugula',
+      ),
+      Ingredient(
+        quantity: '150',
+        measure: IngredientMeasure.gram,
+        name: 'Lamb\'s Lettuce',
+      ),
+      Ingredient(
+        quantity: '50',
+        measure: IngredientMeasure.gram,
+        name: 'Parsley',
+      ),
+      Ingredient(
+        quantity: '50',
+        measure: IngredientMeasure.gram,
+        name: 'Fennel',
+      ),
+      Ingredient(
+        quantity: '200',
+        measure: IngredientMeasure.gram,
+        name: 'Smoked Salmon',
+      ),
+      Ingredient(
+        quantity: 'Some',
+        measure: IngredientMeasure.item,
+        name: 'Mustard',
+      ),
+      Ingredient(
+        quantity: 'Some',
+        measure: IngredientMeasure.item,
+        name: 'Balsamic Vinegar',
+      ),
+      Ingredient(
+        quantity: 'Some',
+        measure: IngredientMeasure.item,
+        name: 'Olive Oil',
+      ),
+      Ingredient(
+        quantity: 'Some',
+        measure: IngredientMeasure.item,
+        name: 'Salt and Pepper',
+      ),
     ],
     steps: [
       'Wash and cut salad and herbs',
@@ -218,12 +348,36 @@ List<Meal> MOCK_MEALS_DATA = [
     imageUrl: MealsImage.orangeMousse(),
     duration: 240,
     ingredients: [
-      Ingredient(quantity: '4 Sheets', name: 'Gelatine'),
-      Ingredient(quantity: '150ml', name: 'Orange Juice'),
-      Ingredient(quantity: '80g', name: 'Sugar'),
-      Ingredient(quantity: '300g', name: 'Yoghurt'),
-      Ingredient(quantity: '200g', name: 'Cream'),
-      Ingredient(quantity: '[Some]', name: 'Orange Peel'),
+      Ingredient(
+        quantity: '4',
+        measure: IngredientMeasure.sheet,
+        name: 'Gelatine',
+      ),
+      Ingredient(
+        quantity: '150',
+        measure: IngredientMeasure.milliliter,
+        name: 'Orange Juice',
+      ),
+      Ingredient(
+        quantity: '80',
+        measure: IngredientMeasure.gram,
+        name: 'Sugar',
+      ),
+      Ingredient(
+        quantity: '300',
+        measure: IngredientMeasure.gram,
+        name: 'Yoghurt',
+      ),
+      Ingredient(
+        quantity: '200',
+        measure: IngredientMeasure.gram,
+        name: 'Cream',
+      ),
+      Ingredient(
+        quantity: 'Some',
+        measure: IngredientMeasure.item,
+        name: 'Orange Peel',
+      ),
     ],
     steps: [
       'Dissolve gelatine in pot',
@@ -250,13 +404,41 @@ List<Meal> MOCK_MEALS_DATA = [
     imageUrl: MealsImage.pancakes(),
     duration: 20,
     ingredients: [
-      Ingredient(quantity: '1 1/2 Cups', name: 'all-purpose Flour'),
-      Ingredient(quantity: '3 1/2 Teaspoons', name: 'Baking Powder'),
-      Ingredient(quantity: '1 Teaspoon', name: 'Salt'),
-      Ingredient(quantity: '1 Tablespoon', name: 'White Sugar'),
-      Ingredient(quantity: '1 1/4 cups', name: 'Milk'),
-      Ingredient(quantity: '1', name: 'Egg'),
-      Ingredient(quantity: '3 Tablespoons', name: 'Butter, melted'),
+      Ingredient(
+        quantity: '1 1/2',
+        measure: IngredientMeasure.cup,
+        name: 'all-purpose Flour',
+      ),
+      Ingredient(
+        quantity: '3 1/2',
+        measure: IngredientMeasure.teaspoon,
+        name: 'Baking Powder',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.teaspoon,
+        name: 'Salt',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.tablespoon,
+        name: 'White Sugar',
+      ),
+      Ingredient(
+        quantity: '1 1/4',
+        measure: IngredientMeasure.cup,
+        name: 'Milk',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.item,
+        name: 'Egg',
+      ),
+      Ingredient(
+        quantity: '3',
+        measure: IngredientMeasure.tablespoon,
+        name: 'Butter, melted',
+      ),
     ],
     steps: [
       'In a large bowl, sift together the flour, baking powder, salt and sugar.',
@@ -278,13 +460,41 @@ List<Meal> MOCK_MEALS_DATA = [
     imageUrl: MealsImage.indianChicken(),
     duration: 35,
     ingredients: [
-      Ingredient(quantity: '4', name: 'Chicken Breasts'),
-      Ingredient(quantity: '1', name: 'Onion'),
-      Ingredient(quantity: '2 Cloves', name: 'Garlic'),
-      Ingredient(quantity: '1 Piece', name: 'Ginger'),
-      Ingredient(quantity: '4 Tablespoons', name: 'Almonds'),
-      Ingredient(quantity: '1 Teaspoon', name: 'Cayenne Pepper'),
-      Ingredient(quantity: '500ml', name: 'Coconut Milk'),
+      Ingredient(
+        quantity: '4',
+        measure: IngredientMeasure.item,
+        name: 'Chicken Breasts',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.item,
+        name: 'Onion',
+      ),
+      Ingredient(
+        quantity: '2',
+        measure: IngredientMeasure.cloves,
+        name: 'Garlic',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.piece,
+        name: 'Ginger',
+      ),
+      Ingredient(
+        quantity: '4',
+        measure: IngredientMeasure.tablespoon,
+        name: 'Almonds',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.teaspoon,
+        name: 'Cayenne Pepper',
+      ),
+      Ingredient(
+        quantity: '500',
+        measure: IngredientMeasure.milliliter,
+        name: 'Coconut Milk',
+      ),
     ],
     steps: [
       'Slice and fry the chicken breast',
@@ -308,21 +518,66 @@ List<Meal> MOCK_MEALS_DATA = [
     imageUrl: MealsImage.chocoSouffle(),
     duration: 45,
     ingredients: [
-      Ingredient(quantity: '1 Teaspoon', name: 'melted Butter'),
-      Ingredient(quantity: '2 Tablespoons', name: 'white Sugar'),
       Ingredient(
-        quantity: '2 Ounces',
+        quantity: '1',
+        measure: IngredientMeasure.teaspoon,
+        name: 'melted Butter',
+      ),
+      Ingredient(
+        quantity: '2',
+        measure: IngredientMeasure.tablespoon,
+        name: 'white Sugar',
+      ),
+      Ingredient(
+        quantity: '2',
+        measure: IngredientMeasure.ounce,
         name: '70% dark Chocolate, broken into pieces',
       ),
-      Ingredient(quantity: '1 Tablespoon', name: 'Butter'),
-      Ingredient(quantity: '1 Tablespoon', name: 'all-purpose Flour'),
-      Ingredient(quantity: '4 1/3 tablespoons', name: 'cold Milk'),
-      Ingredient(quantity: '1 Pinch', name: 'Salt'),
-      Ingredient(quantity: '1 Pinch', name: 'Cayenne Pepper'),
-      Ingredient(quantity: '1 Large', name: 'Egg Yolk'),
-      Ingredient(quantity: '2 Large', name: 'Egg Whites'),
-      Ingredient(quantity: '1 Pinch', name: 'Cream of Tartar'),
-      Ingredient(quantity: '1 Tablespoon', name: 'white Sugar'),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.tablespoon,
+        name: 'Butter',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.tablespoon,
+        name: 'all-purpose Flour',
+      ),
+      Ingredient(
+        quantity: '4 1/3',
+        measure: IngredientMeasure.tablespoon,
+        name: 'cold Milk',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.pinch,
+        name: 'Salt',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.pinch,
+        name: 'Cayenne Pepper',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.item,
+        name: 'Egg Yolk',
+      ),
+      Ingredient(
+        quantity: '2',
+        measure: IngredientMeasure.item,
+        name: 'Egg Whites',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.pinch,
+        name: 'Cream of Tartar',
+      ),
+      Ingredient(
+        quantity: '1',
+        measure: IngredientMeasure.tablespoon,
+        name: 'white Sugar',
+      ),
     ],
     steps: [
       'Preheat oven to 190°C. Line a rimmed baking sheet with parchment paper.',
@@ -361,11 +616,31 @@ List<Meal> MOCK_MEALS_DATA = [
     imageUrl: MealsImage.asparagusSalad(),
     duration: 30,
     ingredients: [
-      Ingredient(quantity: '[Some]', name: 'White and Green Asparagus'),
-      Ingredient(quantity: '30g', name: 'Pine Nuts'),
-      Ingredient(quantity: '300g', name: 'Cherry Tomatoes'),
-      Ingredient(quantity: '[Some]', name: 'Salad'),
-      Ingredient(quantity: '[Some]', name: 'Salt, Pepper and Olive Oil'),
+      Ingredient(
+        quantity: 'Some',
+        measure: IngredientMeasure.item,
+        name: 'White and Green Asparagus',
+      ),
+      Ingredient(
+        quantity: '30',
+        measure: IngredientMeasure.gram,
+        name: 'Pine Nuts',
+      ),
+      Ingredient(
+        quantity: '300',
+        measure: IngredientMeasure.gram,
+        name: 'Cherry Tomatoes',
+      ),
+      Ingredient(
+        quantity: 'Some',
+        measure: IngredientMeasure.item,
+        name: 'Salad',
+      ),
+      Ingredient(
+        quantity: 'Some',
+        measure: IngredientMeasure.item,
+        name: 'Salt, Pepper and Olive Oil',
+      ),
     ],
     steps: [
       'Wash, peel and cut the asparagus',

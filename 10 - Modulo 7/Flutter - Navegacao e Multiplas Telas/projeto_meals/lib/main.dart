@@ -28,6 +28,17 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
+          titleMedium: const TextStyle(
+            fontFamily: 'RobotoCondensed',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+          titleSmall: const TextStyle(
+            fontFamily: 'RobotoCondensed',
+            fontSize: 18,
+            color: Colors.black,
+          ),
         ),
         canvasColor: const Color.fromRGBO(255, 254, 229, 1),
         appBarTheme: const AppBarTheme(
