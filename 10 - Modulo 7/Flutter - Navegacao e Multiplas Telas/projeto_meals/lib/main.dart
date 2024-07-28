@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: theme.colorScheme.copyWith(
           primary: Colors.pink,
           secondary: Colors.amber,
+          tertiary: Colors.lightBlueAccent,
         ),
         textTheme: theme.textTheme.copyWith(
           titleLarge: const TextStyle(
