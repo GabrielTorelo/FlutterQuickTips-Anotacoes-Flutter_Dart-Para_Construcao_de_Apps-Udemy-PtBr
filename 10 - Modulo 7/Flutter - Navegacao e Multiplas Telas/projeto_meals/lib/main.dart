@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:meals/MOCK/MOCK_DATA.dart';
+import 'package:meals/models/meal.dart';
+import 'package:meals/models/settings.dart';
 import 'package:meals/routes/app_routes.dart';
 import 'package:meals/screens/categories_meals_screen.dart';
 import 'package:meals/screens/four_zero_four_screen.dart';
@@ -8,8 +11,29 @@ import 'package:meals/screens/tabs_screen.dart';
 
 void main() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Settings settings = Settings();
+  List<Meal> _availableMeals = MOCK_MEALS_DATA;
+
+  void _filterMeals(Settings settings) {
+    setState(() {
+      _availableMeals = MOCK_MEALS_DATA.where((meal) {
+        final isGlutenFree = settings.isGlutenFree && !meal.isGlutenFree;
+        final isLactoseFree = settings.isLactoseFree && !meal.isLactoseFree;
+        final isVegan = settings.isVegan && !meal.isVegan;
+        final isVegetarian = settings.isVegetarian && !meal.isVegetarian;
+
+        return !isGlutenFree && !isLactoseFree && !isVegan && !isVegetarian;
+      }).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,9 +111,10 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         AppRoutes.home: (_) => const TabsScreen(),
-        AppRoutes.categoriesMeals: (_) => const CategoriesMealsScreen(),
+        AppRoutes.categoriesMeals: (_) =>
+            CategoriesMealsScreen(_availableMeals),
         AppRoutes.mealDetail: (_) => const MealDetailScreen(),
-        AppRoutes.settings: (_) => const SettingsScreen(),
+        AppRoutes.settings: (_) => SettingsScreen(_filterMeals, settings),
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
