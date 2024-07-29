@@ -3,6 +3,7 @@ import 'package:meals/routes/app_routes.dart';
 import 'package:meals/screens/categories_meals_screen.dart';
 import 'package:meals/screens/four_zero_four_screen.dart';
 import 'package:meals/screens/meal_detail_screen.dart';
+import 'package:meals/screens/settings_screen.dart';
 import 'package:meals/screens/tabs_screen.dart';
 
 void main() => runApp(const MyApp());
@@ -40,6 +41,18 @@ class MyApp extends StatelessWidget {
             fontSize: 18,
             color: Colors.black,
           ),
+          labelLarge: const TextStyle(
+            fontFamily: 'RobotoCondensed',
+            fontWeight: FontWeight.w900,
+            fontSize: 30,
+            color: Colors.pink,
+          ),
+          labelMedium: const TextStyle(
+            fontFamily: 'RobotoCondensed',
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
         ),
         canvasColor: const Color.fromRGBO(255, 254, 229, 1),
         appBarTheme: const AppBarTheme(
@@ -59,11 +72,15 @@ class MyApp extends StatelessWidget {
           unselectedItemColor: Colors.white,
           backgroundColor: Colors.pink,
         ),
+        drawerTheme: const DrawerThemeData(
+          backgroundColor: Colors.amber,
+        ),
       ),
       routes: {
         AppRoutes.home: (_) => const TabsScreen(),
         AppRoutes.categoriesMeals: (_) => const CategoriesMealsScreen(),
         AppRoutes.mealDetail: (_) => const MealDetailScreen(),
+        AppRoutes.settings: (_) => const SettingsScreen(),
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
