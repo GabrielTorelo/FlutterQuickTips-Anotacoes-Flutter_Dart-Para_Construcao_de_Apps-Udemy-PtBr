@@ -21,6 +21,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Settings settings = Settings();
   List<Meal> _availableMeals = MOCK_MEALS_DATA;
+  final List<Meal> _favoriteMeals = [];
 
   void _filterMeals(Settings settings) {
     setState(() {
@@ -33,6 +34,18 @@ class _MyAppState extends State<MyApp> {
         return !isGlutenFree && !isLactoseFree && !isVegan && !isVegetarian;
       }).toList();
     });
+  }
+
+  void _toggleFavorite(Meal meal) {
+    setState(() {
+      _favoriteMeals.contains(meal)
+          ? _favoriteMeals.remove(meal)
+          : _favoriteMeals.add(meal);
+    });
+  }
+
+  bool _isFavorite(Meal meal) {
+    return _favoriteMeals.contains(meal);
   }
 
   @override
@@ -110,10 +123,11 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       routes: {
-        AppRoutes.home: (_) => const TabsScreen(),
+        AppRoutes.home: (_) => TabsScreen(_favoriteMeals),
         AppRoutes.categoriesMeals: (_) =>
             CategoriesMealsScreen(_availableMeals),
-        AppRoutes.mealDetail: (_) => const MealDetailScreen(),
+        AppRoutes.mealDetail: (_) =>
+            MealDetailScreen(_toggleFavorite, _isFavorite),
         AppRoutes.settings: (_) => SettingsScreen(_filterMeals, settings),
       },
       onUnknownRoute: (settings) {
