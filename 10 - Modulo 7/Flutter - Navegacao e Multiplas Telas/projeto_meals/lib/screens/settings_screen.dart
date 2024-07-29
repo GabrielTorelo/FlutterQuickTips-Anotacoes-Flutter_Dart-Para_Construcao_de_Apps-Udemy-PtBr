@@ -1,7 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:meals/models/settings.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  Settings settings = Settings();
+
+  Widget _createSwitch(
+    BuildContext context, {
+    required String title,
+    required String subtitle,
+    required bool value,
+    required Function(bool) onChanged,
+  }) {
+    return SwitchListTile.adaptive(
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.titleSmall,
+      ),
+      subtitle: Text(
+        subtitle,
+        style: Theme.of(context).textTheme.labelSmall,
+      ),
+      value: value,
+      onChanged: onChanged,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -9,8 +38,60 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Settings'),
       ),
-      body: const Center(
-        child: Text('Settings'),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Text(
+              'Adjust your meal selection',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+          ),
+          _createSwitch(
+            context,
+            title: 'Gluten-free',
+            subtitle: 'Only include gluten-free meals',
+            value: settings.isGlutenFree,
+            onChanged: (value) {
+              setState(() {
+                settings.isGlutenFree = value;
+              });
+            },
+          ),
+          _createSwitch(
+            context,
+            title: 'Lactose-free',
+            subtitle: 'Only include lactose-free meals',
+            value: settings.isLactoseFree,
+            onChanged: (value) {
+              setState(() {
+                settings.isLactoseFree = value;
+              });
+            },
+          ),
+          _createSwitch(
+            context,
+            title: 'Vegetarian',
+            subtitle: 'Only include vegetarian meals',
+            value: settings.isVegetarian,
+            onChanged: (value) {
+              setState(() {
+                settings.isVegetarian = value;
+              });
+            },
+          ),
+          _createSwitch(
+            context,
+            title: 'Vegan',
+            subtitle: 'Only include vegan meals',
+            value: settings.isVegan,
+            onChanged: (value) {
+              setState(() {
+                settings.isVegan = value;
+              });
+            },
+          ),
+        ],
       ),
     );
   }

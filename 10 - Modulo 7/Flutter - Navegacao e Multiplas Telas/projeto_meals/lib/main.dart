@@ -53,6 +53,11 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
+          labelSmall: TextStyle(
+            fontFamily: 'RobotoCondensed',
+            fontSize: 15,
+            color: Colors.grey[700],
+          ),
         ),
         canvasColor: const Color.fromRGBO(255, 254, 229, 1),
         appBarTheme: const AppBarTheme(
@@ -74,6 +79,10 @@ class MyApp extends StatelessWidget {
         ),
         drawerTheme: const DrawerThemeData(
           backgroundColor: Colors.amber,
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.pink,
         ),
       ),
       routes: {
