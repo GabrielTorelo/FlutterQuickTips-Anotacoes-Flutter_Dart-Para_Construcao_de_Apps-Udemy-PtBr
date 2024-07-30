@@ -20,19 +20,27 @@ class _MyAppState extends State<MyApp> {
       title: 'Shop',
       theme: theme.copyWith(
         colorScheme: theme.colorScheme.copyWith(
-          primary: Colors.blue,
-          secondary: Colors.cyan,
-          tertiary: Colors.lightBlueAccent,
+          primary: Colors.purple,
+          secondary: Colors.deepOrange,
+          tertiary: Colors.black87,
+        ),
+        textTheme: theme.textTheme.copyWith(
+          titleSmall: const TextStyle(
+            fontFamily: 'Lato',
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         appBarTheme: const AppBarTheme(
           titleTextStyle: TextStyle(
+            fontFamily: 'Lato',
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
           iconTheme: IconThemeData(
             color: Colors.white,
           ),
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.purple,
           centerTitle: true,
         ),
       ),
