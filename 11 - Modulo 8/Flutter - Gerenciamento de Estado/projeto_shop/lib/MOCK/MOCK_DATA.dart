@@ -1,7 +1,7 @@
 import 'package:shop/models/product.dart';
 import 'package:uuid/uuid.dart';
 
-List<Product> MOCK_PRODUCTS_DATA = [
+final List<Product> MOCK_PRODUCTS_DATA = [
   Product(
     id: const Uuid().v4(),
     title: 'Red Shirt',
