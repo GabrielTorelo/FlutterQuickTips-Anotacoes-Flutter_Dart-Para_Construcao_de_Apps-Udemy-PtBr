@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop/routes/app_routes.dart';
+import 'package:shop/screens/product_details_screen.dart';
 import 'package:shop/screens/products_overview_screen.dart';
 
 void main() => runApp(const MyApp());
@@ -45,7 +46,10 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      routes: {AppRoutes.home: (_) => ProductsOverviewScreen()},
+      routes: {
+        AppRoutes.home: (_) => ProductsOverviewScreen(),
+        AppRoutes.productDetail: (_) => const ProductDetailsScreen(),
+      },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
           builder: (_) {
