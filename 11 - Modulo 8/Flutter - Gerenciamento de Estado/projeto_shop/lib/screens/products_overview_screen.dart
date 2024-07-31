@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:shop/MOCK/MOCK_DATA.dart';
+import 'package:provider/provider.dart';
 import 'package:shop/components/product_item.dart';
 import 'package:shop/models/product.dart';
+import 'package:shop/models/product_list.dart';
 
 class ProductsOverviewScreen extends StatelessWidget {
-  final List<Product> loadedProducts = MOCK_PRODUCTS_DATA;
-
-  ProductsOverviewScreen({super.key});
+  const ProductsOverviewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final ProductList provider = Provider.of<ProductList>(context);
+    final List<Product> loadedProducts = provider.products;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Shop'),
