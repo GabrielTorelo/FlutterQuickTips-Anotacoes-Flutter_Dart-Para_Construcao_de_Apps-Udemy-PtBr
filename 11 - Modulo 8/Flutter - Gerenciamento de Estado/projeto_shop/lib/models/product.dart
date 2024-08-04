@@ -22,3 +22,8 @@ class Product with ChangeNotifier {
     notifyListeners();
   }
 }
+
+enum FilterOptions {
+  favorites,
+  all,
+}
