@@ -39,6 +39,12 @@ class _MyAppState extends State<MyApp> {
             tertiary: Colors.black87,
           ),
           textTheme: theme.textTheme.copyWith(
+            titleLarge: const TextStyle(
+              fontFamily: 'Lato',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
             titleSmall: const TextStyle(
               fontFamily: 'Lato',
               fontSize: 12,
@@ -61,6 +67,9 @@ class _MyAppState extends State<MyApp> {
             ),
             backgroundColor: Colors.purple,
             centerTitle: true,
+          ),
+          iconTheme: const IconThemeData(
+            color: Colors.white,
           ),
         ),
         debugShowCheckedModeBanner: false,
