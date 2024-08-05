@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop/components/distinctive.dart';
 import 'package:shop/components/product_grid.dart';
+import 'package:shop/models/cart.dart';
 import 'package:shop/models/product.dart';
+import 'package:shop/routes/app_routes.dart';
 
 class ProductsOverviewScreen extends StatefulWidget {
   final FilterOptions selectedOption = FilterOptions.all;
@@ -26,6 +30,22 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
       appBar: AppBar(
         title: const Text('Shop'),
         actions: [
+          Consumer<Cart>(
+            child: IconButton(
+              icon: const Icon(Icons.shopping_cart),
+              onPressed: () {
+                Navigator.of(context).pushNamed(AppRoutes.cart);
+              },
+            ),
+            builder: (ctx, cart, child) {
+              return cart.itemCount > 0
+                  ? Distinctive(
+                      value: cart.itemCount.toString(),
+                      child: child!,
+                    )
+                  : child!;
+            },
+          ),
           PopupMenuButton(
             icon: const Icon(Icons.more_vert),
             itemBuilder: (_) => [

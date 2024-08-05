@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/models/cart.dart';
 import 'package:shop/models/product_list.dart';
 import 'package:shop/routes/app_routes.dart';
+import 'package:shop/screens/cart_screen.dart';
 import 'package:shop/screens/product_details_screen.dart';
 import 'package:shop/screens/products_overview_screen.dart';
 
@@ -19,8 +21,15 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     final ThemeData theme = ThemeData();
 
-    return ChangeNotifierProvider(
-      create: (_) => ProductList(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ProductList(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => Cart(),
+        )
+      ],
       child: MaterialApp(
         title: 'Shop',
         theme: theme.copyWith(
@@ -33,6 +42,11 @@ class _MyAppState extends State<MyApp> {
             titleSmall: const TextStyle(
               fontFamily: 'Lato',
               fontSize: 12,
+              fontWeight: FontWeight.bold,
+            ),
+            labelSmall: const TextStyle(
+              fontFamily: 'Lato',
+              fontSize: 10,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -51,13 +65,14 @@ class _MyAppState extends State<MyApp> {
         ),
         debugShowCheckedModeBanner: false,
         routes: {
-          AppRoutes.home: (_) => ProductsOverviewScreen(),
+          AppRoutes.home: (_) => const ProductsOverviewScreen(),
           AppRoutes.productDetail: (_) => const ProductDetailsScreen(),
+          AppRoutes.cart: (_) => const CartScreen(),
         },
         onUnknownRoute: (settings) {
           return MaterialPageRoute(
             builder: (_) {
-              return ProductsOverviewScreen();
+              return const ProductsOverviewScreen();
             },
           );
         },
