@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/models/cart.dart';
+import 'package:shop/models/order_list.dart';
 import 'package:shop/models/product_list.dart';
 import 'package:shop/routes/app_routes.dart';
 import 'package:shop/screens/cart_screen.dart';
@@ -28,7 +29,10 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => Cart(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (_) => OrderList(),
+        ),
       ],
       child: MaterialApp(
         title: 'Shop',
@@ -45,10 +49,21 @@ class _MyAppState extends State<MyApp> {
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
+            titleMedium: const TextStyle(
+              fontFamily: 'Lato',
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey,
+            ),
             titleSmall: const TextStyle(
               fontFamily: 'Lato',
               fontSize: 12,
               fontWeight: FontWeight.bold,
+            ),
+            labelLarge: const TextStyle(
+              fontFamily: 'Lato',
+              fontSize: 16,
+              color: Colors.black,
             ),
             labelSmall: const TextStyle(
               fontFamily: 'Lato',

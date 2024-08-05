@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shop/components/cart_item.dart';
 import 'package:shop/models/cart.dart';
 import 'package:shop/models/cart_item.dart';
+import 'package:shop/models/order_list.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -11,6 +12,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Cart cart = Provider.of<Cart>(context);
     final List<CartItem> items = cart.items.values.toList();
+    final OrderList order = Provider.of<OrderList>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -59,7 +61,10 @@ class CartScreen extends StatelessWidget {
                         ),
                         const Spacer(),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            order.addOrder(cart);
+                            cart.clearList();
+                          },
                           style: TextButton.styleFrom(
                             backgroundColor:
                                 Theme.of(context).colorScheme.secondary,
