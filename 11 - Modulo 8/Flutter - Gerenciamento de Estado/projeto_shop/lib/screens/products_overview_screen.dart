@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/components/app_drawer.dart';
 import 'package:shop/components/distinctive.dart';
 import 'package:shop/components/product_grid.dart';
 import 'package:shop/models/cart.dart';
@@ -70,6 +71,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
       body: ProductGrid(
         selectedOption: selectedOption,
       ),
+      drawer: const AppDrawer(),
     );
   }
 }
