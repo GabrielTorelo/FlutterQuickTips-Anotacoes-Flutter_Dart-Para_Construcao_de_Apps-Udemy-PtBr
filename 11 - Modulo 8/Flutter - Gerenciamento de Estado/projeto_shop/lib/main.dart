@@ -66,6 +66,12 @@ class _MyAppState extends State<MyApp> {
               fontSize: 16,
               color: Colors.black,
             ),
+            labelMedium: const TextStyle(
+              fontFamily: 'Lato',
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
             labelSmall: const TextStyle(
               fontFamily: 'Lato',
               fontSize: 10,

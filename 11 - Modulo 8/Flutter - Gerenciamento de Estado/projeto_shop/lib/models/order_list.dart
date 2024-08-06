@@ -4,9 +4,9 @@ import 'package:shop/models/order.dart';
 import 'package:uuid/uuid.dart';
 
 class OrderList with ChangeNotifier {
-  List<Order> _orders = [];
+  final List<Order> _orders = [];
 
-  List<Order> get orders => [..._orders];
+  List<Order> get items => [..._orders];
 
   int get itemsCount => _orders.length;
 

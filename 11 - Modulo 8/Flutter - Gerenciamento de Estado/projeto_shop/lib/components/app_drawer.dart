@@ -11,6 +11,7 @@ class AppDrawer extends StatelessWidget {
         children: [
           AppBar(
             title: const Text('Hello Friend!'),
+            automaticallyImplyLeading: false,
           ),
           Padding(
             padding: const EdgeInsets.only(
