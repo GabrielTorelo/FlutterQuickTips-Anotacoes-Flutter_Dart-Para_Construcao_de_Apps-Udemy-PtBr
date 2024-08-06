@@ -19,11 +19,31 @@ class CartScreen extends StatelessWidget {
         title: const Text('Cart'),
       ),
       body: items.isEmpty
-          ? Center(
-              child: Text(
-                'No items in the cart',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'No items in the cart',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 20,
+                  ),
+                  child: Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                      ),
+                      child: const Text('Back to Shop'),
+                    ),
+                  ),
+                )
+              ],
             )
           : Column(
               children: [
