@@ -7,6 +7,7 @@ import 'package:shop/routes/app_routes.dart';
 import 'package:shop/screens/cart_screen.dart';
 import 'package:shop/screens/orders_screen.dart';
 import 'package:shop/screens/product_details_screen.dart';
+import 'package:shop/screens/products_screen.dart';
 import 'package:shop/screens/products_overview_screen.dart';
 
 void main() => runApp(const MyApp());
@@ -100,6 +101,7 @@ class _MyAppState extends State<MyApp> {
           AppRoutes.productDetail: (_) => const ProductDetailsScreen(),
           AppRoutes.cart: (_) => const CartScreen(),
           AppRoutes.orders: (_) => const OrdersScreen(),
+          AppRoutes.products: (_) => const ProductsScreen(),
         },
         onUnknownRoute: (settings) {
           return MaterialPageRoute(
