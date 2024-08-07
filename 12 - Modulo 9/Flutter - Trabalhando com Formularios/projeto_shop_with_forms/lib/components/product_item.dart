@@ -21,6 +21,7 @@ class ProductItem extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.edit),
                 onPressed: () {},
+                color: Theme.of(context).colorScheme.primary,
               ),
               IconButton(
                 icon: const Icon(Icons.delete),

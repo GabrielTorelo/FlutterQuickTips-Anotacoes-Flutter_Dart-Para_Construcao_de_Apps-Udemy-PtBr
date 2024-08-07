@@ -13,6 +13,14 @@ class ProductsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Manage Products'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/product-edit');
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
