@@ -20,19 +20,26 @@ class ProductGrid extends StatelessWidget {
             ? provider.favoriteProducts
             : provider.products;
 
-    return GridView.builder(
-      padding: const EdgeInsets.all(10),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 3 / 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-      ),
-      itemCount: loadedProducts.length,
-      itemBuilder: (context, index) => ChangeNotifierProvider.value(
-        value: loadedProducts[index],
-        child: const ProductGridItem(),
-      ),
-    );
+    return loadedProducts.isEmpty
+        ? Center(
+            child: Text(
+              'No products found!',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          )
+        : GridView.builder(
+            padding: const EdgeInsets.all(10),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 3 / 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+            ),
+            itemCount: loadedProducts.length,
+            itemBuilder: (context, index) => ChangeNotifierProvider.value(
+              value: loadedProducts[index],
+              child: const ProductGridItem(),
+            ),
+          );
   }
 }

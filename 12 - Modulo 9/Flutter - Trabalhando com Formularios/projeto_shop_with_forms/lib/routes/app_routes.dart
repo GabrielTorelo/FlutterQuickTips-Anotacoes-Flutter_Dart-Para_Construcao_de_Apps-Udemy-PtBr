@@ -4,5 +4,5 @@ class AppRoutes {
   static const String cart = '/cart';
   static const String orders = '/orders';
   static const String products = '/products';
-  static const String productEdit = '/product-edit';
+  static const String productForm = '/product-form';
 }

@@ -1,16 +1,17 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop/models/product.dart';
-import 'package:uuid/uuid.dart';
+import 'package:shop/models/product_list.dart';
 
-class ProductEditScreen extends StatefulWidget {
-  const ProductEditScreen({super.key});
+class ProductFormScreen extends StatefulWidget {
+  const ProductFormScreen({super.key});
 
   @override
-  State<ProductEditScreen> createState() => _ProductFormScreenState();
+  State<ProductFormScreen> createState() => _ProductFormScreenState();
 }
 
-class _ProductFormScreenState extends State<ProductEditScreen> {
+class _ProductFormScreenState extends State<ProductFormScreen> {
   final FocusNode _priceFocusNode = FocusNode();
   final FocusNode _descriptionFocusNode = FocusNode();
   final FocusNode _imageUrlFocusNode = FocusNode();
@@ -18,6 +19,27 @@ class _ProductFormScreenState extends State<ProductEditScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final Map<String, dynamic> _formData = {};
   Timer? _debounce;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (_formData.isEmpty) {
+      final product = ModalRoute.of(context)?.settings.arguments as Product?;
+
+      if (product != null) {
+        _formData['id'] = product.id;
+        _formData['title'] = product.title;
+        _formData['price'] = product.price.toString();
+        _formData['description'] = product.description;
+        _formData['imageUrl'] = product.imageUrl;
+
+        _imageUrlController.text = _formData['imageUrl'];
+      } else {
+        _formData['price'] = '';
+      }
+    }
+  }
 
   @override
   void dispose() {
@@ -48,15 +70,12 @@ class _ProductFormScreenState extends State<ProductEditScreen> {
 
     _formKey.currentState?.save();
 
-    final newProduct = Product(
-      id: const Uuid().v4(),
-      title: _formData['title'],
-      description: _formData['description'],
-      price: _formData['price'],
-      imageUrl: _formData['imageUrl'],
-    );
+    Provider.of<ProductList>(
+      context,
+      listen: false,
+    ).saveProduct(_formData);
 
-    newProduct.printProduct();
+    Navigator.of(context).pop();
   }
 
   @override
@@ -79,6 +98,7 @@ class _ProductFormScreenState extends State<ProductEditScreen> {
             children: [
               TextFormField(
                 maxLength: 24,
+                initialValue: _formData['title']?.toString(),
                 decoration: const InputDecoration(labelText: 'Title'),
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: (_) =>
@@ -95,6 +115,7 @@ class _ProductFormScreenState extends State<ProductEditScreen> {
               ),
               TextFormField(
                 maxLength: 7,
+                initialValue: _formData['price']?.toString(),
                 decoration: const InputDecoration(labelText: 'Price'),
                 textInputAction: TextInputAction.next,
                 focusNode: _priceFocusNode,
@@ -117,6 +138,7 @@ class _ProductFormScreenState extends State<ProductEditScreen> {
               ),
               TextFormField(
                 maxLength: 130,
+                initialValue: _formData['description']?.toString(),
                 decoration: const InputDecoration(labelText: 'Description'),
                 focusNode: _descriptionFocusNode,
                 maxLines: 3,
