@@ -1,0 +1,30 @@
+Introdução as Requisições HTTP (Hypertext Transfer Protocol):
+  Conceito: HTTP é um protocolo de comunicação usado na internet para transferir dados entre clientes e servidores.
+  Ou seja: O protocolo HTTP é a base para a comunicação entre o front-end e o back-end em uma aplicação.
+  Uso: Utilizado para realizar operações no servidor, como obter informações, enviar dados, atualizar registros existentes ou excluir dados.
+
+Introdução as APIs REST (Representational State Transfer):
+  Conceito: REST é um estilo de arquitetura para construir APIs que utiliza convenções simples e métodos HTTP para realizar operações CRUD (Create, Read, Update e Delete).
+  Ou seja: Permite que diferentes sistemas interajam através de requisições HTTP padronizadas, onde cada método HTTP combinado a uma URL específica gera uma ação correspondente no servidor.
+  Uso: APIs REST são amplamente utilizadas para criar serviços web que podem ser consumidos por aplicativos, permitindo a integração e a comunicação entre diferentes sistemas através de requisições HTTP.
+
+  * Métodos Disponíveis:
+    * GET:
+      Conceito: Usado para solicitar dados do servidor.
+      Ou seja: Realiza a leitura de informações sem alterar nada no servidor.
+    * POST:
+      Conceito: Usado para enviar novos dados ao servidor.
+      Ou seja: Realiza a inserção de novos registros no banco de dados.
+    * PUT:
+      Conceito: Usado para substituir completamente dados existentes no servidor.
+      Ou seja: Atualiza um registro existente enviando todos os dados necessários.
+    * PATCH:
+      Conceito: Usado para atualizar parcialmente dados existentes no servidor.
+      Ou seja: Realiza atualizações incrementais, sem substituir todo o registro.
+    * DELETE:
+      Conceito: Usado para excluir dados do servidor.
+      Ou seja: Remove um registro específico do banco de dados.
+
+  * Formato dos Dados (JSON):
+    Conceito: O JSON (JavaScript Object Notation) é o formato de dados mais utilizado em APIs REST, principalmente por ser leve e de fácil leitura.
+    Ou seja: Ele permite que os dados transferidos sejam compatíveis com diversas linguagens de programação.
