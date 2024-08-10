@@ -1,0 +1,24 @@
+Armazenamento Local (SQLite):
+  Conceito: O SQLite é um banco de dados relacional leve e autossuficiente, projetado para armazenar dados de maneira estruturada e eficiente diretamente no dispositivo do usuário.
+  Ou seja: O SQLite permite que aplicativos salvem dados localmente no dispositivo, facilitando o acesso rápido e offline às informações.
+  Uso: Ideal para armazenar dados que precisam ser persistidos localmente, como preferências do usuário, histórico de navegação ou dados de aplicativos que funcionam offline.
+
+Armazenamento Remoto (Servidor Web):
+  Conceito: O armazenamento remoto envolve o uso de servidores web para guardar dados que podem ser acessados e manipulados por meio de uma API.
+  Ou seja: Em vez de salvar dados no dispositivo do usuário, o aplicativo interage com um servidor remoto para armazenar, recuperar e atualizar informações.
+  Uso: Indicado para dados que necessitam ser compartilhados entre dispositivos, sincronizados em tempo real ou acessíveis de qualquer localidade.
+
+  * Segurança na Conexão com Banco de Dados:
+    Conceito: A conexão direta do aplicativo com o banco de dados é considerada insegura.
+    Ou seja: Expor o banco de dados diretamente na aplicação pode ser perigoso, pois abre brechas para ataques e acessos não autorizados.
+    Uso: A prática correta é utilizar um servidor web que implemente camadas de segurança, validações e lógica de negócios para intermediar essa conexão.
+
+  * Conexão com Servidor Web:
+    Conceito: O servidor web atua como intermediário entre a aplicação e o banco de dados.
+    Ou seja: Ele recebe requisições do aplicativo, aplica validações e lógica de negócios, e só então interage com o banco de dados.
+    Uso: Além de proteger o banco de dados, o servidor web também garante que as operações sejam realizadas de forma segura e conforme as regras de negócio.
+
+  * Banco de Dados Remoto (Firebase):
+    Conceito: O Firebase é uma plataforma abrangente que oferece uma gama de serviços para o desenvolvimento de aplicativos, incluindo um banco de dados em tempo real.
+    Ou seja: O Firebase permite que aplicativos se conectem a um banco de dados remoto para armazenar, sincronizar e recuperar dados em tempo real, garantindo que as alterações sejam refletidas instantaneamente em vários dispositivos.
+    Uso: Perfeito para a criação de aplicativos onde a atualização instantânea das informações é crucial.
