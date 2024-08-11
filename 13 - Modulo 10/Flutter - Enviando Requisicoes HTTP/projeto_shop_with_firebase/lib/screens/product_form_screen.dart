@@ -79,7 +79,24 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
     ).saveProduct(_formData).then((_) {
       setState(() => _isLoading = false);
       Navigator.of(context).pop();
-    });
+    }).catchError(
+      (_) {
+        setState(() => _isLoading = false);
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('An error occurred!'),
+            content: const Text('Something went wrong.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Ok'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
