@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 import 'package:shop/MOCK/MOCK_DATA.dart';
 import 'package:shop/models/product.dart';
-import 'package:uuid/uuid.dart';
+import 'package:shop/service/firebase_service.dart';
 
 class ProductList with ChangeNotifier {
+  final FirebaseService _firebase = FirebaseService();
   final List<Product> _products = MOCK_PRODUCTS_DATA;
 
   List<Product> get products => [..._products];
@@ -35,6 +37,17 @@ class ProductList with ChangeNotifier {
   }
 
   void addProduct(Product product) {
+    _firebase.methodPOST(
+      path: 'products',
+      data: {
+        'title': product.title,
+        'description': product.description,
+        'price': product.price.toString(),
+        'imageUrl': product.imageUrl,
+        'isFavorite': product.isFavorite,
+      },
+    );
+
     _products.add(product);
     notifyListeners();
   }
