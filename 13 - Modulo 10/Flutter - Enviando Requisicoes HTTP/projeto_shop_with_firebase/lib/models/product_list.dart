@@ -18,7 +18,7 @@ class ProductList with ChangeNotifier {
     return _products.length;
   }
 
-  void saveProduct(Map<String, dynamic> data) {
+  Future<void> saveProduct(Map<String, dynamic> data) {
     bool hasId = data.containsKey('id');
 
     final product = Product(
@@ -30,20 +30,20 @@ class ProductList with ChangeNotifier {
     );
 
     if (hasId) {
-      updateProduct(product);
+      return updateProduct(product);
     } else {
-      addProduct(product);
+      return addProduct(product);
     }
   }
 
-  void addProduct(Product product) {
-    _firebase
-        .methodPUT(
+  Future<void> addProduct(Product product) {
+    Future<Map<String, dynamic>> request = _firebase.methodPUT(
       path: 'products',
       id: product.id,
       data: product.toJsonWithoutId(),
-    )
-        .then(
+    );
+
+    return request.then<void>(
       (response) {
         if (response.containsKey('error')) {
           return;
@@ -55,13 +55,15 @@ class ProductList with ChangeNotifier {
     );
   }
 
-  void updateProduct(Product product) {
+  Future<void> updateProduct(Product product) {
     final productIndex = _products.indexWhere((prod) => prod.id == product.id);
 
     if (productIndex >= 0) {
       _products[productIndex] = product;
       notifyListeners();
     }
+
+    return Future.value();
   }
 
   void removeProduct(Product product) {
