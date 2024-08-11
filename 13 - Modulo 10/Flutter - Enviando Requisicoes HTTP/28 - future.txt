@@ -1,0 +1,54 @@
+Introdução ao Future:
+  Conceito: O Future é uma representação de uma operação assíncrona, na qual retornará um valor ou erro no futuro, após a conclusão da operação.
+  Ou seja: Lida com operações que podem não ter um resultado imediato e permite que o código continue executando outras tarefas enquanto aguarda a conclusão dessas operações.
+  Uso: Utilizado para gerenciar operações que dependem de tempo, como esperar por uma resposta de um servidor, ler um arquivo ou realizar cálculos intensivos. 
+  
+  * Método de Conclusão (then):
+    Conceito: O método "then" é usado para registrar retornos de chamada (callbacks) que serão executados após a conclusão de um Future.
+    Ou seja: Quando você faz uma requisição assíncrona, você pode usar o método de conclusão (then) para definir o que deve acontecer após a resposta ser processada.
+    Uso: Utilizado para encadear ações que devem ocorrer após a conclusão de uma operação assíncrona.
+    Exemplo:
+      1 - Enviando uma requisição POST e exibindo o ID do produto criado:
+        Future<void> adicionarProduto() {
+          return enviarRequisicaoPOST(produto).then((response) {
+            print("Produto criado com ID: $response.id");
+          });
+        }
+
+  * Método para Capturar Erros Específicos (onError):
+    Conceito: O método "onError" lida com erros que podem ocorrer durante a execução de um Future, permitindo capturar e tratar erros específicos imediatamente após a operação que os causou.
+    Ou seja: Permite adicionar uma lógica de tratamento de erros personalizada logo após a conclusão de uma operação assíncrona, caso um erro ocorra.
+    Uso: Utilizado para fornecer uma resposta adequada quando uma operação assíncrona falha.
+    Exemplo: 
+      1 - Capturando um erro ocorrido durante o envio de uma requisição:
+        Future<void> processarRequisicao() {
+          return enviarRequisicaoPOST(dados)
+            .then(
+              (response) => print("Resposta recebida: ${response.body}"),
+              onError: (error) => print("Erro ao processar a requisição: $error"),
+            );
+        }
+
+  * Método para Capturar Erros Gerais (catchError):
+    Conceito: O método "catchError" captura qualquer erro que possa ocorrer durante a execução de um Future, permitindo que o código continue a execução normal ou tome uma ação corretiva.
+    Ou seja: Permite capturar erros que não foram tratados pelo "onError" e fornece uma abordagem mais ampla para lidar com exceções.
+    Uso: Utilizado para capturar e tratar erros em um fluxo de operações assíncronas.
+    Exemplo: 
+      1 - Capturando um erro ocorrido durante a criação de um novo produto:
+        Future<void> adicionarProduto() {
+          return enviarRequisicaoPOST(produto)
+            .then((response) => print("Produto criado com ID: ${response.id}"))
+            .catchError((error) => print("Erro ao criar o produto: $error.message"));
+        }
+
+Sincronismo com Future (async e await):
+  Conceito: O sincronismo no contexto de Future refere-se à capacidade de garantir que operações sejam concluídas antes que ações subsequentes sejam executadas.
+  Ou seja: Com o Future, você pode sincronizar operações que ocorrem em tempos diferentes, como esperar por uma resposta de uma API antes de continuar com o processamento de dados.
+  Uso: Utilizado para assegurar que operações dependentes sejam executadas na ordem correta.
+  Exemplo:
+    1 - Enviando uma requisição POST e esperando pela resposta para continuar:
+      Future<void> processarRequisicao() async { // Utiliza-se a palavra-chave "async" para indicar que a função contém operações que não são imediatas.
+        response = await enviarRequisicaoPOST(dados); // Utiliza-se a palavra-chave "await" para pausar a execução do código até que a resposta seja recebida.
+        print("Resposta recebida: ${response.body}");
+        print("Executado somente após a resposta");
+      }

@@ -21,6 +21,23 @@ class Product with ChangeNotifier {
     isFavorite = !isFavorite;
     notifyListeners();
   }
+
+  Map<String, Object> toJsonWithoutId() {
+    return {
+      'title': title,
+      'description': description,
+      'price': price,
+      'imageUrl': imageUrl,
+      'isFavorite': isFavorite,
+    };
+  }
+
+  Map<String, Object> toJson() {
+    return {
+      'id': id,
+      ...toJsonWithoutId(),
+    };
+  }
 }
 
 enum FilterOptions {

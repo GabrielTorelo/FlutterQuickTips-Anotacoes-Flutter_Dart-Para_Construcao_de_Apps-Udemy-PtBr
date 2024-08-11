@@ -5,7 +5,7 @@ import 'package:shop/models/product.dart';
 import 'package:shop/service/firebase_service.dart';
 
 class ProductList with ChangeNotifier {
-  final FirebaseService _firebase = FirebaseService();
+  final FirebaseService _firebase = const FirebaseService();
   final List<Product> _products = MOCK_PRODUCTS_DATA;
 
   List<Product> get products => [..._products];
@@ -37,19 +37,22 @@ class ProductList with ChangeNotifier {
   }
 
   void addProduct(Product product) {
-    _firebase.methodPOST(
+    _firebase
+        .methodPUT(
       path: 'products',
-      data: {
-        'title': product.title,
-        'description': product.description,
-        'price': product.price.toString(),
-        'imageUrl': product.imageUrl,
-        'isFavorite': product.isFavorite,
+      id: product.id,
+      data: product.toJsonWithoutId(),
+    )
+        .then(
+      (response) {
+        if (response.containsKey('error')) {
+          return;
+        }
+
+        _products.add(product);
+        notifyListeners();
       },
     );
-
-    _products.add(product);
-    notifyListeners();
   }
 
   void updateProduct(Product product) {
