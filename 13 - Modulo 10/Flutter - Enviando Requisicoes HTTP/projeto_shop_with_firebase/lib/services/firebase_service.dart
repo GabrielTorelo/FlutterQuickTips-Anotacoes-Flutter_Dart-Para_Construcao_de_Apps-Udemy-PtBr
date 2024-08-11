@@ -29,9 +29,13 @@ class FirebaseService {
       ..headers.addAll(header)
       ..body = jsonEncode(body ?? {});
 
-    return await http.Client().send(request).then(
+    return await http.Client()
+        .send(request)
+        .then(
           (response) async => jsonDecode(await response.stream.bytesToString()),
-          onError: (error) => {"error": "$error"},
+        )
+        .catchError(
+          (error) => {"error": error.toString()},
         );
   }
 

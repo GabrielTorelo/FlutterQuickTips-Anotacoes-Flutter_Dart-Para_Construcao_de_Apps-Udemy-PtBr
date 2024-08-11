@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'package:shop/MOCK/MOCK_DATA.dart';
 import 'package:shop/models/product.dart';
-import 'package:shop/service/firebase_service.dart';
+import 'package:shop/services/firebase_service.dart';
 
 class ProductList with ChangeNotifier {
   final FirebaseService _firebase = const FirebaseService();
@@ -36,23 +36,17 @@ class ProductList with ChangeNotifier {
     }
   }
 
-  Future<void> addProduct(Product product) {
-    Future<Map<String, dynamic>> request = _firebase.methodPUT(
+  Future<void> addProduct(Product product) async {
+    Map<String, dynamic> response = await _firebase.methodPUT(
       path: 'products',
       id: product.id,
       data: product.toJsonWithoutId(),
     );
 
-    return request.then<void>(
-      (response) {
-        if (response.containsKey('error')) {
-          return;
-        }
+    if (response.containsKey('error')) return Future.error(response['error']);
 
-        _products.add(product);
-        notifyListeners();
-      },
-    );
+    _products.add(product);
+    notifyListeners();
   }
 
   Future<void> updateProduct(Product product) {
