@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/components/alert_error.dart';
 import 'package:shop/components/app_drawer.dart';
 import 'package:shop/components/distinctive.dart';
 import 'package:shop/components/product_grid.dart';
 import 'package:shop/models/cart.dart';
 import 'package:shop/models/product.dart';
+import 'package:shop/models/product_list.dart';
 import 'package:shop/routes/app_routes.dart';
 
 class ProductsOverviewScreen extends StatefulWidget {
@@ -18,11 +20,27 @@ class ProductsOverviewScreen extends StatefulWidget {
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   late FilterOptions selectedOption;
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
     selectedOption = widget.selectedOption;
+
+    Provider.of<ProductList>(
+      context,
+      listen: false,
+    ).loadProducts().then((_) {
+      setState(() => _isLoading = false);
+    }).catchError(
+      (_) {
+        setState(() => _isLoading = false);
+        showDialog(
+          context: context,
+          builder: (_) => const AlertError(),
+        );
+      },
+    );
   }
 
   @override
@@ -68,9 +86,13 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           ),
         ],
       ),
-      body: ProductGrid(
-        selectedOption: selectedOption,
-      ),
+      body: _isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : ProductGrid(
+              selectedOption: selectedOption,
+            ),
       drawer: const AppDrawer(),
     );
   }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/components/alert_error.dart';
 import 'package:shop/models/product.dart';
 import 'package:shop/models/product_list.dart';
 
@@ -84,16 +85,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
         setState(() => _isLoading = false);
         showDialog(
           context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('An error occurred!'),
-            content: const Text('Something went wrong.'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('Ok'),
-              ),
-            ],
-          ),
+          builder: (_) => const AlertError(),
         );
       },
     );

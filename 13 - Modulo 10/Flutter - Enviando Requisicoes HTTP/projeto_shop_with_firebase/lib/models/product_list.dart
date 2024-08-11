@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
-import 'package:shop/MOCK/MOCK_DATA.dart';
 import 'package:shop/models/product.dart';
 import 'package:shop/services/firebase_service.dart';
 
 class ProductList with ChangeNotifier {
   final FirebaseService _firebase = const FirebaseService();
-  final List<Product> _products = MOCK_PRODUCTS_DATA;
+  final List<Product> _products = [];
 
   List<Product> get products => [..._products];
 
@@ -16,6 +15,22 @@ class ProductList with ChangeNotifier {
 
   int get itemsCount {
     return _products.length;
+  }
+
+  Future<void> loadProducts() async {
+    final Map<String, dynamic> response =
+        await _firebase.methodGET(path: 'products');
+
+    if (response.containsKey('error')) return Future.error(response['error']);
+
+    _products.clear();
+
+    response.forEach((productId, productData) {
+      productData['id'] = productId;
+      _products.add(Product.fromJson(productData));
+    });
+
+    notifyListeners();
   }
 
   Future<void> saveProduct(Map<String, dynamic> data) {
@@ -37,7 +52,7 @@ class ProductList with ChangeNotifier {
   }
 
   Future<void> addProduct(Product product) async {
-    Map<String, dynamic> response = await _firebase.methodPUT(
+    final Map<String, dynamic> response = await _firebase.methodPUT(
       path: 'products',
       id: product.id,
       data: product.toJsonWithoutId(),
