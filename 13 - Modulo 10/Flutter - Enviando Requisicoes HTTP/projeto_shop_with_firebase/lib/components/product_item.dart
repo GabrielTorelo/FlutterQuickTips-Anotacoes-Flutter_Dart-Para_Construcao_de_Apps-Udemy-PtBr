@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/components/alert_error.dart';
 import 'package:shop/models/product.dart';
 import 'package:shop/models/product_list.dart';
 import 'package:shop/routes/app_routes.dart';
@@ -57,7 +58,12 @@ class ProductItem extends StatelessWidget {
                     Provider.of<ProductList>(
                       context,
                       listen: false,
-                    ).removeProduct(product);
+                    ).removeProduct(product).catchError((_) {
+                      showDialog(
+                        context: context,
+                        builder: (_) => const AlertError(),
+                      );
+                    });
                   }
                 });
               },

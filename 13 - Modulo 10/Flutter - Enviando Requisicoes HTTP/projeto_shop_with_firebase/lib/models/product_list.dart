@@ -71,7 +71,8 @@ class ProductList with ChangeNotifier {
   }
 
   Future<void> updateProduct(Product product) async {
-    final productIndex = _products.indexWhere((prod) => prod.id == product.id);
+    final int productIndex =
+        _products.indexWhere((prod) => prod.id == product.id);
 
     if (productIndex >= 0) {
       final Map<String, dynamic> response = await _firebase.methodPATCH(
@@ -92,11 +93,20 @@ class ProductList with ChangeNotifier {
     }
   }
 
-  void removeProduct(Product product) {
-    bool hasProductId =
-        _products.indexWhere((prod) => prod.id == product.id) >= 0;
+  Future<void> removeProduct(Product product) async {
+    final int productIndex =
+        _products.indexWhere((prod) => prod.id == product.id);
 
-    if (hasProductId) {
+    if (productIndex >= 0) {
+      final Map<String, dynamic> response = await _firebase.methodDELETE(
+        path: 'products',
+        id: product.id,
+      );
+
+      if (response.containsKey('error') || response['status'] >= 400) {
+        return Future.error(response['error']);
+      }
+
       _products.remove(product);
       notifyListeners();
     }

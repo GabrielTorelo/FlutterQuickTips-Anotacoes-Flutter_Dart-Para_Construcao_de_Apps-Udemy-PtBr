@@ -16,6 +16,7 @@ class FirebaseService {
     required String method,
     required String path,
     Map<String, dynamic>? body,
+    bool withResponse = true,
   }) async {
     final Map<String, String> header = {
       ...headers ?? {},
@@ -32,7 +33,9 @@ class FirebaseService {
     return await http.Client()
         .send(request)
         .then(
-          (response) async => jsonDecode(await response.stream.bytesToString()),
+          (response) async => withResponse
+              ? jsonDecode(await response.stream.bytesToString())
+              : {"status": response.statusCode},
         )
         .catchError(
           (error) => {"error": error.toString()},
@@ -83,10 +86,12 @@ class FirebaseService {
 
   Future<Map<String, dynamic>> methodDELETE({
     required String path,
+    required String id,
   }) async {
     return await _makeRequest(
       method: 'DELETE',
-      path: '$path.json',
+      path: '$path/$id.json',
+      withResponse: false,
     );
   }
 }
