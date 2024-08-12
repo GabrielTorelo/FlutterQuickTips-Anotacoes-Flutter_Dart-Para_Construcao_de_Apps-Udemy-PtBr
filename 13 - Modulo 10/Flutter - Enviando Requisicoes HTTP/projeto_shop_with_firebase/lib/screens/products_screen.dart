@@ -8,6 +8,13 @@ import 'package:shop/routes/app_routes.dart';
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key});
 
+  Future<void> _refreshProducts(BuildContext context) {
+    return Provider.of<ProductList>(
+      context,
+      listen: false,
+    ).loadProducts();
+  }
+
   @override
   Widget build(BuildContext context) {
     final ProductList prod = Provider.of<ProductList>(context);
@@ -24,22 +31,32 @@ class ProductsScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: prod.itemsCount == 0
-          ? Center(
-              child: Text(
-                'No products found!',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-            )
-          : Padding(
-              padding: const EdgeInsets.all(8),
-              child: ListView.builder(
-                itemCount: prod.itemsCount,
-                itemBuilder: (context, index) => Card(
-                  child: ProductItem(product: prod.products[index]),
+      body: RefreshIndicator(
+        onRefresh: () => _refreshProducts(context),
+        child: prod.itemsCount == 0
+            ? SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Container(
+                  height: MediaQuery.of(context).size.height -
+                      (AppBar().preferredSize.height +
+                          MediaQuery.of(context).padding.top),
+                  alignment: Alignment.center,
+                  child: Text(
+                    'No products found!',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ),
+              )
+            : Padding(
+                padding: const EdgeInsets.all(8),
+                child: ListView.builder(
+                  itemCount: prod.itemsCount,
+                  itemBuilder: (context, index) => Card(
+                    child: ProductItem(product: prod.products[index]),
+                  ),
                 ),
               ),
-            ),
+      ),
       drawer: const AppDrawer(),
     );
   }
