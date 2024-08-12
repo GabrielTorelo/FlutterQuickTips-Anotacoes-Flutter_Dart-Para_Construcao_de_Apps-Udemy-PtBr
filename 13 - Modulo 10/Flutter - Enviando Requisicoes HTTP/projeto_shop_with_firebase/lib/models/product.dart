@@ -33,25 +33,52 @@ class Product with ChangeNotifier {
     notifyListeners();
   }
 
-  Map<String, Object> toJsonWithoutId() {
-    return {
+  Map<String, Object> toJsonWithoutData({
+    required List<ProductFields> fieldsToIgnore,
+  }) {
+    final Map<String, Object> data = {
+      'id': id,
       'title': title,
       'description': description,
       'price': price,
       'imageUrl': imageUrl,
       'isFavorite': isFavorite,
     };
+
+    for (ProductFields field in fieldsToIgnore) {
+      data.remove(field());
+    }
+
+    return data;
   }
 
   Map<String, Object> toJson() {
     return {
-      'id': id,
-      ...toJsonWithoutId(),
+      ...toJsonWithoutData(fieldsToIgnore: []),
     };
   }
+}
+
+enum ProductFields {
+  id('id'),
+  title('title'),
+  description('description'),
+  price('price'),
+  imageUrl('imageUrl'),
+  isFavorite('isFavorite');
+
+  final String value;
+  const ProductFields(this.value);
+
+  String call() => value.toString();
 }
 
 enum FilterOptions {
   favorites,
   all,
 }
+
+// enum SortOptions {
+//   title,
+//   price,
+// }

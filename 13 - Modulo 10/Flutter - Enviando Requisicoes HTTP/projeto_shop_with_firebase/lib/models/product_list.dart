@@ -27,6 +27,7 @@ class ProductList with ChangeNotifier {
 
     response.forEach((productId, productData) {
       productData['id'] = productId;
+      productData['isFavorite'] = productData['isFavorite'] ?? false;
       _products.add(Product.fromJson(productData));
     });
 
@@ -55,7 +56,12 @@ class ProductList with ChangeNotifier {
     final Map<String, dynamic> response = await _firebase.methodPUT(
       path: 'products',
       id: product.id,
-      data: product.toJsonWithoutId(),
+      data: product.toJsonWithoutData(
+        fieldsToIgnore: [
+          ProductFields.id,
+          ProductFields.isFavorite,
+        ],
+      ),
     );
 
     if (response.containsKey('error')) return Future.error(response['error']);
@@ -64,15 +70,26 @@ class ProductList with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateProduct(Product product) {
+  Future<void> updateProduct(Product product) async {
     final productIndex = _products.indexWhere((prod) => prod.id == product.id);
 
     if (productIndex >= 0) {
+      final Map<String, dynamic> response = await _firebase.methodPATCH(
+        path: 'products',
+        id: product.id,
+        data: product.toJsonWithoutData(
+          fieldsToIgnore: [
+            ProductFields.id,
+            ProductFields.isFavorite,
+          ],
+        ),
+      );
+
+      if (response.containsKey('error')) return Future.error(response['error']);
+
       _products[productIndex] = product;
       notifyListeners();
     }
-
-    return Future.value();
   }
 
   void removeProduct(Product product) {

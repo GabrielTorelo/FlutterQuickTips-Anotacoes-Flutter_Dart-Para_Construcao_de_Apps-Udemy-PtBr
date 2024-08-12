@@ -69,6 +69,18 @@ class FirebaseService {
     );
   }
 
+  Future<Map<String, dynamic>> methodPATCH({
+    required String path,
+    required String id,
+    required Map<String, dynamic> data,
+  }) async {
+    return await _makeRequest(
+      method: 'PATCH',
+      path: '$path/$id.json',
+      body: data,
+    );
+  }
+
   Future<Map<String, dynamic>> methodDELETE({
     required String path,
   }) async {
