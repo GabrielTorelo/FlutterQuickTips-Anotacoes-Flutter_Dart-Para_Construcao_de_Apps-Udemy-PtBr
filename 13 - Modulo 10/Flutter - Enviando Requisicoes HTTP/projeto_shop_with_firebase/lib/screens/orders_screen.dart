@@ -4,21 +4,11 @@ import 'package:shop/components/alert_error.dart';
 import 'package:shop/components/order.dart';
 import 'package:shop/models/order_list.dart';
 
-class OrdersScreen extends StatefulWidget {
+class OrdersScreen extends StatelessWidget {
   const OrdersScreen({super.key});
 
-  @override
-  State<OrdersScreen> createState() => _OrdersScreenState();
-}
-
-class _OrdersScreenState extends State<OrdersScreen> {
-  bool _isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-
-    Provider.of<OrderList>(
+  Future<void> _loadOrders(BuildContext context) async {
+    return await Provider.of<OrderList>(
       context,
       listen: false,
     ).loadOrders().catchError(
@@ -28,49 +18,51 @@ class _OrdersScreenState extends State<OrdersScreen> {
           builder: (_) => const AlertError(),
         );
       },
-    ).whenComplete(() => setState(() => _isLoading = false));
-  }
-
-  Future<void> _refreshOrders(BuildContext context) {
-    return Provider.of<OrderList>(
-      context,
-      listen: false,
-    ).loadOrders();
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final OrderList order = Provider.of<OrderList>(context);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Orders'),
       ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : RefreshIndicator(
-              onRefresh: () => _refreshOrders(context),
-              child: order.items.isEmpty
-                  ? SingleChildScrollView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      child: Container(
-                        height: MediaQuery.of(context).size.height -
-                            (AppBar().preferredSize.height +
-                                MediaQuery.of(context).padding.top),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'No orders yet!',
-                          style: Theme.of(context).textTheme.titleLarge,
+      body: FutureBuilder(
+        future: _loadOrders(context),
+        builder: (ctx, snapshot) {
+          return switch (snapshot.connectionState) {
+            ConnectionState.waiting => const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ConnectionState.done => Consumer<OrderList>(
+                builder: (ctx, order, _) => RefreshIndicator(
+                  onRefresh: () => _loadOrders(context),
+                  child: order.items.isEmpty
+                      ? SingleChildScrollView(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          child: Container(
+                            height: MediaQuery.of(context).size.height -
+                                (AppBar().preferredSize.height +
+                                    MediaQuery.of(context).padding.top),
+                            alignment: Alignment.center,
+                            child: Text(
+                              'No orders yet!',
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: order.itemsCount,
+                          itemBuilder: (ctx, index) => OrderWidget(
+                            order: order.items[index],
+                          ),
                         ),
-                      ),
-                    )
-                  : ListView.builder(
-                      itemCount: order.itemsCount,
-                      itemBuilder: (ctx, index) => OrderWidget(
-                        order: order.items[index],
-                      ),
-                    ),
-            ),
+                ),
+              ),
+            _ => const Placeholder(),
+          };
+        },
+      ),
     );
   }
 }

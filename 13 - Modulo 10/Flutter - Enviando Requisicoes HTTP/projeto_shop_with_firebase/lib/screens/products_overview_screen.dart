@@ -20,14 +20,15 @@ class ProductsOverviewScreen extends StatefulWidget {
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   late FilterOptions selectedOption;
-  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
     selectedOption = widget.selectedOption;
+  }
 
-    Provider.of<ProductList>(
+  Future<void> _loadProducts(BuildContext context) async {
+    return await Provider.of<ProductList>(
       context,
       listen: false,
     ).loadProducts().catchError(
@@ -37,7 +38,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           builder: (_) => const AlertError(),
         );
       },
-    ).whenComplete(() => setState(() => _isLoading = false));
+    );
   }
 
   @override
@@ -83,13 +84,20 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           ),
         ],
       ),
-      body: _isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : ProductGrid(
-              selectedOption: selectedOption,
-            ),
+      body: FutureBuilder(
+        future: _loadProducts(context),
+        builder: (ctx, snapshot) {
+          return switch (snapshot.connectionState) {
+            ConnectionState.waiting => const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ConnectionState.done => ProductGrid(
+                selectedOption: selectedOption,
+              ),
+            _ => const Placeholder(),
+          };
+        },
+      ),
       drawer: const AppDrawer(),
     );
   }
