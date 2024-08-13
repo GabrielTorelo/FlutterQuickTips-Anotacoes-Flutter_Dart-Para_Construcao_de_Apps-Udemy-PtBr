@@ -30,17 +30,14 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
     Provider.of<ProductList>(
       context,
       listen: false,
-    ).loadProducts().then((_) {
-      setState(() => _isLoading = false);
-    }).catchError(
+    ).loadProducts().catchError(
       (_) {
-        setState(() => _isLoading = false);
         showDialog(
           context: context,
           builder: (_) => const AlertError(),
         );
       },
-    );
+    ).whenComplete(() => setState(() => _isLoading = false));
   }
 
   @override

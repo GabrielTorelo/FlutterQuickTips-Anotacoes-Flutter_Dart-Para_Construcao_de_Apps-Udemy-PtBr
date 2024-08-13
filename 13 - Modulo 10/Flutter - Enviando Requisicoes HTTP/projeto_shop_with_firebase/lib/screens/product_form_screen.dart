@@ -78,17 +78,15 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
       context,
       listen: false,
     ).saveProduct(_formData).then((_) {
-      setState(() => _isLoading = false);
       Navigator.of(context).pop();
     }).catchError(
       (_) {
-        setState(() => _isLoading = false);
         showDialog(
           context: context,
           builder: (_) => const AlertError(),
         );
       },
-    );
+    ).whenComplete(() => setState(() => _isLoading = false));
   }
 
   @override

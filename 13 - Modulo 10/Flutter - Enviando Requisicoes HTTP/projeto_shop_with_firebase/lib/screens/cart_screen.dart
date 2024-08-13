@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/components/alert_error.dart';
 import 'package:shop/components/cart_item.dart';
 import 'package:shop/models/cart.dart';
 import 'package:shop/models/cart_item.dart';
 import 'package:shop/models/order_list.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  bool isAwaiting = false;
 
   @override
   Widget build(BuildContext context) {
@@ -80,17 +88,27 @@ class CartScreen extends StatelessWidget {
                               Theme.of(context).colorScheme.primary,
                         ),
                         const Spacer(),
-                        TextButton(
-                          onPressed: () {
-                            order.addOrder(cart);
-                            cart.clearList();
-                          },
-                          style: TextButton.styleFrom(
-                            backgroundColor:
-                                Theme.of(context).colorScheme.secondary,
-                            foregroundColor: Colors.white,
+                        IgnorePointer(
+                          ignoring: isAwaiting,
+                          child: TextButton(
+                            onPressed: () async {
+                              setState(() => isAwaiting = !isAwaiting);
+                              await order.addOrder(cart).then((_) {
+                                cart.clearList();
+                              }).catchError((_) {
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => const AlertError(),
+                                );
+                              });
+                            },
+                            style: TextButton.styleFrom(
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.secondary,
+                              foregroundColor: Colors.white,
+                            ),
+                            child: const Text('ORDER NOW'),
                           ),
-                          child: const Text('ORDER NOW'),
                         ),
                       ],
                     ),
