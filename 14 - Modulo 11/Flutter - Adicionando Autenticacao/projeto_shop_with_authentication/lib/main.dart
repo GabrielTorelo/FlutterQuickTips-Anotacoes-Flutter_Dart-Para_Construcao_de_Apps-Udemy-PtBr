@@ -5,6 +5,7 @@ import 'package:shop/models/cart.dart';
 import 'package:shop/models/order_list.dart';
 import 'package:shop/models/product_list.dart';
 import 'package:shop/routes/app_routes.dart';
+import 'package:shop/screens/auth_screen.dart';
 import 'package:shop/screens/cart_screen.dart';
 import 'package:shop/screens/orders_screen.dart';
 import 'package:shop/screens/product_details_screen.dart';
@@ -50,6 +51,11 @@ class _MyAppState extends State<MyApp> {
             tertiary: Colors.black87,
           ),
           textTheme: theme.textTheme.copyWith(
+            headlineLarge: const TextStyle(
+              fontFamily: 'Anton',
+              fontSize: 45,
+              color: Colors.white,
+            ),
             titleLarge: const TextStyle(
               fontFamily: 'Lato',
               fontSize: 20,
@@ -102,6 +108,7 @@ class _MyAppState extends State<MyApp> {
         ),
         debugShowCheckedModeBanner: false,
         routes: {
+          AppRoutes.auth: (_) => const AuthScreen(),
           AppRoutes.home: (_) => const ProductsOverviewScreen(),
           AppRoutes.productDetail: (_) => const ProductDetailsScreen(),
           AppRoutes.cart: (_) => const CartScreen(),
