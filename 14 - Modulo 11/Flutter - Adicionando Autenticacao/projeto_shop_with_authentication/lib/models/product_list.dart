@@ -4,7 +4,9 @@ import 'package:shop/models/product.dart';
 import 'package:shop/services/firebase_service.dart';
 
 class ProductList with ChangeNotifier {
-  final FirebaseService _firebase = const FirebaseService();
+  final FirebaseService _firebase = FirebaseService(
+    requestType: FirebaseRequest.realtimeDB,
+  );
   final List<Product> _products = [];
 
   List<Product> get products => [..._products];

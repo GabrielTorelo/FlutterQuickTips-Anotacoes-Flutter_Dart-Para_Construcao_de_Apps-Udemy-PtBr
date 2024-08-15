@@ -3,21 +3,43 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class FirebaseService {
+  FirebaseRequest? _requestType;
   final Map<String, String>? headers;
 
-  const FirebaseService({
+  FirebaseService({
+    FirebaseRequest? requestType,
     this.headers,
-  });
+  }) : _requestType = requestType;
 
-  String get _firebaseURL =>
-      dotenv.env['FIREBASE_URL'] ?? 'http://localhost:3000';
+  set requestType(FirebaseRequest request) {
+    _requestType = request;
+  }
+
+  String get _firebaseURL {
+    return switch (_requestType) {
+      FirebaseRequest.authSignUp => _firebaseSignupURL,
+      FirebaseRequest.authSignIn => _firebaseSigninURL,
+      _ => _firebaseRealtimeURL,
+    };
+  }
+
+  String get _firebaseRealtimeURL =>
+      dotenv.env['FIREBASE_REALTIME_DB'] ?? 'http://localhost:3000';
+
+  String get _firebaseSignupURL =>
+      dotenv.env['FIREBASE_AUTH_SIGNUP'] ?? 'http://localhost:3000';
+
+  String get _firebaseSigninURL =>
+      dotenv.env['FIREBASE_AUTH_SIGNIN'] ?? 'http://localhost:3000';
 
   Future<Map<String, dynamic>> _makeRequest({
     required String method,
-    required String path,
+    String? path,
     Map<String, dynamic>? body,
     bool withResponse = true,
   }) async {
+    final requestPath = (path != null ? '$_firebaseURL/$path' : _firebaseURL);
+
     final Map<String, String> header = {
       ...headers ?? {},
       "Content-Type": "application/json",
@@ -25,7 +47,7 @@ class FirebaseService {
 
     final request = http.Request(
       method,
-      Uri.parse("$_firebaseURL/$path"),
+      Uri.parse(requestPath),
     )
       ..headers.addAll(header)
       ..body = jsonEncode(body ?? {});
@@ -42,7 +64,9 @@ class FirebaseService {
         );
   }
 
-  Future<Map<String, dynamic>> methodGET({required String path}) async {
+  Future<Map<String, dynamic>> methodGET({
+    required String path,
+  }) async {
     return await _makeRequest(
       method: 'GET',
       path: '$path.json',
@@ -50,48 +74,62 @@ class FirebaseService {
   }
 
   Future<Map<String, dynamic>> methodPOST({
-    required String path,
+    String? path,
     required Map<String, dynamic> data,
   }) async {
+    final requestPath = (path != null ? '$path.json' : null);
+
     return await _makeRequest(
       method: 'POST',
-      path: '$path.json',
+      path: requestPath,
       body: data,
     );
   }
 
   Future<Map<String, dynamic>> methodPUT({
-    required String path,
+    String? path,
     required String id,
     required Map<String, dynamic> data,
   }) async {
+    final requestPath = (path != null ? '$path/$id.json' : null);
+
     return await _makeRequest(
       method: 'PUT',
-      path: '$path/$id.json',
+      path: requestPath,
       body: data,
     );
   }
 
   Future<Map<String, dynamic>> methodPATCH({
-    required String path,
+    String? path,
     required String id,
     required Map<String, dynamic> data,
   }) async {
+    final requestPath = (path != null ? '$path/$id.json' : null);
+
     return await _makeRequest(
       method: 'PATCH',
-      path: '$path/$id.json',
+      path: requestPath,
       body: data,
     );
   }
 
   Future<Map<String, dynamic>> methodDELETE({
-    required String path,
+    String? path,
     required String id,
   }) async {
+    final requestPath = (path != null ? '$path/$id.json' : null);
+
     return await _makeRequest(
       method: 'DELETE',
-      path: '$path/$id.json',
+      path: requestPath,
       withResponse: false,
     );
   }
+}
+
+enum FirebaseRequest {
+  realtimeDB,
+  authSignUp,
+  authSignIn,
 }

@@ -5,7 +5,9 @@ import 'package:shop/services/firebase_service.dart';
 import 'package:uuid/uuid.dart';
 
 class OrderList with ChangeNotifier {
-  final FirebaseService _firebase = const FirebaseService();
+  final FirebaseService _firebase = FirebaseService(
+    requestType: FirebaseRequest.realtimeDB,
+  );
   final List<Order> _orders = [];
 
   List<Order> get items => [..._orders];

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop/models/auth.dart';
 
 class AuthForm extends StatefulWidget {
@@ -27,7 +28,7 @@ class _AuthFormState extends State<AuthForm> {
     });
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     final isValid = _formKey.currentState?.validate() ?? false;
 
     if (!isValid) {
@@ -36,9 +37,23 @@ class _AuthFormState extends State<AuthForm> {
 
     _formKey.currentState?.save();
 
+    Auth auth = Provider.of(context, listen: false);
+
     setState(() => _isLoading = true);
 
-    if (_isLoading) {}
+    if (_isLogin()) {
+      await auth.authentication(
+        email: _authData['email']!,
+        password: _authData['password']!,
+        authMode: AuthMode.login,
+      );
+    } else {
+      await auth.authentication(
+        email: _authData['email']!,
+        password: _authData['password']!,
+        authMode: AuthMode.signup,
+      );
+    }
 
     setState(() => _isLoading = false);
   }
