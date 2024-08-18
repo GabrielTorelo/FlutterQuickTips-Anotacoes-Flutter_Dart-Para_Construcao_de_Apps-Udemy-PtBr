@@ -28,7 +28,7 @@ class _CounterScreenState extends State<CounterScreen> {
               onPressed: () {
                 setState(() {
                   provider?.state.increment();
-                  print(provider?.state.value);
+                  // print(provider?.state.value);
                 });
               },
               icon: const Icon(Icons.add),
@@ -37,7 +37,7 @@ class _CounterScreenState extends State<CounterScreen> {
               onPressed: () {
                 setState(() {
                   provider?.state.decrement();
-                  print(provider?.state.value);
+                  // print(provider?.state.value);
                 });
               },
               icon: const Icon(Icons.remove),

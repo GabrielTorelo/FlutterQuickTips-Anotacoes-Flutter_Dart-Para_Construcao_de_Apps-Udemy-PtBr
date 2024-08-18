@@ -49,13 +49,13 @@ class _MyAppState extends State<MyApp> {
         ),
         debugShowCheckedModeBanner: false,
         routes: {
-          AppRoutes.home: (_) => ProductsOverviewScreen(),
+          AppRoutes.home: (_) => const ProductsOverviewScreen(),
           AppRoutes.productDetail: (_) => const CounterScreen(),
         },
         onUnknownRoute: (settings) {
           return MaterialPageRoute(
             builder: (_) {
-              return ProductsOverviewScreen();
+              return const ProductsOverviewScreen();
             },
           );
         },
