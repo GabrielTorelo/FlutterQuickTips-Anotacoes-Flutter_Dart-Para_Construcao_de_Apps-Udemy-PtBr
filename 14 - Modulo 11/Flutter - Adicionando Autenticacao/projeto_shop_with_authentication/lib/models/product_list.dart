@@ -7,7 +7,16 @@ class ProductList with ChangeNotifier {
   final FirebaseService _firebase = FirebaseService(
     requestType: FirebaseRequest.realtimeDB,
   );
+  final String _token;
   final List<Product> _products = [];
+
+  ProductList({
+    required String token,
+    required List<Product> products,
+  }) : _token = token {
+    _firebase.token = _token;
+    _products.addAll(products);
+  }
 
   List<Product> get products => [..._products];
 
@@ -20,8 +29,9 @@ class ProductList with ChangeNotifier {
   }
 
   Future<void> loadProducts() async {
-    final Map<String, dynamic> response =
-        await _firebase.methodGET(path: 'products');
+    final Map<String, dynamic> response = await _firebase.methodGET(
+      path: 'products',
+    );
 
     if (response.containsKey('error')) return Future.error(response['error']);
 

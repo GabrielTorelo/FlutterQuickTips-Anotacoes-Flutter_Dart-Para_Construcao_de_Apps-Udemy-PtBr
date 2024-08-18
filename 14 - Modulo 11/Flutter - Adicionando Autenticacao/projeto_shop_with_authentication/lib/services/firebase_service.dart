@@ -5,11 +5,16 @@ import 'package:http/http.dart' as http;
 class FirebaseService {
   FirebaseRequest? _requestType;
   final Map<String, String>? headers;
+  String _token = '';
 
   FirebaseService({
     FirebaseRequest? requestType,
     this.headers,
   }) : _requestType = requestType;
+
+  set token(String token) {
+    _token = token;
+  }
 
   set requestType(FirebaseRequest request) {
     _requestType = request;
@@ -38,7 +43,8 @@ class FirebaseService {
     Map<String, dynamic>? body,
     bool withResponse = true,
   }) async {
-    final requestPath = (path != null ? '$_firebaseURL/$path' : _firebaseURL);
+    final requestPath =
+        (path != null ? '$_firebaseURL/$path?auth=$_token' : _firebaseURL);
 
     final Map<String, String> header = {
       ...headers ?? {},

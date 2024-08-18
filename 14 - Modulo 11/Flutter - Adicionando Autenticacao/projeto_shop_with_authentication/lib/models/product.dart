@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shop/services/firebase_service.dart';
 
 class Product with ChangeNotifier {
+  final FirebaseService _firebase = FirebaseService(
+    requestType: FirebaseRequest.realtimeDB,
+  );
   final String id;
   final String title;
   final String description;
@@ -28,9 +32,30 @@ class Product with ChangeNotifier {
     );
   }
 
-  void toggleFavoriteStatus() {
+  void _toggleFavoriteStatus() {
     isFavorite = !isFavorite;
     notifyListeners();
+  }
+
+  Future<void> toggleFavoriteStatus(String token) async {
+    _firebase.token = token;
+    _toggleFavoriteStatus();
+
+    final Map<String, dynamic> response = await _firebase.methodPATCH(
+      path: 'products',
+      id: id,
+      data: toJsonWithoutData(
+        fieldsToIgnore: [
+          ProductFields.id,
+          ProductFields.title,
+          ProductFields.description,
+          ProductFields.price,
+          ProductFields.imageUrl,
+        ],
+      ),
+    );
+
+    if (response.containsKey('error')) _toggleFavoriteStatus();
   }
 
   Map<String, Object> toJsonWithoutData({

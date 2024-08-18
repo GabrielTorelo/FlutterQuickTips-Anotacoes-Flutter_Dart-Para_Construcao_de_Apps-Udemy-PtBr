@@ -6,7 +6,7 @@ import 'package:shop/models/cart.dart';
 import 'package:shop/models/order_list.dart';
 import 'package:shop/models/product_list.dart';
 import 'package:shop/routes/app_routes.dart';
-import 'package:shop/screens/auth_screen.dart';
+import 'package:shop/screens/auth_or_home_screen.dart';
 import 'package:shop/screens/cart_screen.dart';
 import 'package:shop/screens/orders_screen.dart';
 import 'package:shop/screens/product_details_screen.dart';
@@ -34,16 +34,30 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => ProductList(),
+          create: (_) => Auth(),
+        ),
+        ChangeNotifierProxyProvider<Auth, ProductList>(
+          create: (_) => ProductList(
+            token: '',
+            products: [],
+          ),
+          update: (_, auth, previousProducts) => ProductList(
+            token: auth.token ?? '',
+            products: previousProducts?.products ?? [],
+          ),
+        ),
+        ChangeNotifierProxyProvider<Auth, OrderList>(
+          create: (_) => OrderList(
+            token: '',
+            orders: [],
+          ),
+          update: (_, auth, previousOrders) => OrderList(
+            token: auth.token ?? '',
+            orders: previousOrders?.items ?? [],
+          ),
         ),
         ChangeNotifierProvider(
           create: (_) => Cart(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => OrderList(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => Auth(),
         ),
       ],
       child: MaterialApp(
@@ -112,8 +126,7 @@ class _MyAppState extends State<MyApp> {
         ),
         debugShowCheckedModeBanner: false,
         routes: {
-          AppRoutes.auth: (_) => const AuthScreen(),
-          AppRoutes.home: (_) => const ProductsOverviewScreen(),
+          AppRoutes.authOrHome: (_) => const AuthOrHomeScreen(),
           AppRoutes.productDetail: (_) => const ProductDetailsScreen(),
           AppRoutes.cart: (_) => const CartScreen(),
           AppRoutes.orders: (_) => const OrdersScreen(),
