@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop/exceptions/auth_exception.dart';
 import 'package:shop/services/firebase_service.dart';
 
 class Auth with ChangeNotifier {
@@ -21,7 +22,10 @@ class Auth with ChangeNotifier {
       },
     );
 
-    print(response);
+    if (response.containsKey('error')) {
+      String errorMessage = response['error']['message'];
+      throw AuthException(errorMenssage: errorMessage.split(':').first.trim());
+    }
   }
 }
 

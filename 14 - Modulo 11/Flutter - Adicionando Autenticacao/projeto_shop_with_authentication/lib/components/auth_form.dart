@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/components/alert_error.dart';
+import 'package:shop/exceptions/auth_exception.dart';
 import 'package:shop/models/auth.dart';
 
 class AuthForm extends StatefulWidget {
@@ -28,6 +30,15 @@ class _AuthFormState extends State<AuthForm> {
     });
   }
 
+  void _showErrorDialog({String? message}) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertError(
+        message: message,
+      ),
+    );
+  }
+
   Future<void> _submit() async {
     final isValid = _formKey.currentState?.validate() ?? false;
 
@@ -41,18 +52,26 @@ class _AuthFormState extends State<AuthForm> {
 
     setState(() => _isLoading = true);
 
-    if (_isLogin()) {
-      await auth.authentication(
-        email: _authData['email']!,
-        password: _authData['password']!,
-        authMode: AuthMode.login,
+    try {
+      if (_isLogin()) {
+        await auth.authentication(
+          email: _authData['email']!,
+          password: _authData['password']!,
+          authMode: AuthMode.login,
+        );
+      } else {
+        await auth.authentication(
+          email: _authData['email']!,
+          password: _authData['password']!,
+          authMode: AuthMode.signup,
+        );
+      }
+    } on AuthException catch (error) {
+      _showErrorDialog(
+        message: error.toString(),
       );
-    } else {
-      await auth.authentication(
-        email: _authData['email']!,
-        password: _authData['password']!,
-        authMode: AuthMode.signup,
-      );
+    } catch (_) {
+      _showErrorDialog();
     }
 
     setState(() => _isLoading = false);
@@ -69,92 +88,93 @@ class _AuthFormState extends State<AuthForm> {
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
-        child: SizedBox(
-          height: _isLogin() ? 310 : 400,
-          width: deviceSize.width * 0.65,
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'E-mail',
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                  onSaved: (value) => _authData['email'] = value ?? '',
-                  validator: (value) {
-                    return switch (value?.trim()) {
-                      '' || null => 'Please enter a e-mail',
-                      _ => null,
-                    };
-                  },
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                  ),
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  controller: _passwordController,
-                  onSaved: (value) => _authData['password'] = value ?? '',
-                  validator: (value) {
-                    return switch (value?.trim()) {
-                      '' || null => 'Please enter a password',
-                      _ => _isSignup() && value!.trim().length < 8
-                          ? 'Password must be at least 8 characters long'
-                          : null,
-                    };
-                  },
-                ),
-                if (_isSignup())
+        child: IntrinsicHeight(
+          child: IntrinsicWidth(
+            stepWidth: deviceSize.width * 0.65,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
                   TextFormField(
                     decoration: const InputDecoration(
-                      labelText: 'Repeat Password',
+                      labelText: 'E-mail',
+                    ),
+                    keyboardType: TextInputType.emailAddress,
+                    onSaved: (value) => _authData['email'] = value ?? '',
+                    validator: (value) {
+                      return switch (value?.trim()) {
+                        '' || null => 'Please enter a e-mail',
+                        _ => null,
+                      };
+                    },
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: 'Password',
                     ),
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
+                    controller: _passwordController,
+                    onSaved: (value) => _authData['password'] = value ?? '',
                     validator: (value) {
                       return switch (value?.trim()) {
                         '' || null => 'Please enter a password',
-                        _ => value!.trim() != _passwordController.text
-                            ? 'Passwords must be identical'
+                        _ => _isSignup() && value!.trim().length < 8
+                            ? 'Password must be at least 8 characters long'
                             : null,
                       };
                     },
                   ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 20,
-                  ),
-                  child: _isLoading
-                      ? const CircularProgressIndicator()
-                      : ElevatedButton(
-                          onPressed: _submit,
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
+                  if (_isSignup())
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: 'Repeat Password',
+                      ),
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: true,
+                      validator: (value) {
+                        return switch (value?.trim()) {
+                          '' || null => 'Please enter a password',
+                          _ => value!.trim() != _passwordController.text
+                              ? 'Passwords must be identical'
+                              : null,
+                        };
+                      },
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 20,
+                    ),
+                    child: _isLoading
+                        ? const CircularProgressIndicator()
+                        : ElevatedButton(
+                            onPressed: _submit,
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 30,
+                                vertical: 8,
+                              ),
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.primary,
+                              foregroundColor: Colors.white,
                             ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 30,
-                              vertical: 8,
+                            child: Text(
+                              _isLogin() ? 'ENTER' : 'REGISTER',
                             ),
-                            backgroundColor:
-                                Theme.of(context).colorScheme.primary,
-                            foregroundColor: Colors.white,
                           ),
-                          child: Text(
-                            _isLogin() ? 'ENTER' : 'REGISTER',
-                          ),
-                        ),
-                ),
-                const Spacer(),
-                TextButton(
-                  onPressed: _switchAuthMode,
-                  child: Text(
-                    _isLogin() ? "Don't have an account yet?" : "Login now",
                   ),
-                ),
-              ],
+                  const Spacer(),
+                  TextButton(
+                    onPressed: _switchAuthMode,
+                    child: Text(
+                      _isLogin() ? "Don't have an account yet?" : "Login now",
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
