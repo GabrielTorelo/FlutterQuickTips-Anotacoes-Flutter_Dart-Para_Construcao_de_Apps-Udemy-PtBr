@@ -8,12 +8,15 @@ class ProductList with ChangeNotifier {
     requestType: FirebaseRequest.realtimeDB,
   );
   final String _token;
+  final String _userId;
   final List<Product> _products = [];
 
   ProductList({
-    required String token,
-    required List<Product> products,
-  }) : _token = token {
+    String token = '',
+    String userId = '',
+    List<Product> products = const [],
+  })  : _token = token,
+        _userId = userId {
     _firebase.token = _token;
     _products.addAll(products);
   }
@@ -35,15 +38,25 @@ class ProductList with ChangeNotifier {
 
     if (response.containsKey('error')) return Future.error(response['error']);
 
+    final Map<String, dynamic> favResponse = await _firebase.methodGET(
+      path: 'userFavorites/$_userId',
+    );
+
     _products.clear();
 
     response.forEach((productId, productData) {
       productData['id'] = productId;
-      productData['isFavorite'] = productData['isFavorite'] ?? false;
+      productData['isFavorite'] = favResponse.containsKey(productId)
+          ? favResponse[productId]['isFavorite']
+          : false;
       _products.add(Product.fromJson(productData));
     });
 
     notifyListeners();
+  }
+
+  Product findProductById(String id) {
+    return products.firstWhere((product) => product.id == id);
   }
 
   Future<void> saveProduct(Map<String, dynamic> data) {

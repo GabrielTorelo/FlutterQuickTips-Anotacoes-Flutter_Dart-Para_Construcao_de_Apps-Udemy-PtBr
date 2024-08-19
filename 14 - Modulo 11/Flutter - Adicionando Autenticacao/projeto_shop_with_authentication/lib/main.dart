@@ -37,22 +37,18 @@ class _MyAppState extends State<MyApp> {
           create: (_) => Auth(),
         ),
         ChangeNotifierProxyProvider<Auth, ProductList>(
-          create: (_) => ProductList(
-            token: '',
-            products: [],
-          ),
+          create: (_) => ProductList(),
           update: (_, auth, previousProducts) => ProductList(
             token: auth.token ?? '',
+            userId: auth.userId ?? '',
             products: previousProducts?.products ?? [],
           ),
         ),
         ChangeNotifierProxyProvider<Auth, OrderList>(
-          create: (_) => OrderList(
-            token: '',
-            orders: [],
-          ),
+          create: (_) => OrderList(),
           update: (_, auth, previousOrders) => OrderList(
             token: auth.token ?? '',
+            userId: auth.userId ?? '',
             orders: previousOrders?.items ?? [],
           ),
         ),

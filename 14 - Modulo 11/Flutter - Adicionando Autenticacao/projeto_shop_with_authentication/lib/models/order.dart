@@ -17,24 +17,36 @@ class Order {
     return Order(
       id: json['id'],
       amount: json['amount'],
-      products: (json['products'] as List<dynamic>)
-          .map((product) => CartItem.fromJson(product))
+      products: (json['products'] as Map<String, dynamic>)
+          .entries
+          .map(
+            (product) => CartItem.fromJson({
+              'id': product.key,
+              ...product.value,
+            }),
+          )
           .toList(),
       dateTime: DateTime.parse(json['dateTime']),
     );
   }
 
   Map<String, Object> toJsonWithoutData({
-    required List<OrderFields> fieldsToIgnore,
+    required List<OrderFields> orderFieldsToIgnore,
+    required List<CartItemFields> cartItemFieldsToIgnore,
   }) {
     final Map<String, Object> data = {
       'id': id,
       'amount': amount,
-      'products': products.map((product) => product.toJson()).toList(),
+      'products': {
+        for (var product in products)
+          product.id: product.toJsonWithoutData(
+            fieldsToIgnore: cartItemFieldsToIgnore,
+          ),
+      },
       'dateTime': dateTime.toIso8601String(),
     };
 
-    for (OrderFields field in fieldsToIgnore) {
+    for (OrderFields field in orderFieldsToIgnore) {
       data.remove(field());
     }
 
@@ -43,7 +55,10 @@ class Order {
 
   Map<String, Object> toJson() {
     return {
-      ...toJsonWithoutData(fieldsToIgnore: []),
+      ...toJsonWithoutData(
+        orderFieldsToIgnore: [],
+        cartItemFieldsToIgnore: [],
+      ),
     };
   }
 }

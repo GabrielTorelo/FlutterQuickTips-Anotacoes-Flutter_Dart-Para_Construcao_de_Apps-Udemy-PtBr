@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop/models/order.dart';
 import 'package:intl/intl.dart';
+import 'package:shop/models/product_list.dart';
 
 class OrderWidget extends StatefulWidget {
   final Order order;
@@ -16,6 +18,9 @@ class _OrderWidgetState extends State<OrderWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final ProductList provider =
+        Provider.of<ProductList>(context, listen: false);
+
     return Card(
       child: Column(
         children: [
@@ -56,7 +61,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              prod.title,
+                              provider.findProductById(prod.id).title,
                               style: Theme.of(context).textTheme.labelMedium,
                             ),
                             Row(

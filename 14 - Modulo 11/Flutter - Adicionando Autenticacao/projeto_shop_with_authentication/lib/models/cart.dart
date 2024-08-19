@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shop/models/cart_item.dart';
-import 'package:uuid/uuid.dart';
 
 class Cart with ChangeNotifier {
   Map<String, CartItem> _items = {};
@@ -45,8 +44,6 @@ class Cart with ChangeNotifier {
         productId,
         (existingCartItem) => CartItem(
           id: existingCartItem.id,
-          productId: existingCartItem.productId,
-          title: existingCartItem.title,
           price: existingCartItem.price,
           quantity: existingCartItem.quantity - 1,
         ),
@@ -63,8 +60,6 @@ class Cart with ChangeNotifier {
         productId,
         (existingCartItem) => CartItem(
           id: existingCartItem.id,
-          productId: existingCartItem.productId,
-          title: existingCartItem.title,
           price: existingCartItem.price,
           quantity: existingCartItem.quantity + 1,
         ),
@@ -73,9 +68,7 @@ class Cart with ChangeNotifier {
       _items.putIfAbsent(
         productId,
         () => CartItem(
-          id: const Uuid().v4(),
-          productId: productId,
-          title: title,
+          id: productId,
           price: price,
           quantity: 1,
         ),

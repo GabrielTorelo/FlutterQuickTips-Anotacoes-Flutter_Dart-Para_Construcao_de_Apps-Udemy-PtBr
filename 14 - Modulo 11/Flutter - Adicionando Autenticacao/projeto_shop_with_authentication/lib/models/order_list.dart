@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop/models/cart.dart';
+import 'package:shop/models/cart_item.dart';
 import 'package:shop/models/order.dart';
 import 'package:shop/services/firebase_service.dart';
 import 'package:uuid/uuid.dart';
@@ -9,12 +10,15 @@ class OrderList with ChangeNotifier {
     requestType: FirebaseRequest.realtimeDB,
   );
   final String _token;
+  final String _userId;
   List<Order> _orders = [];
 
   OrderList({
-    required String token,
-    required List<Order> orders,
-  }) : _token = token {
+    String token = '',
+    String userId = '',
+    List<Order> orders = const [],
+  })  : _token = token,
+        _userId = userId {
     _firebase.token = _token;
     _orders.addAll(orders);
   }
@@ -25,14 +29,14 @@ class OrderList with ChangeNotifier {
 
   Future<void> loadOrders() async {
     final List<Order> loadedOrders = [];
-    final Map<String, dynamic> response =
-        await _firebase.methodGET(path: 'orders');
+    final Map<String, dynamic> response = await _firebase.methodGET(
+      path: 'orders/$_userId',
+    );
 
     if (response.containsKey('error')) return Future.error(response['error']);
 
     response.forEach((orderId, orderData) {
       orderData['id'] = orderId;
-      orderData['isFavorite'] = orderData['isFavorite'] ?? false;
       loadedOrders.add(Order.fromJson(orderData));
     });
 
@@ -43,7 +47,7 @@ class OrderList with ChangeNotifier {
 
   Future<void> addOrder(Cart cart) async {
     final Order order = Order(
-      id: const Uuid().v1(),
+      id: const Uuid().v6(),
       amount: cart.totalAmount,
       products: cart.items.values.toList(),
       dateTime: DateTime.now(),
@@ -51,10 +55,15 @@ class OrderList with ChangeNotifier {
 
     final Map<String, dynamic> response = await _firebase.methodPUT(
       path: 'orders',
-      id: order.id,
+      id: '$_userId/${order.id}',
       data: order.toJsonWithoutData(
-        fieldsToIgnore: [
+        orderFieldsToIgnore: [
           OrderFields.id,
+        ],
+        cartItemFieldsToIgnore: [
+          CartItemFields.id,
+          CartItemFields.title,
+          CartItemFields.productId,
         ],
       ),
     );

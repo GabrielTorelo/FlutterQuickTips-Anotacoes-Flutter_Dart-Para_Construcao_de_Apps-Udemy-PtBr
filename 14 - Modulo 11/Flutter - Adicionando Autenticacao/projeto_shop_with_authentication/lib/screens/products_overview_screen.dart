@@ -32,11 +32,13 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
       context,
       listen: false,
     ).loadProducts().catchError(
-      (_) {
-        showDialog(
-          context: context,
-          builder: (_) => const AlertError(),
-        );
+      (error) {
+        error == 'null' || error == null
+            ? null
+            : showDialog(
+                context: context,
+                builder: (_) => const AlertError(),
+              );
       },
     );
   }

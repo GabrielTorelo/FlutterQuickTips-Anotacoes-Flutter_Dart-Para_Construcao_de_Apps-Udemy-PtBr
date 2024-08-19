@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:shop/extensions/json_extension.dart';
 
 class FirebaseService {
   FirebaseRequest? _requestType;
@@ -58,16 +59,19 @@ class FirebaseService {
       ..headers.addAll(header)
       ..body = jsonEncode(body ?? {});
 
-    return await http.Client()
-        .send(request)
-        .then(
-          (response) async => withResponse
-              ? jsonDecode(await response.stream.bytesToString())
-              : {"status": response.statusCode},
-        )
-        .catchError(
-          (error) => {"error": error.toString()},
-        );
+    return await http.Client().send(request).then(
+      (response) async {
+        final responseBody = await response.stream.bytesToString();
+
+        return withResponse
+            ? responseBody.tryJsonDecode()
+                ? jsonDecode(responseBody)
+                : {"error": responseBody}
+            : {"status": response.statusCode};
+      },
+    ).catchError(
+      (error) => {"error": error.toString()},
+    );
   }
 
   Future<Map<String, dynamic>> methodGET({

@@ -37,25 +37,37 @@ class Product with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> toggleFavoriteStatus(String token) async {
+  Future<void> toggleFavoriteStatus({
+    required String token,
+    required String userId,
+  }) async {
     _firebase.token = token;
     _toggleFavoriteStatus();
 
-    final Map<String, dynamic> response = await _firebase.methodPATCH(
-      path: 'products',
-      id: id,
-      data: toJsonWithoutData(
-        fieldsToIgnore: [
-          ProductFields.id,
-          ProductFields.title,
-          ProductFields.description,
-          ProductFields.price,
-          ProductFields.imageUrl,
-        ],
-      ),
-    );
+    if (isFavorite) {
+      final Map<String, dynamic> response = await _firebase.methodPUT(
+        path: 'userFavorites',
+        id: '$userId/$id',
+        data: toJsonWithoutData(
+          fieldsToIgnore: [
+            ProductFields.id,
+            ProductFields.title,
+            ProductFields.description,
+            ProductFields.price,
+            ProductFields.imageUrl,
+          ],
+        ),
+      );
 
-    if (response.containsKey('error')) _toggleFavoriteStatus();
+      if (response.containsKey('error')) _toggleFavoriteStatus();
+    } else {
+      final Map<String, dynamic> response = await _firebase.methodDELETE(
+        path: 'userFavorites',
+        id: '$userId/$id',
+      );
+
+      if (response.containsKey('error')) _toggleFavoriteStatus();
+    }
   }
 
   Map<String, Object> toJsonWithoutData({

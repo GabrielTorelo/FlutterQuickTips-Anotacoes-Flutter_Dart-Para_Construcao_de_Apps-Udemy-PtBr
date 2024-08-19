@@ -12,11 +12,13 @@ class OrdersScreen extends StatelessWidget {
       context,
       listen: false,
     ).loadOrders().catchError(
-      (_) {
-        showDialog(
-          context: context,
-          builder: (_) => const AlertError(),
-        );
+      (error) {
+        error == 'null' || error == null
+            ? null
+            : showDialog(
+                context: context,
+                builder: (_) => const AlertError(),
+              );
       },
     );
   }
