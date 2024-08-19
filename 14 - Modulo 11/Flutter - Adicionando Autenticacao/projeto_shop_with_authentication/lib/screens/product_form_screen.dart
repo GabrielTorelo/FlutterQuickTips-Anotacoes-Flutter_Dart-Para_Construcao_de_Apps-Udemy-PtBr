@@ -80,10 +80,16 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
     ).saveProduct(_formData).then((_) {
       Navigator.of(context).pop();
     }).catchError(
-      (_) {
+      (error) {
         showDialog(
           context: context,
-          builder: (_) => const AlertError(),
+          builder: (_) => AlertError(
+            message: switch (error) {
+              'Permission denied' =>
+                'You do not have permission to manage the products',
+              _ => null,
+            },
+          ),
         );
       },
     ).whenComplete(() => setState(() => _isLoading = false));

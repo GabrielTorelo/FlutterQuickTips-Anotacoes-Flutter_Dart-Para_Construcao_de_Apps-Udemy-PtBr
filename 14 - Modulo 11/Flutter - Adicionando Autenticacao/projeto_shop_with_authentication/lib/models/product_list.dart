@@ -129,6 +129,10 @@ class ProductList with ChangeNotifier {
       );
 
       if (response.containsKey('error') || response['status'] >= 400) {
+        if (response['status'] == 401) {
+          return Future.error('Permission denied');
+        }
+
         return Future.error(response['error']);
       }
 

@@ -53,19 +53,29 @@ class ProductItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                ).then((value) {
-                  if (value ?? false) {
-                    Provider.of<ProductList>(
-                      context,
-                      listen: false,
-                    ).removeProduct(product).catchError((_) {
-                      showDialog(
-                        context: context,
-                        builder: (_) => const AlertError(),
+                ).then(
+                  (value) {
+                    if (value ?? false) {
+                      Provider.of<ProductList>(
+                        context,
+                        listen: false,
+                      ).removeProduct(product).catchError(
+                        (error) {
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertError(
+                              message: switch (error) {
+                                'Permission denied' =>
+                                  'You do not have permission to manage the products',
+                                _ => null,
+                              },
+                            ),
+                          );
+                        },
                       );
-                    });
-                  }
-                });
+                    }
+                  },
+                );
               },
               color: Theme.of(context).colorScheme.error,
             ),
