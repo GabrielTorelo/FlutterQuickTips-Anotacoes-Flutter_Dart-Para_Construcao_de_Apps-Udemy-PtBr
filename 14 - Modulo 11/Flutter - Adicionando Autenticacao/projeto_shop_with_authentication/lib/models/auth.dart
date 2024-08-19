@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:shop/data/store.dart';
 import 'package:shop/exceptions/auth_exception.dart';
 import 'package:shop/services/firebase_service.dart';
 
 class Auth with ChangeNotifier {
+  final Store _store = Store();
   final FirebaseService _firebase = FirebaseService();
   String? _token;
   String? _email;
@@ -59,6 +61,42 @@ class Auth with ChangeNotifier {
       ),
     );
 
+    _store.saveMultiple(
+      key: 'userData',
+      value: {
+        'token': _token,
+        'email': _email,
+        'userId': _userId,
+        'expiryDate': _expiryDate?.toIso8601String() ??
+            DateTime.now().add(const Duration(seconds: 3600)).toIso8601String(),
+      },
+    );
+
+    _autoLogout();
+
+    notifyListeners();
+  }
+
+  Future<void> tryAutoLogin() async {
+    if (isAuth) return;
+
+    final userData = await _store.readMultiple(key: 'userData');
+
+    if (userData.isEmpty ||
+        !userData.containsKey('token') ||
+        !userData.containsKey('email') ||
+        !userData.containsKey('userId') ||
+        !userData.containsKey('expiryDate')) return;
+
+    final expiryDate = DateTime.parse(userData['expiryDate']);
+
+    if (expiryDate.isBefore(DateTime.now())) return;
+
+    _token = userData['token'];
+    _email = userData['email'];
+    _userId = userData['userId'];
+    _expiryDate = expiryDate;
+
     _autoLogout();
 
     notifyListeners();
@@ -72,7 +110,7 @@ class Auth with ChangeNotifier {
 
     _clearLogoutTimer();
 
-    notifyListeners();
+    _store.delete(key: 'userData').then((_) => notifyListeners());
   }
 
   void _clearLogoutTimer() {
