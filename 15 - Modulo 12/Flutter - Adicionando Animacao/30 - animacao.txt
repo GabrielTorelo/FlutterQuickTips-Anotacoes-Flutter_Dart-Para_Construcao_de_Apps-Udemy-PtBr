@@ -1,0 +1,24 @@
+Introdução às Animações:
+  Conceito: Animações são utilizadas para criar transições suaves entre estados diferentes de um widget, proporcionando uma experiência de usuário mais dinâmica e visualmente agradável.
+  Ou seja: Em vez de mudanças abruptas de propriedades, as animações permitem que essas mudanças ocorram gradualmente ao longo do tempo.
+  Uso: Utilizado em interfaces para tornar as transições mais fluidas em resposta à interação do usuário.
+
+  * Controladores de Animação (AnimationController):
+    Conceito: O AnimationController é uma classe que controla a duração e a execução de uma animação, gerando um "ticker" que atualiza a animação em cada frame.
+    Ou seja: Ele define a velocidade da animação e permite iniciar, parar ou reverter a animação, fornecendo controle total sobre o ciclo de vida da animação.
+    Uso: Utilizado para definir a duração da animação e para iniciar ou reverter a animação conforme necessário, garantindo que a transição entre estados ocorra de maneira controlada.
+
+  * Intercalação de Valores (Tween):
+    Conceito: O Tween é uma classe que define como intercalar entre dois valores ao longo da duração da animação.
+    Ou seja: Ele determina o valor intermediário entre o estado inicial e final da animação, permitindo a transição suave entre esses valores.
+    Uso: Utilizado para especificar os valores inicial e final de propriedades, e para aplicar uma curva de animação que controle a velocidade da transição.
+
+  * Curvas de Animações (Curves):
+    Conceito: As curvas de animações definem a aceleração da animação, controlando se ela deve ser "linear", "acelerar", "desacelerar", ou "combinar ambas".
+    Ou seja: Uma curva de animação influencia como o Tween intercala os valores ao longo do tempo, afetando a percepção de velocidade e fluidez da animação.
+    Uso: Aplicado para ajustar a sensação da animação, como fazer com que ela comece devagar e acelere no final, criando uma transição mais natural e agradável.
+
+  * Execução e Reversão de Animações:
+    Conceito: O AnimationController pode ser utilizado para iniciar ("forward") ou reverter ("reverse") a animação, dependendo da interação do usuário.
+    Ou seja: Controla a direção da animação, permitindo que os elementos na interface mudem para frente ou para trás, conforme o contexto.
+    Uso: Utilizado para animar a transição entre diferentes telas ou estados de um widget.
