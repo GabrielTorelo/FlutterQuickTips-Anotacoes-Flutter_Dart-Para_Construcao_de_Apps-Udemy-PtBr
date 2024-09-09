@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/components/distinctive.dart';
+import 'package:shop/constants/image_constants.dart';
 import 'package:shop/models/auth.dart';
 import 'package:shop/models/cart.dart';
 import 'package:shop/models/product.dart';
@@ -32,10 +33,13 @@ class ProductGridItem extends StatelessWidget {
               color: Theme.of(context).colorScheme.secondary,
             ),
           ),
-          title: Text(
-            product.title,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleSmall,
+          title: Hero(
+            tag: product.title,
+            child: Text(
+              product.title,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
           ),
           trailing: Consumer<Cart>(
             child: IconButton(
@@ -75,9 +79,13 @@ class ProductGridItem extends StatelessWidget {
           ),
         ),
         child: GestureDetector(
-          child: Image.network(
-            product.imageUrl,
-            fit: BoxFit.cover,
+          child: Hero(
+            tag: product.id,
+            child: FadeInImage(
+              placeholder: AssetImage(ImageConstants.placeholder()),
+              image: NetworkImage(product.imageUrl),
+              fit: BoxFit.cover,
+            ),
           ),
           onTap: () {
             Navigator.of(context).pushNamed(

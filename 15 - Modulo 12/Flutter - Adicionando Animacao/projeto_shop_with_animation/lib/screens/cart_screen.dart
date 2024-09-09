@@ -5,6 +5,7 @@ import 'package:shop/components/cart_item.dart';
 import 'package:shop/models/cart.dart';
 import 'package:shop/models/cart_item.dart';
 import 'package:shop/models/order_list.dart';
+import 'package:shop/routes/app_routes.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -41,7 +42,8 @@ class _CartScreenState extends State<CartScreen> {
                   child: Center(
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        Navigator.of(context)
+                            .pushReplacementNamed(AppRoutes.home);
                       },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,

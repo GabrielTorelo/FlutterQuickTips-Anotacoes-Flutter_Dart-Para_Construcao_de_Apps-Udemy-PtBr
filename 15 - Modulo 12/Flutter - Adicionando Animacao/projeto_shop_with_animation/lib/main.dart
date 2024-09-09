@@ -64,11 +64,29 @@ class _MyAppState extends State<MyApp> {
             secondary: Colors.deepOrange,
             tertiary: Colors.black87,
           ),
+          primaryTextTheme: theme.textTheme.copyWith(
+            titleSmall: const TextStyle(
+              fontFamily: 'Lato',
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
           textTheme: theme.textTheme.copyWith(
             headlineLarge: const TextStyle(
               fontFamily: 'Anton',
               fontSize: 45,
               color: Colors.white,
+            ),
+            headlineMedium: const TextStyle(
+              fontFamily: 'Anton',
+              fontSize: 35,
+              color: Colors.purple,
+            ),
+            headlineSmall: const TextStyle(
+              fontFamily: 'Lato',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
             titleLarge: const TextStyle(
               fontFamily: 'Lato',
