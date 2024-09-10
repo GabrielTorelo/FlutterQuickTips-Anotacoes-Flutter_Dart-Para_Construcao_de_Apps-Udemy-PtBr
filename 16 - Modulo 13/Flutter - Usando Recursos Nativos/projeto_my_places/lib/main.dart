@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
     final ThemeData theme = ThemeData();
 
     return ChangeNotifierProvider(
-      create: (context) => GratePlaces(),
+      create: (context) => GreatPlaces(),
       child: MaterialApp(
         title: 'My Places',
         theme: theme.copyWith(

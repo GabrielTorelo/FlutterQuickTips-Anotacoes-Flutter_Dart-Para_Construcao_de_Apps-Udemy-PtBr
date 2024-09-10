@@ -1,10 +1,34 @@
 import 'dart:io';
+import 'package:projeto_my_places/data/db_sqlite.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_my_places/models/place.dart';
 
-class GratePlaces with ChangeNotifier {
-  final List<Place> _places = [];
+class GreatPlaces with ChangeNotifier {
+  List<Place> _places = [];
+
+  Future<void> loadDatabase() async {
+    final dataList = await DbSqlite.select('places');
+
+    _places.clear();
+
+    _places = dataList
+        .map(
+          (data) => Place(
+            id: data['id'],
+            title: data['title'],
+            image: File(data['image']),
+            location: PlaceLocation(
+              latitude: data['loc_lat'],
+              longitude: data['loc_lng'],
+              address: data['address'],
+            ),
+          ),
+        )
+        .toList();
+
+    notifyListeners();
+  }
 
   List<Place> get places {
     return [..._places];
@@ -31,6 +55,16 @@ class GratePlaces with ChangeNotifier {
     );
 
     _places.add(newPlace);
+
+    DbSqlite.insert('places', {
+      'id': newPlace.id,
+      'title': newPlace.title,
+      'image': newPlace.image.path,
+      'loc_lat': newPlace.location.latitude,
+      'loc_lng': newPlace.location.longitude,
+      'address': newPlace.location.address,
+    });
+
     notifyListeners();
   }
 }
