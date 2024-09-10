@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:projeto_my_places/components/image_input.dart';
-import 'package:projeto_my_places/providers/grate_places.dart';
+import 'package:projeto_my_places/providers/great_places.dart';
 import 'package:provider/provider.dart';
 
 class PlaceFormScreen extends StatefulWidget {
