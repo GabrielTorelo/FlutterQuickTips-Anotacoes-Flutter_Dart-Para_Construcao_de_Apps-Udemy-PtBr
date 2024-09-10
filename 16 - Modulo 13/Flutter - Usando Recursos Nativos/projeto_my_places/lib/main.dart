@@ -31,9 +31,15 @@ class _MyAppState extends State<MyApp> {
             primary: Colors.indigo,
             secondary: Colors.amber,
           ),
+          textTheme: theme.textTheme.copyWith(
+            titleLarge: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
           appBarTheme: const AppBarTheme(
             titleTextStyle: TextStyle(
-              // fontFamily: 'Lato',
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
