@@ -28,6 +28,10 @@
 	<string>We need to use your camera to take a picture of your places.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need to use your photo library to select a picture of your places.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to show you places near you.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location to show you places near you.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
