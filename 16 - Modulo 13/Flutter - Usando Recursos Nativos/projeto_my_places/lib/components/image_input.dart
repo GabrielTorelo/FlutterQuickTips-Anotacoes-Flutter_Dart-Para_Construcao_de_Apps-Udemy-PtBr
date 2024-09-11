@@ -70,7 +70,7 @@ class _ImageInputState extends State<ImageInput> {
             ),
           ),
           const Spacer(),
-          ElevatedButton.icon(
+          TextButton.icon(
             label: const Text('Take Picture'),
             icon: const Icon(Icons.camera),
             onPressed: _takePicture,

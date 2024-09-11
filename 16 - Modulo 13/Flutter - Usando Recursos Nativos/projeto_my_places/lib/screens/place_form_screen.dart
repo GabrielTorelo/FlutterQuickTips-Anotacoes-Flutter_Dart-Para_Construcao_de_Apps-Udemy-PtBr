@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:projeto_my_places/components/image_input.dart';
+import 'package:projeto_my_places/components/location_input.dart';
 import 'package:projeto_my_places/providers/great_places.dart';
 import 'package:provider/provider.dart';
 
@@ -60,13 +61,17 @@ class _PlaceFormScreenState extends State<PlaceFormScreen> {
                     ImageInput(
                       onImageSelected: _selectImage,
                     ),
+                    const LocationInput()
                   ],
                 ),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 20,
+            ),
             child: ElevatedButton.icon(
               label: const Text('Add Place'),
               icon: const Icon(Icons.add),

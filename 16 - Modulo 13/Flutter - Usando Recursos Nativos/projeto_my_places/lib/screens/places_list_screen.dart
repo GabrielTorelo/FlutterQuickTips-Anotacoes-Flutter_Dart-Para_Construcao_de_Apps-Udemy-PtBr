@@ -34,19 +34,17 @@ class PlacesListScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
-                builder: (ctx, GreatPlaces, child) => GreatPlaces.placesCount ==
-                        0
+                builder: (ctx, data, child) => data.placesCount == 0
                     ? child!
                     : ListView.builder(
-                        itemCount: GreatPlaces.placesCount,
+                        itemCount: data.placesCount,
                         itemBuilder: (ctx, i) => ListTile(
                           leading: CircleAvatar(
                             backgroundImage:
-                                FileImage(GreatPlaces.placeByIndex(i).image),
+                                FileImage(data.placeByIndex(i).image),
                           ),
-                          title: Text(GreatPlaces.placeByIndex(i).title),
-                          subtitle: Text(
-                              GreatPlaces.placeByIndex(i).location.address),
+                          title: Text(data.placeByIndex(i).title),
+                          subtitle: Text(data.placeByIndex(i).location.address),
                           onTap: () {},
                         ),
                       ),

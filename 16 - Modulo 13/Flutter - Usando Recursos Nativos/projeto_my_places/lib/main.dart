@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_my_places/helpers/colored_logs.dart';
 import 'package:projeto_my_places/providers/great_places.dart';
 import 'package:provider/provider.dart';
 import 'package:projeto_my_places/routes/app_routes.dart';
 import 'package:projeto_my_places/routes/custom_routes.dart';
 import 'package:projeto_my_places/screens/place_form_screen.dart';
 import 'package:projeto_my_places/screens/places_list_screen.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
+  await dotenv.load(fileName: ".env");
+  
   runApp(const MyApp());
 }
 
@@ -74,3 +78,5 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
+final ColoredLogs logs = ColoredLogs();

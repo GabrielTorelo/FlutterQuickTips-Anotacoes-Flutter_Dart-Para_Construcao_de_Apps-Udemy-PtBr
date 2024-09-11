@@ -7,6 +7,18 @@ import 'package:projeto_my_places/models/place.dart';
 class GreatPlaces with ChangeNotifier {
   List<Place> _places = [];
 
+  List<Place> get places {
+    return [..._places];
+  }
+
+  int get placesCount {
+    return _places.length;
+  }
+
+  Place placeByIndex(int index) {
+    return _places[index];
+  }
+
   Future<void> loadDatabase() async {
     final dataList = await DbSqlite.select('places');
 
@@ -28,18 +40,6 @@ class GreatPlaces with ChangeNotifier {
         .toList();
 
     notifyListeners();
-  }
-
-  List<Place> get places {
-    return [..._places];
-  }
-
-  int get placesCount {
-    return _places.length;
-  }
-
-  Place placeByIndex(int index) {
-    return _places[index];
   }
 
   void addPlace(String title, File image) {
