@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:projeto_my_places/models/coordinate.dart';
+import 'package:projeto_my_places/screens/map_screen.dart';
 import 'package:projeto_my_places/services/maps_service.dart';
 
 class LocationInput extends StatefulWidget {
@@ -10,14 +13,56 @@ class LocationInput extends StatefulWidget {
 }
 
 class _LocationInputState extends State<LocationInput> {
+  final MapsService _mapsService = MapsService();
   String? _previewImageUrl;
+  LocationData? _location;
+
+  Future<void> _getLocation() async {
+    final LocationData locationData = await Location().getLocation();
+
+    setState(() {
+      _location = locationData;
+    });
+  }
 
   Future<void> _getCurrentUserLocation() async {
-    LocationData locationData = await Location().getLocation();
+    _location ?? await _getLocation();
 
-    final String staticMapImageUrl = MapsService().generateLocationPreviewImage(
-      latitude: locationData.latitude!,
-      longitude: locationData.longitude!,
+    final String staticMapImageUrl = _mapsService.generateLocationPreviewImage(
+      latitude: _location!.latitude!,
+      longitude: _location!.longitude!,
+    );
+
+    setState(() {
+      _previewImageUrl = staticMapImageUrl;
+    });
+  }
+
+  Future<void> _selectOnMap() async {
+    _location ?? await _getLocation();
+
+    final Coordinate initialLocation = Coordinate(
+      latitude: _location!.latitude!,
+      longitude: _location!.longitude!,
+    );
+
+    final LatLng? selectedLocation = await Navigator.of(context).push(
+      MaterialPageRoute(
+        fullscreenDialog: true,
+        builder: (_) => MapScreen(
+          isReadOnly: false,
+          coordinates: initialLocation,
+        ),
+      ),
+    );
+
+    if (selectedLocation == null) {
+      return;
+    }
+
+    final String staticMapImageUrl = _mapsService.generateLocationPreviewImage(
+      latitude: selectedLocation.latitude,
+      longitude: selectedLocation.longitude,
     );
 
     setState(() {
@@ -69,7 +114,7 @@ class _LocationInputState extends State<LocationInput> {
             TextButton.icon(
               icon: const Icon(Icons.map),
               label: const Text('Select on Map'),
-              onPressed: () {},
+              onPressed: _selectOnMap,
             ),
           ],
         ),

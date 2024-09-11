@@ -10,7 +10,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
-  
+
   runApp(const MyApp());
 }
 
@@ -66,6 +66,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         routes: {
           AppRoutes.placeForm: (_) => const PlaceFormScreen(),
+          // AppRoutes.placeDetail: (_) => const PlaceDetailScreen(),
         },
         onUnknownRoute: (settings) {
           return MaterialPageRoute(
