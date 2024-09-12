@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_my_places/helpers/colored_logs.dart';
 import 'package:projeto_my_places/providers/great_places.dart';
+import 'package:projeto_my_places/screens/place_detail_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:projeto_my_places/routes/app_routes.dart';
 import 'package:projeto_my_places/routes/custom_routes.dart';
@@ -41,6 +42,11 @@ class _MyAppState extends State<MyApp> {
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
+            titleMedium: const TextStyle(
+              fontSize: 19,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey,
+            ),
           ),
           appBarTheme: const AppBarTheme(
             titleTextStyle: TextStyle(
@@ -66,7 +72,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         routes: {
           AppRoutes.placeForm: (_) => const PlaceFormScreen(),
-          // AppRoutes.placeDetail: (_) => const PlaceDetailScreen(),
+          AppRoutes.placeDetail: (_) => const PlaceDetailScreen(),
         },
         onUnknownRoute: (settings) {
           return MaterialPageRoute(

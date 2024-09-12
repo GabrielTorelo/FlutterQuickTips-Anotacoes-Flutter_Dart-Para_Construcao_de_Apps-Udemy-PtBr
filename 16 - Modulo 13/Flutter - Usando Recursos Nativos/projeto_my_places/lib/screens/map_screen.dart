@@ -58,11 +58,7 @@ class _MapScreenState extends State<MapScreen> {
               : {
                   Marker(
                     markerId: MarkerId(const Uuid().v4()),
-                    position: _pickedLocation ??
-                        LatLng(
-                          widget.coordinates.latitude,
-                          widget.coordinates.longitude,
-                        ),
+                    position: _pickedLocation ?? widget.coordinates.toLatLng(),
                   ),
                 },
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_my_places/models/place.dart';
 import 'package:projeto_my_places/providers/great_places.dart';
 import 'package:projeto_my_places/routes/app_routes.dart';
 import 'package:provider/provider.dart';
@@ -38,15 +39,23 @@ class PlacesListScreen extends StatelessWidget {
                     ? child!
                     : ListView.builder(
                         itemCount: data.placesCount,
-                        itemBuilder: (ctx, i) => ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage:
-                                FileImage(data.placeByIndex(i).image),
-                          ),
-                          title: Text(data.placeByIndex(i).title),
-                          subtitle: Text(data.placeByIndex(i).location.address),
-                          onTap: () {},
-                        ),
+                        itemBuilder: (ctx, i) {
+                          Place place = data.placeByIndex(i);
+
+                          return ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: FileImage(place.image),
+                            ),
+                            title: Text(place.title),
+                            subtitle: Text(place.location.address),
+                            onTap: () {
+                              Navigator.of(context).pushNamed(
+                                AppRoutes.placeDetail,
+                                arguments: place,
+                              );
+                            },
+                          );
+                        },
                       ),
               ),
             _ => const Placeholder(),
