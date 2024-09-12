@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:projeto_my_places/data/db_sqlite.dart';
+import 'package:projeto_my_places/services/maps_service.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_my_places/models/place.dart';
@@ -42,15 +44,21 @@ class GreatPlaces with ChangeNotifier {
     notifyListeners();
   }
 
-  void addPlace(String title, File image) {
+  Future<void> addPlace({
+    required String title,
+    required File image,
+    required LatLng position,
+  }) async {
+    final address = await MapsService().getAddressFrom(position: position);
+
     final newPlace = Place(
       id: const Uuid().v4(),
       title: title,
       image: image,
-      location: const PlaceLocation(
-        latitude: 0,
-        longitude: 0,
-        address: '',
+      location: PlaceLocation(
+        latitude: position.latitude,
+        longitude: position.longitude,
+        address: address,
       ),
     );
 
