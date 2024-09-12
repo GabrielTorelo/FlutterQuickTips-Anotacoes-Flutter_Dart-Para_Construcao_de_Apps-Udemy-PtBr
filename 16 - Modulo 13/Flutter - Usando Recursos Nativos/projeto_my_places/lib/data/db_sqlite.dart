@@ -32,4 +32,14 @@ class DbSqlite {
 
     return await db.query(table);
   }
+
+  static Future<void> delete(String table, String id) async {
+    final db = await DbSqlite.open();
+
+    db.delete(
+      table,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
 }

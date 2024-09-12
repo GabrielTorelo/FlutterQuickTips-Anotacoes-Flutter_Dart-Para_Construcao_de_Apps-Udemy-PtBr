@@ -1,10 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_my_places/components/alert_error.dart';
 import 'package:projeto_my_places/models/coordinate.dart';
 import 'package:projeto_my_places/models/place.dart';
+import 'package:projeto_my_places/providers/great_places.dart';
 import 'package:projeto_my_places/screens/map_screen.dart';
+import 'package:provider/provider.dart';
 
 class PlaceDetailScreen extends StatelessWidget {
   const PlaceDetailScreen({super.key});
+
+  void _deletePlace(
+    BuildContext context,
+    Place place,
+  ) {
+    Provider.of<GreatPlaces>(context, listen: false)
+        .deletePlace(place)
+        .then(
+          (_) => Navigator.of(context).pop(),
+        )
+        .catchError(
+      (_) {
+        showDialog(
+          context: context,
+          builder: (_) => const AlertError(
+            message: 'Error deleting place! Try again later.',
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +37,14 @@ class PlaceDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(place.title),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: () {
+              _deletePlace(context, place);
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [

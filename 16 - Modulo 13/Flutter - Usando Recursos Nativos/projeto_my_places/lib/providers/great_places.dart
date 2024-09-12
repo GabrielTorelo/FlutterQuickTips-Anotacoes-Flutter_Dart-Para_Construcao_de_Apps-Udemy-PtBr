@@ -44,6 +44,21 @@ class GreatPlaces with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> deletePlace(Place place) async {
+    final index = _places.indexWhere((p) => p.id == place.id);
+
+    if (index >= 0) {
+      _places.removeAt(index);
+      notifyListeners();
+
+      DbSqlite.delete('places', place.id);
+
+      if (place.image.existsSync()) {
+        place.image.deleteSync();
+      }
+    }
+  }
+
   Future<void> addPlace({
     required String title,
     required File image,
