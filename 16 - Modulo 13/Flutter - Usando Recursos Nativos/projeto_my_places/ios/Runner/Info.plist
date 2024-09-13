@@ -26,6 +26,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>We need to use your camera to take a picture of your places.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need to use your microphone to take a picture of your places.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need to use your photo library to select a picture of your places.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
