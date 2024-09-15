@@ -21,6 +21,7 @@ class _AuthScreenState extends State<AuthScreen> {
     logs.highlight('Nickname: ${auth.nickname}');
     logs.sucess('Email: ${auth.email}');
     logs.sucess('Password: ${auth.password}');
+    logs.highlight('Image: ${auth.image.toString()}');
 
     setState(() => _isLoading = false);
   }
