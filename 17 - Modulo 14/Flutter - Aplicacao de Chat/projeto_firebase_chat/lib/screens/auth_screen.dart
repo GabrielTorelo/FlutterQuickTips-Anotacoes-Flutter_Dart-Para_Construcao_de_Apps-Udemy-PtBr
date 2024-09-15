@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_firebase_chat/components/auth_form.dart';
-import 'package:projeto_firebase_chat/main.dart';
 import 'package:projeto_firebase_chat/models/auth.dart';
+import 'package:projeto_firebase_chat/utils/snack_error.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -13,17 +13,20 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   bool _isLoading = false;
 
-  void _handleSubmit(Auth auth) {
-    FocusScope.of(context).unfocus();
+  Future<void> _handleSubmit(Auth auth) async {
+    try {
+      FocusScope.of(context).unfocus();
+      setState(() => _isLoading = true);
 
-    setState(() => _isLoading = true);
-
-    logs.highlight('Nickname: ${auth.nickname}');
-    logs.sucess('Email: ${auth.email}');
-    logs.sucess('Password: ${auth.password}');
-    logs.highlight('Image: ${auth.image.toString()}');
-
-    setState(() => _isLoading = false);
+      if (auth.isLogin) {
+      } else {}
+    } catch (e) {
+      SnackError(context).show(
+        message: 'An error has occurred! Check your credentials!',
+      );
+    } finally {
+      setState(() => _isLoading = false);
+    }
   }
 
   @override
