@@ -37,6 +37,11 @@ class _MyAppState extends State<MyApp> {
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
+          headlineLarge: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
           labelMedium: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,

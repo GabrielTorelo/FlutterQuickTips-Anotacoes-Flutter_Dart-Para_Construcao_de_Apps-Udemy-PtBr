@@ -17,8 +17,6 @@ class AuthOrHomeScreen extends StatelessWidget {
         builder: (ctx, snapshot) {
           return switch (snapshot.connectionState) {
             ConnectionState.waiting => const LoadingScreen(),
-            ConnectionState.done =>
-              snapshot.hasData ? const ChatScreen() : const AuthScreen(),
             ConnectionState.active =>
               snapshot.hasData ? const ChatScreen() : const AuthScreen(),
             _ => const ErrorScreen(),
