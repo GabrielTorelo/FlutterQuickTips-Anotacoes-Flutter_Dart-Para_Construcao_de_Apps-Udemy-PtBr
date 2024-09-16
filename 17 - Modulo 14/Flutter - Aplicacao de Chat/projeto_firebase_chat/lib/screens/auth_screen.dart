@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_firebase_chat/components/auth_form.dart';
 import 'package:projeto_firebase_chat/models/auth.dart';
+import 'package:projeto_firebase_chat/services/auth/auth_service.dart';
 import 'package:projeto_firebase_chat/utils/snack_error.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -19,7 +20,12 @@ class _AuthScreenState extends State<AuthScreen> {
       setState(() => _isLoading = true);
 
       if (auth.isLogin) {
-      } else {}
+        await AuthService().login(auth);
+      } else {
+        await AuthService().register(auth);
+      }
+
+      if (!mounted) throw 'Component not mounted';
     } catch (e) {
       SnackError(context).show(
         message: 'An error has occurred! Check your credentials!',

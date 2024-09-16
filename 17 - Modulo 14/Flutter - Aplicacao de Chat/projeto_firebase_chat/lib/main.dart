@@ -3,7 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:projeto_firebase_chat/helpers/colored_logs.dart';
 import 'package:projeto_firebase_chat/routes/app_routes.dart';
 import 'package:projeto_firebase_chat/routes/custom_routes.dart';
-import 'package:projeto_firebase_chat/screens/auth_screen.dart';
+import 'package:projeto_firebase_chat/screens/auth_or_home_screen.dart';
 import 'package:projeto_firebase_chat/screens/loading_screen.dart';
 
 void main() async {
@@ -75,13 +75,13 @@ class _MyAppState extends State<MyApp> {
       ),
       debugShowCheckedModeBanner: false,
       routes: {
+        AppRoutes.authOrHome: (_) => const AuthOrHomeScreen(),
         AppRoutes.loading: (_) => const LoadingScreen(),
-        AppRoutes.auth: (_) => const AuthScreen(),
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
           builder: (_) {
-            return const AuthScreen();
+            return const AuthOrHomeScreen();
           },
         );
       },

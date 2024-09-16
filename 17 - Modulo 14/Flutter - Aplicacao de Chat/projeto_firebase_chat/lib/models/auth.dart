@@ -1,9 +1,9 @@
 import 'dart:io';
 
 class Auth {
-  String? nickname;
-  String? email;
-  String? password;
+  String nickname = '';
+  String email = '';
+  String password = '';
   File? image;
   AuthMode _mode = AuthMode.login;
 

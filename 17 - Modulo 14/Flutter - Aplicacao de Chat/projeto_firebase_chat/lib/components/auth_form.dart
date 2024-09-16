@@ -4,6 +4,7 @@ import 'package:projeto_firebase_chat/components/adaptative_form_field.dart';
 import 'package:projeto_firebase_chat/components/user_image_picker.dart';
 import 'package:projeto_firebase_chat/models/auth.dart';
 import 'package:projeto_firebase_chat/utils/snack_error.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthForm extends StatefulWidget {
   final void Function(Auth auth) onSubmit;
@@ -24,13 +25,26 @@ class _AuthFormState extends State<AuthForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _rePasswordController = TextEditingController();
+  final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
+  bool _rememberEmail = false;
   bool _imageError = false;
+
+  void _loadRememberedEmail() async {
+    final rememberedEmail = await _secureStorage.read(key: 'rememberedEmail');
+
+    if (rememberedEmail != null) {
+      _emailController.text = rememberedEmail;
+      setState(() {
+        _rememberEmail = true;
+      });
+    }
+  }
 
   void _handleImagePick(File image) {
     _auth.image = image;
   }
 
-  void _submit() {
+  void _submit() async {
     final isValid = _formKey.currentState?.validate() ?? false;
 
     if (!isValid) {
@@ -55,7 +69,19 @@ class _AuthFormState extends State<AuthForm> {
     _auth.email = _emailController.text.trim();
     _auth.password = _passwordController.text.trim();
 
+    if (_rememberEmail) {
+      await _secureStorage.write(key: 'rememberedEmail', value: _auth.email);
+    } else {
+      await _secureStorage.delete(key: 'rememberedEmail');
+    }
+
     widget.onSubmit(_auth);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadRememberedEmail();
   }
 
   @override
@@ -157,12 +183,27 @@ class _AuthFormState extends State<AuthForm> {
                           keyboardType: TextInputType.visiblePassword,
                           textInputAction: TextInputAction.done,
                         ),
+                      if (_auth.isLogin)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Checkbox(
+                              value: _rememberEmail,
+                              onChanged: (value) {
+                                setState(() {
+                                  _rememberEmail = value!;
+                                });
+                              },
+                            ),
+                            const Text('Remember me'),
+                          ],
+                        )
                     ],
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10,
+                  padding: const EdgeInsets.only(
+                    bottom: 10,
                   ),
                   child: ElevatedButton(
                     onPressed: _submit,
