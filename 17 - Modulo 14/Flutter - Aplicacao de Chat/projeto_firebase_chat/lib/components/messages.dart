@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_firebase_chat/components/message_bubble.dart';
 import 'package:projeto_firebase_chat/components/without_data.dart';
 import 'package:projeto_firebase_chat/models/message.dart';
 import 'package:projeto_firebase_chat/services/chat/chat_service.dart';
@@ -18,17 +19,18 @@ class Messages extends StatelessWidget {
               ),
             ConnectionState.active =>
               snapshot.hasData && snapshot.data!.isNotEmpty
-                  ? ListView.builder(
+                  ? ListView.separated(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                      ),
+                      separatorBuilder: (ctx, index) =>
+                          const SizedBox(height: 30),
                       reverse: true,
                       itemCount: snapshot.data!.length,
                       itemBuilder: (ctx, index) {
-                        final message = snapshot.data![index];
-                        return ListTile(
-                          title: Text(message.text),
-                          subtitle: Text(message.userName),
-                          leading: CircleAvatar(
-                            backgroundImage: AssetImage(message.userImagePath),
-                          ),
+                        return MessageBubble(
+                          key: ValueKey(snapshot.data![index].id),
+                          message: snapshot.data![index],
                         );
                       },
                     )

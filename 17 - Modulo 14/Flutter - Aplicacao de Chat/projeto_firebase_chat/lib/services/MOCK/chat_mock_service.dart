@@ -18,7 +18,7 @@ class ChatMockService implements ChatService {
       text: 'Olá, tudo bem?',
       createdAt: DateTime.now().subtract(const Duration(minutes: 20)),
       userId: '123',
-      userName: 'João',
+      userName: 'Gabriel Torelo',
       userImagePath: 'assets/images/avatar.png',
     ),
     Message(
@@ -29,10 +29,18 @@ class ChatMockService implements ChatService {
       userName: 'Maria',
       userImagePath: 'assets/images/avatar.png',
     ),
+    Message(
+      id: const Uuid().v4(),
+      text: 'Estou bem também, obrigado!',
+      createdAt: DateTime.now(),
+      userId: '123',
+      userName: 'Gabriel Torelo',
+      userImagePath: 'assets/images/avatar.png',
+    ),
   ];
 
   ChatMockService() {
-    _messages.addAll(_mockMessages);
+    if (_messages.isEmpty) _messages.addAll(_mockMessages);
   }
 
   @override

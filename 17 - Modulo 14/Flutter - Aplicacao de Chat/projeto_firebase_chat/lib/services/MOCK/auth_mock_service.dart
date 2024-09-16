@@ -14,7 +14,7 @@ class AuthMockService implements AuthService {
     },
   );
   static final ChatUserMock _mockUser = ChatUserMock(
-    id: const Uuid().v4(),
+    id: '123',
     name: 'Gabriel Torelo',
     email: 'admin@teste.com',
     password: '123456',
