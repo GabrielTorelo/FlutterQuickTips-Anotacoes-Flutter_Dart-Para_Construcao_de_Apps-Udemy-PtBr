@@ -40,7 +40,7 @@ class ChatMockService implements ChatService {
   ];
 
   ChatMockService() {
-    if (_messages.isEmpty) _messages.addAll(_mockMessages);
+    if (_messages.isEmpty) _messages.addAll(_mockMessages.reversed);
   }
 
   @override
@@ -58,7 +58,7 @@ class ChatMockService implements ChatService {
     );
 
     _messages.add(newMessage);
-    _messagesStreamController.add(_messages);
+    _messagesStreamController.add(_messages.reversed.toList());
 
     return Future.value(newMessage);
   }
