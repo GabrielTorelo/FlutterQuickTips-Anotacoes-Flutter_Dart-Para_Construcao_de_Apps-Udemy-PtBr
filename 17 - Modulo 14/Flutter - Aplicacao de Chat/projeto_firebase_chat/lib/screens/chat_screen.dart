@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_firebase_chat/components/messages.dart';
 import 'package:projeto_firebase_chat/components/new_message.dart';
+import 'package:projeto_firebase_chat/routes/app_routes.dart';
 import 'package:projeto_firebase_chat/services/auth/auth_service.dart';
+import 'package:projeto_firebase_chat/services/notification/chat_notification_service.dart';
+import 'package:provider/provider.dart';
+// ---------------------------------------------------------------------
+//  Importe necessário apenas quando for utilizar notificações mockadas
+// ---------------------------------------------------------------------
+//
+// import 'package:projeto_firebase_chat/models/chat_notification.dart';
+//
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -42,7 +51,39 @@ class ChatScreen extends StatelessWidget {
                 default:
               }
             },
-          )
+          ),
+          Stack(
+            children: [
+              IconButton(
+                  icon: const Icon(Icons.notifications),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(AppRoutes.notifications);
+                  }),
+              Consumer<ChatNotificationService>(
+                builder: (context, service, _) {
+                  if (service.notificationsPopUpCount != '0') {
+                    return Positioned(
+                      top: 5,
+                      right: 5,
+                      child: CircleAvatar(
+                        maxRadius: 10,
+                        backgroundColor: Colors.redAccent,
+                        child: Text(
+                          service.notificationsPopUpCount,
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+
+                  return const SizedBox();
+                },
+              ),
+            ],
+          ),
         ],
       ),
       body: const SafeArea(
@@ -55,6 +96,28 @@ class ChatScreen extends StatelessWidget {
           ],
         ),
       ),
+      // -------------------------------------------------
+      // Botão para adicionar notificação de forma mockada
+      // -------------------------------------------------
+      //
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Provider.of<ChatNotificationService>(
+      //       context,
+      //       listen: false,
+      //     ).addNotification(
+      //       notification: ChatNotification(
+      //         title: 'New Chat',
+      //         body: 'New message received from user',
+      //       ),
+      //     );
+      //   },
+      //   backgroundColor: Colors.blue,
+      //   child: const Icon(
+      //     Icons.add,
+      //     color: Colors.white,
+      //   ),
+      // ),
     );
   }
 }
