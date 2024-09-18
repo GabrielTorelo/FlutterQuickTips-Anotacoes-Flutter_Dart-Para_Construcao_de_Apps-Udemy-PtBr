@@ -11,18 +11,16 @@ class AuthOrHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: StreamBuilder<ChatUser?>(
-        stream: AuthService().onAuthStateChanged,
-        builder: (ctx, snapshot) {
-          return switch (snapshot.connectionState) {
-            ConnectionState.waiting => const LoadingScreen(),
-            ConnectionState.active =>
-              snapshot.hasData ? const ChatScreen() : const AuthScreen(),
-            _ => const ErrorScreen(),
-          };
-        },
-      ),
+    return StreamBuilder<ChatUser?>(
+      stream: AuthService().onAuthStateChanged,
+      builder: (ctx, snapshot) {
+        return switch (snapshot.connectionState) {
+          ConnectionState.waiting => const LoadingScreen(),
+          ConnectionState.active =>
+            snapshot.hasData ? const ChatScreen() : const AuthScreen(),
+          _ => const ErrorScreen(),
+        };
+      },
     );
   }
 }

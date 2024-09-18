@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "XXXXXXXXXXXX",
+    "project_id": "XXXXXXXXXXX",
+    "storage_bucket": "XXXXXXXXXXX.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "X:XXXXXXXXXXXX:android:XXXXXXXXXXXXXXXXXXXXXX",
+        "android_client_info": {
+          "package_name": "com.example.projeto_firebase_chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
