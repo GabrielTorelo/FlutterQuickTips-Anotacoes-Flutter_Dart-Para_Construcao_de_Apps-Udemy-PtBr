@@ -19,7 +19,7 @@ abstract class AuthService {
     // useMock: false => Serão utilizados os dados do Firebase
     //
     return AuthFactoryService.createAuthService(
-      useMock: true,
+      useMock: false,
     );
   }
 }
