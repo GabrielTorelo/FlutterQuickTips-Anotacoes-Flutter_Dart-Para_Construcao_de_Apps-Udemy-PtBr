@@ -2,13 +2,13 @@ class ChatUser {
   final String id;
   final String name;
   final String email;
-  final String imagePath;
+  final String? imagePath;
 
   const ChatUser({
     required this.id,
     required this.name,
     required this.email,
-    required this.imagePath,
+    this.imagePath,
   });
 
   factory ChatUser.fromJson(Map<String, dynamic> json) {
