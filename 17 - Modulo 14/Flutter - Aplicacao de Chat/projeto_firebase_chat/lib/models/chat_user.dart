@@ -1,3 +1,6 @@
+import 'package:uuid/uuid.dart';
+import 'package:projeto_firebase_chat/models/message.dart';
+
 class ChatUser {
   final String id;
   final String name;
@@ -27,5 +30,18 @@ class ChatUser {
       'email': email,
       'imagePath': imagePath,
     };
+  }
+
+  Message toMessage({
+    required String message,
+  }) {
+    return Message(
+      id: const Uuid().v4(),
+      text: message,
+      createdAt: DateTime.now(),
+      userId: id,
+      userName: name,
+      userImagePath: imagePath ?? 'assets/images/avatar.png',
+    );
   }
 }

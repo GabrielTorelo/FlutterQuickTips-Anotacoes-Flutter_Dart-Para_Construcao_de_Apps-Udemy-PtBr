@@ -15,7 +15,7 @@ abstract class ChatService {
     // useMock: false => Serão utilizados os dados do Firebase
     //
     return ChatFactoryService.createChatService(
-      useMock: true,
+      useMock: false,
     );
   }
 }
