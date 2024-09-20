@@ -27,9 +27,16 @@ class _AuthScreenState extends State<AuthScreen> {
 
       if (!mounted) throw 'Component not mounted';
     } catch (e) {
-      SnackError(context).show(
-        message: 'An error has occurred! Check your credentials!',
-      );
+      final splitErrorID = e.toString().replaceFirst('[', '').split(']')[0];
+
+      return switch (splitErrorID) {
+        "firebase_auth/email-already-in-use" => SnackError(context).show(
+            message: 'This email is already in use!',
+          ),
+        _ => SnackError(context).show(
+            message: 'An error has occurred! Check your credentials!',
+          ),
+      };
     } finally {
       setState(() => _isLoading = false);
     }

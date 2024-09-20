@@ -20,9 +20,7 @@ class Messages extends StatelessWidget {
             ConnectionState.active =>
               snapshot.hasData && snapshot.data!.isNotEmpty
                   ? ListView.separated(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                      ),
+                      padding: const EdgeInsets.all(10),
                       separatorBuilder: (ctx, index) =>
                           const SizedBox(height: 30),
                       reverse: true,

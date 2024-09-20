@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_firebase_chat/components/messages.dart';
 import 'package:projeto_firebase_chat/components/new_message.dart';
@@ -12,46 +13,35 @@ import 'package:provider/provider.dart';
 // import 'package:projeto_firebase_chat/models/chat_notification.dart';
 //
 
-class ChatScreen extends StatelessWidget {
+class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
+
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _firebaseMessaging.requestPermission();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Chat Screen'),
+        leading: IconButton(
+          onPressed: () {
+            AuthService().logout();
+          },
+          icon: const Icon(Icons.meeting_room),
+        ),
         actions: [
-          DropdownButton(
-            underline: Container(),
-            icon: const Icon(
-              Icons.more_vert,
-              color: Colors.white,
-            ),
-            items: const [
-              DropdownMenuItem(
-                value: 'logout',
-                child: SizedBox(
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(right: 10),
-                        child: Icon(Icons.exit_to_app, color: Colors.black87),
-                      ),
-                      Text('Logout'),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-            onChanged: (value) {
-              switch (value) {
-                case 'logout':
-                  AuthService().logout();
-                  break;
-                default:
-              }
-            },
-          ),
           Stack(
             children: [
               IconButton(

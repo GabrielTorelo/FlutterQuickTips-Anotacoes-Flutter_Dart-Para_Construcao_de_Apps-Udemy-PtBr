@@ -8,6 +8,8 @@ class AdaptativeTextField extends StatelessWidget {
   final TextEditingController controller;
   final void Function(String value) onChanged;
   final void Function(String value)? onSubmitted;
+  final Color? backgroundColor;
+  final double? borderRadius;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final bool isPassword;
@@ -19,6 +21,8 @@ class AdaptativeTextField extends StatelessWidget {
     required this.controller,
     required this.onChanged,
     this.onSubmitted,
+    this.backgroundColor,
+    this.borderRadius,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.next,
     this.isPassword = false,
@@ -36,6 +40,9 @@ class AdaptativeTextField extends StatelessWidget {
               obscureText: isPassword,
               maxLength: maxLength,
               controller: controller,
+              decoration: BoxDecoration(
+                color: backgroundColor,
+              ),
               placeholder: label,
               onChanged: (value) => onChanged(value),
               onSubmitted: onSubmitted,
@@ -49,7 +56,15 @@ class AdaptativeTextField extends StatelessWidget {
             obscureText: isPassword,
             maxLength: maxLength,
             controller: controller,
-            decoration: InputDecoration(labelText: label),
+            decoration: InputDecoration(
+              hintText: label,
+              filled: true,
+              fillColor: backgroundColor,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius ?? 0),
+                borderSide: BorderSide.none,
+              ),
+            ),
             onChanged: (value) => onChanged(value),
             onSubmitted: onSubmitted,
             textInputAction: textInputAction,
