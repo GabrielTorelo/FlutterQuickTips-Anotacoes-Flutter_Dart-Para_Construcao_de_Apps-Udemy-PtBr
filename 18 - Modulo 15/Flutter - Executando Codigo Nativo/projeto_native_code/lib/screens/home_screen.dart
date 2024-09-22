@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:projeto_native_code/components/adaptative_field.dart';
 import 'package:projeto_native_code/main.dart';
 
@@ -14,18 +15,25 @@ class _HomeScreenState extends State<HomeScreen> {
   int _b = 0;
   int _sum = 0;
 
-  void _calculateSum() {
-    try {
+  Future<void> _calculateSum() async {
+    const channel = MethodChannel('com.example.projeto_native_code/sum');
+
+    await channel.invokeMethod('calculateSum', {
+      'a': _a,
+      'b': _b,
+    }).then((result) {
+      if (!mounted) return;
+
       FocusScope.of(context).unfocus();
 
       setState(() {
-        _sum = _a + _b;
+        _sum = result;
       });
 
       logs.sucess('Sum of $_a and $_b is $_sum');
-    } catch (e) {
+    }).catchError((e) {
       logs.error('Error while summing numbers! Error: $e');
-    }
+    });
   }
 
   @override
