@@ -1,0 +1,46 @@
+Introdução à integração Flutter e nativo:
+  Conceito: A integração entre Flutter e código nativo permite que aplicativos Flutter utilizem funcionalidades e APIs específicas de cada plataforma, por meio de comunicação assíncrona.
+  Ou seja: É possível chamar métodos nativos de cada plataforma diretamente do Flutter, permitindo o uso de recursos que não estão disponíveis diretamente no Flutter.
+  Uso: Utilizado quando funcionalidades específicas da plataforma, precisam ser acessadas em um aplicativo Flutter.
+
+Implementação de métodos nativos:
+  Conceito: Envolve a criação de métodos no código nativo que podem serem invocadas a partir do código Flutter.
+  Ou seja: O código nativo executa a lógica necessária e retorna resultados ao Flutter.
+  Uso: Utilizado quando a aplicação Flutter precisa executar código nativo para realizar tarefas que não são possíveis no Dart.
+
+Canais de comunicação:
+  * Criação de canais de plataforma (Platform Channels):
+    Conceito: Canais de comunicação são utilizados para conectar o código Dart do Flutter com o código nativo da plataforma, permitindo a troca de informações.
+    Ou seja: É uma ponte entre o Flutter e o código nativo, permitindo que o Flutter acesse funcionalidades implementadas nativamente.
+    Uso: Utilizados para invocar funções nativas de uma plataforma diretamente do Flutter.
+    Exemplo:
+      1 - Criação de canal:
+        const platform_channel = MethodChannel('com.example.projeto_native_code/native');
+
+  * Uso de canais:
+    Conceito: O uso de canais de comunicação envolve enviar e receber dados entre o Flutter e o código nativo da plataforma.
+    Ou seja: Permite que o Flutter envie comandos para a plataforma nativa e receba respostas, possibilitando a execução de código nativo dentro de uma aplicação Flutter.
+    Uso: Implementado quando é necessário que o Flutter invoque métodos no código nativo para obter informações ou realizar ações que são exclusivas do ambiente da plataforma.
+    Exemplo:
+      1 - Invocação de método nativo:
+        Future<void> _getNativeData() async {
+          final String result = await platform_channel.invokeMethod('getNativeData');
+          print(result);
+        }
+
+  * Tratamento de erros:
+    Conceito: O tratamento de erros ao utilizar canais de comunicação garante que exceções lançadas ao invocar métodos nativos sejam capturadas, prevenindo que o aplicativo trave ou apresente comportamentos inesperados.
+    Ou seja: Caso o método nativo retorne um erro ou não consiga ser acessado, o código em Flutter pode tratar essas exceções e tomar as devidas providências, como notificar o usuário ou registrar logs de erro.
+    Uso: Utilizado para garantir que a comunicação com o código nativo ocorra perfeitamente, evitando falhas inesperadas no aplicativo.
+    Exemplo:
+      1 - Invocação de método nativo com tratamentos de erros:
+        Future<void> _getNativeData() async {
+          try {
+            final String result = await platform_channel.invokeMethod('getNativeData');
+            print(result);
+          } catch (PlatformException e) {
+            print("Erro na plataforma! Erro: ${e.message}");
+          } catch (e) {
+            print("Erro ao acessar método nativo! Erro: $e");
+          }
+        }
