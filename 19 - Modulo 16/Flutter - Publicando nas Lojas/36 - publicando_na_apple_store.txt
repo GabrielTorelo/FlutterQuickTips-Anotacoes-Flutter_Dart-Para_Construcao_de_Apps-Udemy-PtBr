@@ -1,0 +1,29 @@
+Publicação de aplicativos no iOS:
+  Conceito: A publicação de aplicativos no iOS envolve o processo de preparar, testar e enviar o aplicativo para a App Store, seguindo as diretrizes e políticas da Apple.
+  Ou seja: É o processo de disponibilizar um aplicativo desenvolvido em Flutter para usuários de iPhone e iPad através da plataforma oficial da Apple, a App Store.
+  Uso: Utilizado para distribuir o aplicativo para um grande número de usuários, garantindo que ele esteja acessível e atualizável através da loja oficial.
+
+Registro de identificadores e Bundle ID:
+  Conceito: O registro de identificadores e o Bundle ID são etapas necessárias para identificar de forma única o aplicativo dentro do ecossistema Apple.
+  Ou seja: O Bundle ID é um identificador exclusivo que associa o aplicativo a uma entrada específica no Apple Developer, permitindo que o aplicativo seja diferenciado de outros.
+  Uso: Utilizado para registrar o aplicativo junto à Apple e para configurar permissões de acesso a recursos específicos, como notificações push e serviços do iCloud.
+
+Criação do app no App Store Connect:
+  Conceito: O App Store Connect é a plataforma da Apple usada para configurar e gerenciar os aplicativos que serão publicados na App Store.
+  Ou seja: Criar um novo app no App Store Connect envolve fornecer informações básicas sobre o aplicativo, como nome, categoria, ícones e capturas de tela, antes de enviar o binário.
+  Uso: Utilizado para configurar o aplicativo na loja, definindo como ele será exibido aos usuários, e para gerenciar as versões disponíveis do app.
+
+Processo de Archive e distribuição:
+  Conceito: O processo de Archive é a etapa final de preparação do aplicativo, onde ele é empacotado em um arquivo para ser distribuído via App Store ou TestFlight.
+  Ou seja: Criar um archive é necessário para gerar o binário que será enviado para a App Store Connect ou para ser distribuído para testes internos e externos.
+  Uso: Utilizado para garantir que o aplicativo está na forma correta para ser distribuído e pode ser submetido ao App Store Connect.
+
+Distribuição via App Store Connect:
+  Conceito: A distribuição via App Store Connect envolve o envio do arquivo empacotado (archived) do aplicativo para a plataforma da Apple, onde ele pode ser revisado e posteriormente publicado.
+  Ou seja: É a etapa em que o aplicativo preparado é carregado no App Store Connect, configurado para testes (TestFlight) ou para a publicação na App Store.
+  Uso: Utilizado para disponibilizar o aplicativo aos usuários finais, distribuindo-o oficialmente pela App Store ou permitindo testes beta controlados antes da publicação oficial.
+
+Revisão e publicação do app:
+  Conceito: O processo de revisão e publicação do app envolve o envio do aplicativo para a Apple, que realiza uma análise para garantir que ele atende às diretrizes da App Store antes de ser disponibilizado para download.
+  Ou seja: A Apple verifica o aplicativo quanto a aspectos como segurança, privacidade, estabilidade e conformidade com as políticas de conteúdo.
+  Uso: Utilizado para garantir que o aplicativo seja seguro e confiável para os usuários, obtendo aprovação da Apple antes da publicação.
