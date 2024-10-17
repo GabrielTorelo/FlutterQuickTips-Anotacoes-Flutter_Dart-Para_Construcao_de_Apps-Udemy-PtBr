@@ -39,7 +39,7 @@ class Area {
     }
 
     if (safeNeighborhood) {
-      for (var neighbor in neighbors) {
+      for (Area neighbor in neighbors) {
         neighbor.open();
       }
     }
