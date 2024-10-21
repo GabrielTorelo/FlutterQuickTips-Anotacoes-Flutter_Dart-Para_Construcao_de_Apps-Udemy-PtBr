@@ -37,7 +37,7 @@ class ResultWidget extends StatelessWidget implements PreferredSizeWidget {
       child: SizedBox(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(15),
             child: CircleAvatar(
               backgroundColor: _getColor(context),
               child: IconButton(

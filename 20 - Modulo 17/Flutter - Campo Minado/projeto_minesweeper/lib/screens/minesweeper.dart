@@ -14,16 +14,12 @@ class Minesweeper extends StatefulWidget {
 
 class _MinesweeperState extends State<Minesweeper> {
   bool? _win;
-  final Board _board = Board(
-    lines: 12,
-    columns: 12,
-    numberOfBombs: 3,
-  );
+  Board? _board;
 
   void _restartGame() {
     setState(() {
       _win = null;
-      _board.restart();
+      _board!.restart();
     });
   }
 
@@ -36,12 +32,12 @@ class _MinesweeperState extends State<Minesweeper> {
       try {
         area.open();
 
-        if (_board.resolved) {
+        if (_board != null && _board!.resolved) {
           _win = true;
         }
       } on ExplosionException {
         _win = false;
-        _board.revealBombs();
+        _board!.revealBombs();
       }
     });
   }
@@ -54,10 +50,29 @@ class _MinesweeperState extends State<Minesweeper> {
     setState(() {
       area.toggleMarked();
 
-      if (_board.resolved) {
+      if (_board != null && _board!.resolved) {
         _win = true;
       }
     });
+  }
+
+  Board _getBoard({
+    required double width,
+    required double height,
+  }) {
+    if (_board == null) {
+      int numColumns = 15;
+      double sizeBoard = width / numColumns;
+      int numLines = (height / sizeBoard).floor();
+
+      _board = Board(
+        lines: numLines,
+        columns: numColumns,
+        numberOfBombs: 50,
+      );
+    }
+
+    return _board!;
   }
 
   @override
@@ -68,10 +83,17 @@ class _MinesweeperState extends State<Minesweeper> {
         onRestart: _restartGame,
       ),
       body: SizedBox(
-        child: BoardWidget(
-          board: _board,
-          onOpen: onOpen,
-          onToggleMark: onToggleMark,
+        child: LayoutBuilder(
+          builder: (ctx, constraints) {
+            return BoardWidget(
+              board: _getBoard(
+                width: constraints.maxWidth,
+                height: constraints.maxHeight,
+              ),
+              onOpen: onOpen,
+              onToggleMark: onToggleMark,
+            );
+          },
         ),
       ),
     );

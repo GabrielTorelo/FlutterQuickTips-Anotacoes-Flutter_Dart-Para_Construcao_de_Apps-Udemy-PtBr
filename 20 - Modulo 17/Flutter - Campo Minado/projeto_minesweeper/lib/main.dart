@@ -17,8 +17,11 @@ class MyApp extends StatelessWidget {
       theme: theme.copyWith(
         colorScheme: theme.colorScheme.copyWith(
           primary: Colors.grey,
-          secondary: Colors.black45,
+          secondary: Colors.yellow,
+          error: Colors.red[300],
+          tertiary: Colors.green[300],
         ),
+        scaffoldBackgroundColor: Colors.grey,
         textTheme: theme.textTheme.copyWith(
           labelLarge: const TextStyle(
             fontSize: 16,
