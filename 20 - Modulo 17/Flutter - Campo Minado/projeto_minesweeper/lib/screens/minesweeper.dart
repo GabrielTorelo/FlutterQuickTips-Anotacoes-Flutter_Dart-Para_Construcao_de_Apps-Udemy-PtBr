@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_minesweeper/components/area.dart';
+import 'package:projeto_minesweeper/components/board.dart';
 import 'package:projeto_minesweeper/components/result.dart';
 import 'package:projeto_minesweeper/models/area.dart';
+import 'package:projeto_minesweeper/models/board.dart';
 
 class Minesweeper extends StatelessWidget {
   const Minesweeper({super.key});
@@ -20,28 +21,18 @@ class Minesweeper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Area neighbor1 = Area(
-      line: 1,
-      column: 0,
-    );
-    neighbor1.mine();
-
-    Area area = Area(
-      line: 0,
-      column: 0,
-    );
-    area.addNeighbor(neighbor: neighbor1);
-    // area.open();
-    area.toggleMarked();
-
     return Scaffold(
       appBar: ResultWidget(
         win: null,
         onRestart: _restartGame,
       ),
       body: SizedBox(
-        child: AreaWidget(
-          area: area,
+        child: BoardWidget(
+          board: Board(
+            lines: 15,
+            columns: 15,
+            numberOfBombs: 10,
+          ),
           onOpen: onOpen,
           onToggleMark: onToggleMark,
         ),
