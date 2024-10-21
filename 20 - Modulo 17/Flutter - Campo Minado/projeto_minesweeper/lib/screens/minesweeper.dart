@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_minesweeper/components/area.dart';
 import 'package:projeto_minesweeper/components/result.dart';
 import 'package:projeto_minesweeper/models/area.dart';
 
@@ -19,14 +20,30 @@ class Minesweeper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Area neighbor1 = Area(
+      line: 1,
+      column: 0,
+    );
+    neighbor1.mine();
+
+    Area area = Area(
+      line: 0,
+      column: 0,
+    );
+    area.addNeighbor(neighbor: neighbor1);
+    // area.open();
+    area.toggleMarked();
+
     return Scaffold(
       appBar: ResultWidget(
         win: null,
         onRestart: _restartGame,
       ),
-      body: const Center(
-        child: Text(
-          'Minesweeper',
+      body: SizedBox(
+        child: AreaWidget(
+          area: area,
+          onOpen: onOpen,
+          onToggleMark: onToggleMark,
         ),
       ),
     );
