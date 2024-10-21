@@ -1,38 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_minesweeper/components/board.dart';
 import 'package:projeto_minesweeper/components/result.dart';
+import 'package:projeto_minesweeper/err/explosion_exception.dart';
 import 'package:projeto_minesweeper/models/area.dart';
 import 'package:projeto_minesweeper/models/board.dart';
 
-class Minesweeper extends StatelessWidget {
+class Minesweeper extends StatefulWidget {
   const Minesweeper({super.key});
 
+  @override
+  State<Minesweeper> createState() => _MinesweeperState();
+}
+
+class _MinesweeperState extends State<Minesweeper> {
+  bool? _win;
+  final Board _board = Board(
+    lines: 12,
+    columns: 12,
+    numberOfBombs: 3,
+  );
+
   void _restartGame() {
-    print('Restarting game...');
+    setState(() {
+      _win = null;
+      _board.restart();
+    });
   }
 
   void onOpen(Area area) {
-    print('Opening area...');
+    if (_win != null) {
+      return;
+    }
+
+    setState(() {
+      try {
+        area.open();
+
+        if (_board.resolved) {
+          _win = true;
+        }
+      } on ExplosionException {
+        _win = false;
+        _board.revealBombs();
+      }
+    });
   }
 
   void onToggleMark(Area area) {
-    print('Toggling mark...');
+    if (_win != null) {
+      return;
+    }
+
+    setState(() {
+      area.toggleMarked();
+
+      if (_board.resolved) {
+        _win = true;
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: ResultWidget(
-        win: null,
+        win: _win,
         onRestart: _restartGame,
       ),
       body: SizedBox(
         child: BoardWidget(
-          board: Board(
-            lines: 15,
-            columns: 15,
-            numberOfBombs: 10,
-          ),
+          board: _board,
           onOpen: onOpen,
           onToggleMark: onToggleMark,
         ),
