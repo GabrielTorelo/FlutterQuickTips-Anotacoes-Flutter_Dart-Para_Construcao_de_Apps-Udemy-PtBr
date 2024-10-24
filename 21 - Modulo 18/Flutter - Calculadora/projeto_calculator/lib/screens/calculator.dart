@@ -13,7 +13,7 @@ class Calculator extends StatefulWidget {
 class _CalculatorState extends State<Calculator> {
   final Memory memory = Memory();
 
-  void _onPressed(String command) {
+  void _onPressed({required dynamic command}) {
     setState(() {
       memory.applyCommand(command);
     });

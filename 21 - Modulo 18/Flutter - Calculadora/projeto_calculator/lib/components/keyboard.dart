@@ -3,7 +3,7 @@ import 'package:projeto_calculator/components/button.dart';
 import 'package:projeto_calculator/components/button_row.dart';
 
 class Keyboard extends StatelessWidget {
-  final void Function(String) callback;
+  final void Function({required dynamic command}) callback;
 
   const Keyboard({
     super.key,

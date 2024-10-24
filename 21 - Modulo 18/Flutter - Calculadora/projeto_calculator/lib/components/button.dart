@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_calculator/models/memory.dart';
 
 class Button extends StatelessWidget {
   static const Color defaultColor = Color.fromRGBO(112, 112, 112, 1);
@@ -6,7 +7,7 @@ class Button extends StatelessWidget {
   static const Color specialColor = Color.fromRGBO(82, 82, 82, 1);
 
   final String text;
-  final void Function(String) callback;
+  final void Function({required dynamic command}) callback;
   final bool big;
   final Color color;
 
@@ -37,7 +38,7 @@ class Button extends StatelessWidget {
     return Expanded(
       flex: big ? 2 : 1,
       child: ElevatedButton(
-        onPressed: () => callback(text),
+        onPressed: () => callback(command: _getCommand()),
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
           shape: const RoundedRectangleBorder(
@@ -50,5 +51,15 @@ class Button extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  dynamic _getCommand() {
+    for (Operation operation in Operation.values) {
+      if (operation.value == text) {
+        return operation;
+      }
+    }
+
+    return text;
   }
 }
