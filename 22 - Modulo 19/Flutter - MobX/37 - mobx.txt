@@ -1,0 +1,33 @@
+Introdução ao MobX:
+  Conceito: O MobX é uma biblioteca de gerenciamento de estado baseada em programação reativa, ele permite que os dados de uma aplicação sejam sincronizados automaticamente com sua interface de usuário.
+  Ou seja: Ele ajuda a criar uma interface de usuário reativa, onde as mudanças no estado de um componente ou aplicação refletem imediatamente na interface sem necessidade de manipulação direta.
+  Uso: Utilizada em aplicações que demandam atualização automática e consistente da interface com o estado subjacente, tornando o desenvolvimento mais eficiente e menos propenso a erros.
+
+Funcionamento do MobX:
+  Conceito: O MobX funciona por meio de uma arquitetura de reatividade, onde qualquer modificação em variáveis observáveis é detectada automaticamente e propagada pela aplicação.
+  Ou seja: Ele monitora variáveis observáveis e, ao detectar alterações, atualiza automaticamente as partes da UI que dependem dessas variáveis.
+  Uso: Utilizado para simplificar o fluxo de dados e atualizações na aplicação, reduzindo a necessidade de chamadas manuais para atualizar a interface do usuário.
+
+Programação reativa:
+  Conceito: A programação reativa é um paradigma que permite que a aplicação reaja automaticamente a mudanças de estado.
+  Ou seja: Ao invés de gerenciar manualmente a atualização dos componentes, eles reagem automaticamente quando os dados que eles dependem são modificados.
+
+  * Variáveis observáveis (Observables):
+    Conceito: Os "observables" são variáveis que o MobX monitora para detectar mudanças e acionar atualizações na interface.
+    Ou seja: Ao tornar uma variável observável, o MobX rastreia suas mudanças para atualizar automaticamente as partes afetadas na UI.
+    Uso: Utilizado para acompanhar dados que mudam frequentemente, como "inputs" do usuário, sem necessidade de notificações manuais.
+
+  * Ações (Actions):
+    Conceito: Os "actions" são métodos que modificam os "observables", centralizando e organizando as mudanças no estado.
+    Ou seja: As ações encapsulam as alterações de estado para manter um fluxo controlado e previsível de modificações.
+    Uso: Utilizado para definir onde e como as mudanças de estado ocorrem, promovendo organização e rastreamento do estado da aplicação.
+
+  * Reações (Reactions):
+    Conceito: Reações são métodos que observam "observables" e executam uma ação específica quando eles mudam.
+    Ou seja: São reações automáticas a mudanças, permitindo que partes da aplicação respondam sem intervenção manual.
+    Uso: Utilizado para atualizar a interface, monitorar mudanças e tomar decisões automáticas em resposta a modificações no estado.
+
+  * Efeitos colaterais (Side Effects):
+    Conceito: Os efeitos colaterais representam mudanças na aplicação que ocorrem como resultado de atualizações nos "observables".
+    Ou seja: Quando um "observable" muda, o MobX dispara ações ou reações que causam efeitos colaterais na aplicação.
+    Uso: Utilizado para desencadear ações como notificações, chamadas de API ou qualquer interação com outros sistemas, sempre que o estado mudar.
