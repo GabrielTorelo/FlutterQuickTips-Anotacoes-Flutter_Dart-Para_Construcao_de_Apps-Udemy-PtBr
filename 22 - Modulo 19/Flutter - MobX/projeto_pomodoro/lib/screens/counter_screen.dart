@@ -25,7 +25,7 @@ class CounterScreen extends StatelessWidget {
             Observer(
               builder: (_) => Text(
                 '${store.counter}',
-                style: Theme.of(context).textTheme.titleLarge,
+                style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
           ],

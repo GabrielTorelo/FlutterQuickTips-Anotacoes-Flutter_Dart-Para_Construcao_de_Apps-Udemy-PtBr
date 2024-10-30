@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_pomodoro/screens/counter_screen.dart';
+import 'package:projeto_pomodoro/screens/pomodoro_screen.dart';
+// import 'package:projeto_pomodoro/screens/counter_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,24 +20,40 @@ class MyApp extends StatelessWidget {
           primary: Colors.blue,
         ),
         textTheme: theme.textTheme.copyWith(
+          headlineLarge: const TextStyle(
+            fontSize: 120,
+            fontWeight: FontWeight.w100,
+            color: Colors.white,
+          ),
+          headlineMedium: const TextStyle(
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+          headlineSmall: const TextStyle(
+            fontSize: 25,
+            color: Colors.white,
+          ),
           titleLarge: const TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.w100,
+            color: Colors.black,
+          ),
+          titleMedium: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w100,
+            color: Colors.black,
+          ),
+          titleSmall: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w100,
             color: Colors.black,
           ),
         ),
-        appBarTheme: const AppBarTheme(
-          titleTextStyle: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-          backgroundColor: Colors.blue,
-          centerTitle: true,
-        ),
       ),
       debugShowCheckedModeBanner: false,
-      home: CounterScreen(),
+      home: const PomodoroScreen(),
+      // home: CounterScreen(),
     );
   }
 }
