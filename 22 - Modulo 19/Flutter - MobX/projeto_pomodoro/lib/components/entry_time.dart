@@ -4,11 +4,15 @@ import 'package:projeto_pomodoro/components/arrow_button.dart';
 class EntryTime extends StatelessWidget {
   final String title;
   final int value;
+  final void Function()? onIncrementPressed;
+  final void Function()? onDecrementPressed;
 
   const EntryTime({
     super.key,
     required this.title,
     required this.value,
+    required this.onIncrementPressed,
+    required this.onDecrementPressed,
   });
 
   @override
@@ -25,8 +29,8 @@ class EntryTime extends StatelessWidget {
           children: [
             ArrowButton(
               icon: Icons.arrow_downward,
-              backgroundColor: Colors.red,
-              onPressed: () {},
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              onPressed: onDecrementPressed ?? () {},
             ),
             Text(
               '$value min',
@@ -34,8 +38,8 @@ class EntryTime extends StatelessWidget {
             ),
             ArrowButton(
               icon: Icons.arrow_upward,
-              backgroundColor: Colors.green,
-              onPressed: () {},
+              backgroundColor: Theme.of(context).colorScheme.tertiary,
+              onPressed: onIncrementPressed ?? () {},
             ),
           ],
         ),

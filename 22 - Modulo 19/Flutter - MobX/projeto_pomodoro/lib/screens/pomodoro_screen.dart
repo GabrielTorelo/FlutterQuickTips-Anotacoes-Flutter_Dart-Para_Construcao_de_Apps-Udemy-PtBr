@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_pomodoro/components/entry_time.dart';
+import 'package:projeto_pomodoro/components/entry_time_item.dart';
 import 'package:projeto_pomodoro/components/stopwatch.dart';
 
 class PomodoroScreen extends StatelessWidget {
@@ -7,33 +7,38 @@ class PomodoroScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: StopwatchWidget(),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 40,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    final isLandScape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
+    return Scaffold(
+      body: isLandScape
+          ? const Row(
               children: [
-                EntryTime(
-                  title: 'Work',
-                  value: 25,
+                Expanded(
+                  flex: 2,
+                  child: StopwatchWidget(),
                 ),
-                EntryTime(
-                  title: 'Short Break',
-                  value: 5,
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 40),
+                    child: EntryTimeItem(),
+                  ),
+                ),
+              ],
+            )
+          : const Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: StopwatchWidget(),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 40),
+                  child: EntryTimeItem(),
                 ),
               ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }
