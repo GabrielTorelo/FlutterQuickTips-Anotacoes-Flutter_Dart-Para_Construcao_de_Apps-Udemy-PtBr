@@ -1,0 +1,48 @@
+Introdução ao stream:
+  Conceito: Um Stream é uma sequência assíncrona de eventos ou dados que podem ser consumidos ao longo do tempo, permitindo que valores sejam emitidos conforme ficam disponíveis.
+  Ou seja: Em vez de receber todos os dados de uma vez, o Stream permite que eles sejam processados gradualmente, assim que forem emitidos, de forma assíncrona.
+  Uso: Utilizado para lidar com fluxos de dados contínuos, como interações do usuário, ou qualquer outro cenário em que os dados chegam de forma progressiva e precisam ser processados conforme chegam.
+
+Tipos de Streams:
+  * Stream de dados únicos (Single Subscription Stream):
+    Conceito: Este tipo de stream só pode ter um ouvinte por vez. É útil quando se deseja processar os eventos de forma sequencial e garantida por uma única fonte.
+    Ou seja: Um exemplo seria uma requisição HTTP que retorna uma sequência de dados ou eventos processados um de cada vez.
+    Uso: Utilizado em processos onde a linearidade e o controle do fluxo são essenciais, como comunicação com APIs, leitura de arquivos, ou eventos de usuário.
+    Exemplo:
+      1 - Enviando mensagens em sequência:
+        Stream<String> mensagemStream() async* {
+          yield "Carregando dados...";
+          await Future.delayed(Duration(seconds: 2));
+          yield "Dados carregados com sucesso!";
+        }
+
+  * Stream de transmissão (Broadcast Stream):
+    Conceito: Um stream de transmissão permite que múltiplos ouvintes escutem os eventos simultaneamente. Cada ouvinte recebe o mesmo conjunto de dados ou eventos.
+    Ou seja: É ideal para casos em que vários componentes do código precisam escutar e reagir aos mesmos eventos ou dados simultaneamente.
+    Uso: Utilizado em cenários de múltiplos ouvintes, como eventos de rede ao vivo (notificações push, atualizações de chat em tempo real), onde várias partes do sistema devem reagir aos mesmos eventos.
+    Exemplo:
+      1 - Enviando sequência de números para múltiplos ouvintes:
+        StreamController<int> controller = StreamController<int>.broadcast();
+        controller.stream.listen((data) => print("Ouvinte 1: $data"));
+        controller.stream.listen((data) => print("Ouvinte 2: $data"));
+
+Métodos comuns no Stream:
+  * Método ouvir (listen):
+    Conceito: Cria-se um ouvinte ao stream, para que ele possa receber e processar eventos emitidos.
+    Ou seja: O método "listen()" é o ponto de entrada principal para reagir a eventos emitidos por um stream.
+    Uso: Utilizado para registrar callbacks que serão chamados à medida que novos eventos ou dados forem emitidos pelo stream.
+  
+  * Método de fluxo de transmissão (asBroadcastStream):
+    Conceito: Converte um stream de dados únicos (Single Subscription Stream) em um stream de transmissão (Broadcast Stream), permitindo que múltiplos ouvintes sejam registrados.
+    Ou seja: Transforma um stream que originalmente suporta apenas um ouvinte em um que permite múltiplos ouvintes.
+    Uso: Quando há necessidade de converter streams unidimensionais em streams compartilhados por diversos componentes ou processos.
+
+Introdução ao controlador (StreamController):
+  Conceito: O StreamController é utilizado para criar e gerenciar streams, fornecendo controle explícito sobre a adição de eventos ao stream.
+  Ou seja: Ele atua como a fonte de um stream, permitindo que eventos sejam manualmente adicionados, pausados ou encerrados.
+  Uso: Utilizado quando se deseja controlar a emissão de eventos em um stream, como em aplicativos com dados dinâmicos e interativos, onde o fluxo de eventos precisa ser controlado manualmente.
+
+Introdução ao transformador (StreamTransformer):
+  Conceito: O StreamTransformer permite transformar os eventos emitidos por um stream antes de eles chegarem ao ouvinte.
+  Ou seja: É usado para modificar ou filtrar os dados do stream, oferecendo flexibilidade para manipular os eventos que estão sendo transmitidos.
+  Uso: Aplicado em casos onde é necessário transformar, filtrar ou modificar os dados que estão fluindo pelo stream, como converter formatos de dados, aplicar validações ou fazer cache.

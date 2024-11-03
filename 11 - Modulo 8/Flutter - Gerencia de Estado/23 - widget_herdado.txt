@@ -1,0 +1,11 @@
+Introdução ao widget herdado (InheritedWidget):
+  Conceito: O InheritedWidget é um widget que permite a propagação eficiente de dados para widgets descendentes na árvore de widgets.
+  Ou seja: Ele possibilita que dados sejam compartilhados de um widget pai para seus filhos sem a necessidade de passá-los explicitamente por todos os níveis intermediários da árvore de widgets.
+  Uso: Utilizado para gerenciar estados e dados compartilhados de forma eficiente.
+  Exemplo: Os Widgets filhos podem acessar os dados fornecidos pelo InheritedWidget usando o método of e se reconstruir automaticamente quando os dados mudam.
+
+Árvore de Contextos:
+  Conceito: A árvore de contextos refere-se à estrutura hierárquica de objetos BuildContext.
+  Ou seja: É uma representação da hierarquia de widgets em termos de contextos, permitindo que cada widget acesse informações e métodos dos widgets ancestrais.
+  Uso: Utilizada para navegar pela árvore de widgets e acessar dados de widgets ancestrais.
+  Exemplo: Os Widgets usam o BuildContext para interagir com a árvore de widgets, buscar InheritedWidgets e acessar recursos.

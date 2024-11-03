@@ -1,0 +1,23 @@
+Introdução à Autenticação:
+  Conceito: A autenticação é o processo de verificação da identidade de um usuário antes de conceder acesso a recursos protegidos dentro de uma aplicação.
+  Ou seja: Permite que apenas usuários autenticados possam realizar operações e acessar dados específicos, garantindo a segurança da aplicação.
+  Uso: Utilizado para proteger áreas sensíveis da aplicação, como dados de usuários e funcionalidades restritas, permitindo acesso somente a usuários autorizados.
+
+Autenticação em APIs REST:
+  Conceito: As APIs REST não mantêm estados entre as requisições, logo, cada requisição é tratada como uma nova interação com o servidor.
+  Ou seja: Não há memória de sessões anteriores no servidor, tornando necessário identificar o usuário em cada nova requisição.
+  Uso: Em APIs REST, a autenticação deve ser gerenciada de forma que cada requisição subsequente possa ser identificada como pertencente a um usuário autenticado.
+
+  * Uso de Tokens:
+    Conceito: Após a autenticação, o servidor gera um token único, baseado em uma chave secreta, para identificar o usuário em requisições futuras.
+    Ou seja: O token permite que o servidor valide a autenticidade de uma requisição e autorize o acesso aos recursos protegidos sem manter o estado da sessão.
+    Uso: O token é armazenado localmente na aplicação e enviado em cada requisição subsequente ao servidor para validação.
+  
+  * Implementação de Autenticação:
+    Conceito: A configuração e implementação da autenticação envolve a criação de regras para a geração e validação de tokens.
+    Ou seja: O back-end deve gerenciar a autenticação de maneira eficiente, permitindo que a aplicação autentique usuários e mantenha sua sessão segura.
+
+  * Segurança das informações:
+    Conceito: A segurança das informações envolve a proteção dos dados do usuário e a garantia de que apenas usuários autorizados possam acessar determinadas funcionalidades.
+    Ou seja: Medidas de segurança, como criptografia de tokens e regras de acesso, são implementadas para proteger os dados sensíveis e assegurar que o sistema seja robusto contra ataques.
+    Uso: Utilizado para garantir que as informações pessoais e sensíveis dos usuários permaneçam protegidas contra acessos não autorizados e possíveis violações de segurança.

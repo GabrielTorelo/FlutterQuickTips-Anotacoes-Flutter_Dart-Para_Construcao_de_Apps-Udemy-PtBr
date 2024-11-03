@@ -1,9 +1,0 @@
-Introdução aos providers
-  Conceito: O Provider permite gerenciar estado de forma eficiente e escalável.
-  Ou seja: Ele facilita a injeção de dependências e o gerenciamento de estado, permitindo que os widgets acessem e atualizem dados de forma reativa.
-  Uso: Utilizado para gerenciar estados complexos e compartilhados entre diferentes widgets de maneira organizada e eficiente, permitindo a criação de um sistema de gerenciamento de estado centralizado que pode ser facilmente acessado por toda a árvore de widgets.
-
-Provedor de Notificação de Alteração (ChangeNotifierProvider):
-  Conceito: É um provedor que fornece um objeto ChangeNotifier para a árvore de widgets, permitindo que os widgets filhos escutem mudanças nesse estado e reajam de acordo.
-  Ou seja: Ele permite que você use um objeto ChangeNotifier como um estado gerenciável que pode notificar mudanças.
-  Uso: Utilizado em estados que requerem notificações reativas e precisam ser ouvidos por vários widgets para atualizar a interface do usuário de forma eficiente.
