@@ -1,0 +1,26 @@
+Introdução à Navegação:
+  Conceito: A navegação permite a transição entre telas dentro de um aplicativo.
+  Ou seja: É o mecanismo responsável por empilhar, remover e alternar entre diferentes telas do aplicativo.
+  Uso: Utilizado para criar fluxos de navegação dinâmicos e interativos, permitindo que os usuários acessem diferentes seções do aplicativo.
+
+Navegação com Navigator:
+  Conceito: O Navigator gerencia a pilha de telas do aplicativo e permite a navegação entre elas.
+  Ou seja: Ele empilha novas páginas sobre a tela atual e permite removê-las quando necessário.
+
+  * Rotas Nomeadas:
+    Conceito: A navegação por rotas nomeadas permite definir caminhos para telas, tornando a navegação mais organizada.
+    Ou seja: Em vez de instanciar diretamente um widget ao navegar, é possível utilizar um nome de rota predefinido.
+    Uso: Utilizado quando se deseja um sistema de navegação mais gerenciável.
+    Exemplo: Navigator.pushNamed(context, '/segundaTela')
+
+  * Rotas com Argumentos:
+    Conceito: Os argumentos permitem passar dados entre telas durante a navegação.
+    Ou seja: É possível enviar informações como objetos e variáveis para a nova tela.
+    Uso: Utilizado quando há necessidade de comunicação entre telas.
+    Exemplo: Navigator.push(context, MaterialPageRoute(builder: (context) => DetalhesTela(dado: meuDado)))
+
+Navegação com GoRouter:
+  Conceito: O GoRouter é um pacote que simplifica a navegação declarativa no Flutter.
+  Ou seja: Ele permite definir rotas de forma mais estruturadas e compatíveis com links diretos.
+  Uso: Utilizado para gerenciar navegações complexas, incluindo navegação baseada em estado e autenticação.
+  Exemplo: GoRouter(routes: [GoRoute(path: '/', builder: (context, state) => TelaInicio())])

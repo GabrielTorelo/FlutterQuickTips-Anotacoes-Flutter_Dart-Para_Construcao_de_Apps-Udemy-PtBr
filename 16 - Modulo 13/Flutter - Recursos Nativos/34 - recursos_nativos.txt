@@ -1,0 +1,26 @@
+Introdução aos Recursos Nativos:
+  Conceito: Recursos nativos são funcionalidades oferecidas diretamente pelo sistema operacional do dispositivo, como câmera, GPS, armazenamento local, entre outros.
+  Ou seja: São APIs específicas acessadas pelo Flutter por meio de bibliotecas.
+
+  * Câmera:
+    Conceito: A biblioteca 'camera' permite capturar fotos e vídeos diretamente no aplicativo.
+    Ou seja: Ela acessa a câmera do dispositivo e possibilita o seu uso.
+    Exemplo: final CameraController? cameraController = controller;
+
+  * Localização (GPS):
+    Conceito: A biblioteca 'geolocator' permite obter a posição geográfica atual do dispositivo via GPS.
+    Ou seja: Ele fornece latitude, longitude, distância entre pontos e escuta as movimentações do usuário.
+    Uso: Utilizado para rastrear a posição do usuário em tempo real ou buscar sua localização atual.
+    Exemplo: Geolocator.getCurrentPosition()
+
+  * Armazenamento Local:
+    Conceito: A biblioteca 'sqflite' oferece um banco de dados local SQLite no dispositivo.
+    Ou seja: Ele permite criar tabelas, inserir, buscar, atualizar e excluir dados localmente.
+    Uso: Utilizado para armazenar dados offline, como listas, configurações e históricos.
+    Exemplo: await db.insert('carrinho', {'nome': 'Bola', 'quantidade': 1})
+
+Permissões de Acesso:
+  Conceito: Para acessar recursos nativos, o app precisa de permissões explícitas do usuário.
+  Ou seja: É necessário solicitar essas permissões ao usuário para o seu uso.
+  Uso: Utilizado com a biblioteca 'permission_handler' para garantir que o usuário autorize o uso do recurso.
+  Exemplo: await Permission.camera.request()

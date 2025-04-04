@@ -1,0 +1,22 @@
+Introdução às Orientações:
+  Conceito: A orientação de tela refere-se à direção na qual o dispositivo está sendo utilizado (vertical ou horizontal).
+  Ou seja: O Flutter permite controlar e responder às mudanças de orientação, adaptando a interface conforme necessário.
+  Uso: Utilizado para melhorar a experiência do usuário, garantindo que o layout funcione em ambos os modos (retrato e paisagem).
+  Exemplo: Um aplicativo de leitura pode forçar a orientação retrato para melhor leitura.
+
+Orientações Disponíveis:
+  Conceito: Permite especificar quais orientações de tela são aceitas pela aplicação.
+  Ou seja: Ela limita o app a funcionar apenas nas direções especificadas.
+  Uso: Utilizado para definir quais orientações são permitidas durante o uso do app.
+  Exemplo: SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
+Detecção de Orientação:
+  Conceito: A detecção de orientação permite adaptar dinamicamente a interface de acordo com a posição atual do dispositivo.
+  Ou seja: É possível identificar se o dispositivo está em modo retrato ou paisagem e modificar o layout com base nisso.
+  Uso: Utilizado para exibir layouts diferentes em cada orientação.
+  Exemplo: MediaQuery.of(context).orientation == Orientation.landscape
+
+Restrições por Tela:
+  Conceito: É possível definir restrições de orientação por tela específica dentro do app.
+  Ou seja: Cada tela pode ter suas próprias configurações de orientação, independentemente do restante do aplicativo.
+  Uso: Utilizado para impor orientação apenas em determinadas páginas.

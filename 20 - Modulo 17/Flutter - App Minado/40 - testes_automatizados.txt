@@ -1,0 +1,33 @@
+Introdução aos Testes Automatizados:
+  Conceito: Os testes automatizados permitem verificar o comportamento correto do código sem a necessidade de interação manual.
+  Ou seja: São scripts que simulam a execução do aplicativo para garantir que tudo funcione como esperado.
+  Uso: Utilizado para garantir a qualidade do código e facilitar a manutenção do aplicativo.
+  Exemplo: O Flutter oferece suporte nativo para testes unitários, usando as bibliotecas 'test' e 'flutter_test'.
+
+Testes Unitários:
+  Conceito: Testes unitários verificam o comportamento de funções, classes e métodos isoladamente.
+  Ou seja: Eles testam a menor unidade funcional do código sem dependências externas.
+  Uso: Utilizado para validar regras de negócio, cálculos, lógica interna, entre outros.
+  Exemplo: expect(funcaoSomaDois(2), 4)
+
+Testes de Widget:
+  Conceito: Testes de widget simulam a interface do usuário e verificam se os widgets se comportam corretamente.
+  Ou seja: Eles constroem partes da UI e interagem com ela de forma programada.
+  Uso: Utilizado para testar visualizações, interações com botões, entre outros.
+  Exemplo: await tester.tap(find.byType(ElevatedButton))
+
+Testes de Integração:
+  Conceito: Testes de integração verificam o comportamento do aplicativo como um todo, incluindo interações reais entre componentes.
+  Ou seja: Simulam o uso completo do aplicativo, como se fosse um usuário real.
+  Uso: Utilizado para testar fluxos de telas, login, formulários, entre outros.
+  Exemplo: flutter test integration_test/app_test.dart
+
+Simulações:
+  Conceito: As simulações (mocking) permitem imitar comportamentos de classes e dependências durante o teste.
+  Ou seja: Ao invés de usar uma API real, simula-se o retorno de dados para testar a lógica do app.
+  Uso: Comumente utilizado para isolar o que está sendo testado.
+
+Organização dos Testes:
+  Conceito: Por convenção os testes devem ser organizados na pasta 'test' e agrupados por funcionalidades.
+  Ou seja: É importante manter uma estrutura clara para facilitar a leitura, manutenção e execução dos testes.
+  Uso: Utilizado para criar um ambiente automatizado e contínuo de validação.
